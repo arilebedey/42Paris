@@ -1,0 +1,1 @@
+find -type f -name '*~' -exec ls '{}' + -exec rm '{}' + -or -type f -name '#*#' -exec ls '{}' + -exec rm '{}' +
