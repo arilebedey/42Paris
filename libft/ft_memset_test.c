@@ -15,8 +15,6 @@ int test_memset_int_array(int value)
     // Compare results
     for (int i = 0; i < 5; i++)
     {
-		printf("arr1 value: %i\n", arr1[i]);
-		printf("arr2 value: %i\n", arr2[i]);
         if (arr1[i] != arr2[i])
             return 0; // Failure
     }
