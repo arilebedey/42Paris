@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 12:13:40 by alebedev          #+#    #+#             */
-/*   Updated: 2025/03/26 16:28:11 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/04/25 12:24:05 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* Key validations:                                                           */
@@ -19,8 +19,8 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char		*new;
-	size_t int	i;
+	char	*new;
+	size_t	i;
 
 	if (start >= ft_strlen(s))
 		len = 0;
