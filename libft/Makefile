@@ -1,65 +1,67 @@
-LIBC =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
-				ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c \
-				ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c \
-				ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c \
-				ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c 
+LIB := libft.a
+LIBFT_DIR := libft
+TESTS_DIR := tests
 
-ADDITIONAL =	ft_itoa.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-							ft_split.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_striteri.c
+LIBC :=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
+		ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c \
+		ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c \
+		ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c \
+		ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c 
+ADDITIONAL :=	ft_itoa.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
+		ft_split.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_striteri.c
 
-BONUS =	ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
-				ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
-				ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
+SRCS := $(LIBC) $(ADDITIONAL)
+OBJS := $(addprefix $(LIBFT_DIR)/, $(SRCS:.c=.o))
 
-SRCS = ${LIBC} ${ADDITIONAL}
+# Test source files
+TEST_SRCS := $(wildcard $(TESTS_DIR)/*.c)
+TEST_BINS := $(TEST_SRCS:.c=.out)
 
-SRCSALL = ${LIBC} ${ADDITIONAL} ${BONUS}
+CC := gcc
+CFLAGS := -Wall -Werror -Wextra -I $(LIBFT_DIR)
+LDFLAGS := -L$(LIBFT_DIR) -lft -lbsd
 
-# Objects are SRCS with .c replaced with .o 
-#
-OBJS = ${SRCS:.c=.o}
+# Build the library
+$(LIBFT_DIR)/$(LIB): $(OBJS)
+	ar -rsc $@ $(OBJS)
 
-# Objects are SRCS with .c replaced with .o 
-#
-OBJSALL = ${SRCSALL:.c=.o}
+# Compile library objects
+$(LIBFT_DIR)/%.o: $(LIBFT_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-LIB = libft.a
+# Compile test files into executables
+$(TESTS_DIR)/%.out: $(TESTS_DIR)/%.c $(LIBFT_DIR)/$(LIB)
+	$(CC) $(CFLAGS) $< $(LDFLAGS) -o $@
 
-CC = gcc
+all: $(LIBFT_DIR)/$(LIB)
 
-# The -I flag specifies directories to search for header files
-#
-CFLAGS = -Wall -Werror -Wextra -I ./
+# Build and run all tests
+tests: $(TEST_BINS)
+	@echo "Running all tests..."
+	@rm -f test_output.log
+	@for test in $(TEST_BINS); do \
+		echo "\n--- Running $${test} ---"; \
+		./$${test} | tee -a test_output.log; \
+	done
+	@echo "\n---------------------------------"
+	@echo "Test Summary:"
+	@failures=$$(grep -c "FAILURE" test_output.log || true); \
+	echo "Total failures: $${failures}"; \
+	if [ "$${failures}" -gt 0 ]; then \
+		echo "Failed tests:"; \
+		grep -n "FAILURE" test_output.log || true; \
+	else \
+		echo "All tests passed!"; \
+	fi
+	@rm -f test_output.log
 
-# How to make .o from .c rule
-# When you have a pattern rule like .c.o:, Make uses this rule as template to create .o file for all input files
-# < is a special Make automatic variable that represents the first prerequisite of the rule.
-# < inside that is the automatic variable (same as $< but inside the braces)
-#
-.c.o:
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+clean:
+	rm -f $(OBJS)
+	rm -f $(TEST_BINS)
 
-# ar -rsc ${LIB} ${OBJS}
-# -r: Replace/insert object files in the archive. Creates archive if it doesn't exist.
-#     If an object already exists in the archive, it updates it with the new version.
-# -s: Create/update symbol table index (equivalent to running ranlib afterward).
-#     This helps the linker quickly find symbols without scanning all objects.
-# -c: Suppress the "creating library" message when the archive is first created.
-#
-${LIB}:	${OBJS}
-		ar -rsc ${LIB} ${OBJS}
+fclean: clean
+	rm -f $(LIBFT_DIR)/$(LIB)
 
-bonus:	${OBJSALL}
-		ar -rsc ${LIB} ${OBJSALL}
+re: fclean all
 
-all: 	${LIB}
-
-clean:	
-		rm -f ${OBJSALL}
-
-fclean:	clean;
-		rm -f ${LIB}
-
-re:	fclean all
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re tests
