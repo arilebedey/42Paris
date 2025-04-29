@@ -6,19 +6,10 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:15:53 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/25 11:52:03 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:22:55 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
-** #### size_t ####
-**
-** Using size_t ensures code behaves consistently across different platforms.
-** An int might be 2 bytes on one system and 4 bytes on another, potentially
-** causing overflow issues.
-** 
-** On 32-bit systems: size_t is typically 4 bytes (0 to ~4.3 billion)
-** On 64-bit systems: size_t is typically 8 bytes (0 to ~18.4 quintillion)
-**
 ** size_t is specifically designed for memory addressing and counting. Memory
 ** addressing refers to the process of identifying and accessing specific
 ** locations in computer memory. Each byte in memory has a unique address,
@@ -45,11 +36,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
-
-// # include <sys/types.h>
-// # include <sys/stat.h>
-// # include <fcntl.h> 
-// # include <stdint.h>
 
 /* libc functions */
 void	*ft_memset(void *b, int c, size_t len);

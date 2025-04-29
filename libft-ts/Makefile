@@ -58,6 +58,7 @@ tests: $(TEST_BINS)
 clean:
 	rm -f $(OBJS)
 	rm -f $(TEST_BINS)
+	rm test*.txt
 
 fclean: clean
 	rm -f $(LIBFT_DIR)/$(LIB)

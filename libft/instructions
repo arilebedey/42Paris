@@ -1,3 +1,4 @@
+
 create the test for the provided file (without the 42 headear) so that the output follows the exact format
 SUCCESS should be written when the result passes the test, and FAILURE when it doesn't
 You can import the header from "../libft/libft.h"
