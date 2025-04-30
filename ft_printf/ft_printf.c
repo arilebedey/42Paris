@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:10:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/30 13:14:09 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:21:18 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ static int	ft_format_check(va_list args, const char fmt_string)
 		count += ft_print_nbr(va_arg(args, int));
 	else if (fmt_string == 'u')
 		count += ft_print_unsigned(va_arg(args, unsigned int));
-	else if (fmt_string == '%')
-		count += ft_print_char('%');
 	else if (fmt_string == 'x')
 		count += ft_print_hex(va_arg(args, unsigned int), 0);
 	else if (fmt_string == 'X')
 		count += ft_print_hex(va_arg(args, unsigned int), 1);
+	else if (fmt_string == 'p')
+		count += ft_print_ptr(va_arg(args, void *));
+	else if (fmt_string == '%')
+		count += ft_print_char('%');
 	else
 		count += ft_print_char(fmt_string);
 	return (count);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf(const char *fmt_string, ...)
 {
 	va_list	args;
 	int		i;
@@ -44,16 +46,16 @@ int	ft_printf(const char *format, ...)
 
 	i = 0;
 	count = 0;
-	va_start(args, format);
-	while (format[i])
+	va_start(args, fmt_string);
+	while (fmt_string[i])
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (fmt_string[i] == '%' && fmt_string[i + 1])
 		{
-			count += ft_format_check(args, format[i + 1]);
+			count += ft_format_check(args, fmt_string[i + 1]);
 			i++;
 		}
-		else if (format[i] != '%')
-			count += ft_print_char(format[i]);
+		else if (fmt_string[i] != '%')
+			count += ft_print_char(fmt_string[i]);
 		i++;
 	}
 	va_end(args);

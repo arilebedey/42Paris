@@ -1,9 +1,7 @@
 LIB := libftprintf.a
 
-SRCS := ft_printf.c
-# ADDITIONAL :=	
+SRCS := ft_printf.c numbers.c pointers.c
 
-# SRCS := $(LIBC) $(ADDITIONAL)
 OBJS := $(SRCS:.c=.o)
 
 CC = gcc
