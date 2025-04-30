@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:17:20 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/29 15:50:36 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/04/30 13:00:48 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include <stddef.h>
 #include "libft/libft.h"
 
-int count_bytes_in_string(char *string);
+int	ft_print_char(char c);
+int	ft_print_str(char *str);
+int	ft_print_nbr(int n);
+int	ft_print_unsigned(unsigned int n);
 
 #endif
