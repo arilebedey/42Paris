@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 18:13:27 by alebedev          #+#    #+#             */
-/*   Updated: 2025/03/23 17:51:42 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:39:35 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
@@ -15,15 +15,6 @@
 ** This function searches for the first occurrence of the character 'c'
 ** in the string 's'. The terminating null byte is considered part of the 
 ** string.
-**
-** @s: The string to search in
-** @c: The character to search for
-**
-** Return: A pointer to the first occurrence of the character, or NULL if not
-** found
-**
-** Note: Cast from const char* to char* is needed for return; would be
-** unnecessary if both parameter and return type were char*.
 **/
 
 #include "libft.h"

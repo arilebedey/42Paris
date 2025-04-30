@@ -5,110 +5,107 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 15:30:40 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/28 14:16:54 by alebedev         ###   ########.fr       */
+/*   Created: 2025/02/01 16:20:09 by alebedev          #+#    #+#             */
+/*   Updated: 2025/04/30 12:16:16 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int	is_delimiter(char c, char *charset)
+static int	is_delim(char c, char *set)
 {
 	int	i;
 
 	i = 0;
-	while (charset[i])
+	while (set[i])
 	{
-		if (charset[i] == c)
+		if (set[i] == c)
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int	count_words(char *str, char *charset)
+static int	count_words(char *str, char *charset)
 {
 	int	count;
 	int	i;
-	int	in_word;
 
 	count = 0;
 	i = 0;
-	in_word = 0;
 	while (str[i])
 	{
-		if (!is_delimiter(str[i], charset) && !in_word)
+		while (is_delim(str[i], charset) && str[i])
+			i++;
+		if (!is_delim(str[i], charset) && str[i])
 		{
-			in_word = 1;
 			count++;
+			while (!is_delim(str[i], charset) && str[i])
+				i++;
 		}
-		else if (is_delimiter(str[i], charset))
-			in_word = 0;
-		i++;
 	}
 	return (count);
 }
 
-char	*extract_word(char *str, char *charset, int *i)
+static int	add_word(char **tab, char *str, int j, char *charset)
 {
-	char	*word;
-	int		len;
-	int		j;
+	int	i;
+	int	k;
 
-	len = 0;
-	while (str[*i + len] && !is_delimiter(str[*i + len], charset))
-		len++;
-	word = (char *)malloc(sizeof(char) * (len + 1));
-	if (!word)
-		return (NULL);
-	j = 0;
-	while (j < len)
+	i = 0;
+	while (!is_delim(str[i], charset) && str[i])
+		i++;
+	tab[j] = malloc(sizeof(char) * (i + 1));
+	if (!tab[j])
+		return (-1);
+	k = 0;
+	while (!is_delim(str[k], charset) && str[k])
 	{
-		word[j] = str[*i + j];
-		j++;
+		tab[j][k] = str[k];
+		k++;
 	}
-	word[j] = '\0';
-	*i += len;
-	return (word);
+	tab[j][k] = 0;
+	return (i);
 }
 
-char	**allocate_result(char *str, char *charset)
+static char	**process_words(char **tab, char *str, char *charset)
 {
-	char	**result;
-	int		word_count;
+	int	i;
+	int	j;
+	int	word_len;
 
-	if (!str)
-		return (NULL);
-	word_count = count_words(str, charset);
-	result = (char **)malloc(sizeof(char *) * (word_count + 1));
-	if (!result)
-		return (NULL);
-	return (result);
-}
-
-char	**ft_split(char *str, char *charset)
-{
-	char	**result;
-	int		i;
-	int		j;
-
-	result = allocate_result(str, charset);
-	if (!result)
-		return (NULL);
 	i = 0;
 	j = 0;
 	while (str[i])
 	{
-		while (str[i] && is_delimiter(str[i], charset))
+		while (is_delim(str[i], charset) && str[i])
 			i++;
-		if (str[i])
+		if (!is_delim(str[i], charset) && str[i])
 		{
-			result[j] = extract_word(str, charset, &i);
-			if (!result[j])
+			word_len = add_word(tab, &str[i], j, charset);
+			if (word_len == -1)
+			{
+				while (j > 0)
+					free(tab[--j]);
+				free(tab);
 				return (NULL);
+			}
+			i += word_len;
 			j++;
 		}
 	}
-	result[j] = 0;
-	return (result);
+	return (tab);
+}
+
+char	**ft_split(char *str, char *charset)
+{
+	char	**tab;
+	int		words;
+
+	words = count_words(str, charset);
+	tab = malloc(sizeof(char *) * (words + 1));
+	if (!tab)
+		return (NULL);
+	tab[words] = 0;
+	return (process_words(tab, str, charset));
 }

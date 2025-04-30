@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 18:08:23 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/25 15:47:24 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:51:13 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* This file implements ft_calloc with four key security considerations:      */
@@ -21,17 +21,11 @@
 static void	*zeroalloc(size_t size)
 {
 	void	*mem_ptr;
-	size_t	i;
 
 	mem_ptr = malloc(size);
 	if (!mem_ptr)
 		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		*(char *)(mem_ptr + i) = 0;
-		i++;
-	}
+	ft_bzero(mem_ptr, size);
 	return (mem_ptr);
 }
 

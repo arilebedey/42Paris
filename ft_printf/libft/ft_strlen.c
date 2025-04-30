@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 10:38:08 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/29 15:33:17 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/03/17 11:06:18 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t			i;
-	unsigned char	*us;
+	size_t	i;
 
 	i = 0;
-	us = (unsigned char *) s;
-	while (us[i])
+	while (s[i])
 		i++;
 	return (i);
 }
