@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/15 17:30:59 by alebedev          #+#    #+#             */
-/*   Updated: 2025/03/15 17:30:59 by alebedev         ###   ########.fr       */
+/*   Created: 2025/04/29 14:17:20 by alebedev          #+#    #+#             */
+/*   Updated: 2025/05/01 10:58:08 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
-int	ft_isascii(int c)
-{
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
-}
+# include <stdlib.h>
+# include <stdio.h>
+# include <stdarg.h>
+# include <unistd.h>
+# include <stddef.h>
+
+int	ft_print_char(char c);
+int	ft_print_str(char *str);
+int	ft_print_nbr(int n);
+int	ft_print_unsigned(unsigned int n);
+int	ft_print_hex(unsigned int n, int uppercase);
+int	ft_print_ptr(void *ptr);
+int	ft_printf(const char *fmt_string, ...);
+
+#endif

@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   chars.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 18:11:28 by alebedev          #+#    #+#             */
-/*   Updated: 2025/03/18 18:11:29 by alebedev         ###   ########.fr       */
+/*   Created: 2025/05/01 10:58:21 by alebedev          #+#    #+#             */
+/*   Updated: 2025/05/01 10:58:22 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-int	ft_toupper(int c)
+int	ft_print_char(char c)
 {
-	if (c >= 'a' && 'z' >= c)
-		return (c - 'a' + 'A');
-	return (c);
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_print_str(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	if (!str)
+		str = "(null)";
+	while (str[i])
+		count += ft_print_char(str[i++]);
+	return (i);
 }
