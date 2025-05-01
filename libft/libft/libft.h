@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:15:53 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/29 13:22:55 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/01 11:37:30 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
@@ -32,7 +32,6 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-// # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>

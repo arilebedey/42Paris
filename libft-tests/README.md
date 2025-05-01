@@ -2,5 +2,5 @@
 
 #### Usage
 1. Clone repo
-2. Place the libft source folder in the cloned libft-ts
-3. Run with `make tests`
+2. Copy the libft-tests folder inside the cloned libft source directory
+3. Run with `make`
