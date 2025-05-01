@@ -6,29 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:58:30 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/30 13:15:17 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/04/30 15:10:50 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-int	ft_print_char(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_print_str(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		str = "(null)";
-	while (str[i])
-		ft_print_char(str[i++]);
-	return (i);
-}
 
 int	ft_print_nbr(int n)
 {

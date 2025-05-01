@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:10:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/30 14:21:18 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:06:50 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int	ft_printf(const char *fmt_string, ...)
 	{
 		if (fmt_string[i] == '%' && fmt_string[i + 1])
 		{
-			count += ft_format_check(args, fmt_string[i + 1]);
 			i++;
+			count += ft_format_check(args, fmt_string[i]);
 		}
-		else if (fmt_string[i] != '%')
+		else
 			count += ft_print_char(fmt_string[i]);
 		i++;
 	}

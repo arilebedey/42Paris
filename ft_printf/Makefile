@@ -1,6 +1,6 @@
 LIB := libftprintf.a
 
-SRCS := ft_printf.c numbers.c pointers.c
+SRCS := ft_printf.c numbers.c pointers.c chars.c
 
 OBJS := $(SRCS:.c=.o)
 

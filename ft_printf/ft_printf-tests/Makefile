@@ -1,17 +1,18 @@
 NAME = test_printf
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -I ../
 
-SRC_DIR = ./
-SRCS = $(wildcard $(SRC_DIR)*.c)
+SRCS = ./*.c
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: run-test fclean
+
+run-test: $(NAME)
+	./$(NAME)
 
 $(NAME): test
-	./$(NAME)
 
 test: ../libftprintf.a
 	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS) ../libftprintf.a -o $(NAME)
