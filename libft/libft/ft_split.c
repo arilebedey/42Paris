@@ -6,27 +6,13 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:20:09 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/30 12:16:16 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/02 12:23:13 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-static int	is_delim(char c, char *set)
-{
-	int	i;
-
-	i = 0;
-	while (set[i])
-	{
-		if (set[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static int	count_words(char *str, char *charset)
+static int	count_words(char *str, char c)
 {
 	int	count;
 	int	i;
@@ -35,31 +21,31 @@ static int	count_words(char *str, char *charset)
 	i = 0;
 	while (str[i])
 	{
-		while (is_delim(str[i], charset) && str[i])
+		while (str[i] && str[i] == c)
 			i++;
-		if (!is_delim(str[i], charset) && str[i])
+		if (str[i] != c && str[i])
 		{
 			count++;
-			while (!is_delim(str[i], charset) && str[i])
+			while (str[i] != c && str[i])
 				i++;
 		}
 	}
 	return (count);
 }
 
-static int	add_word(char **tab, char *str, int j, char *charset)
+static int	add_word(char **tab, char *str, int j, char c)
 {
 	int	i;
 	int	k;
 
 	i = 0;
-	while (!is_delim(str[i], charset) && str[i])
+	while (str[i] != c && str[i])
 		i++;
 	tab[j] = malloc(sizeof(char) * (i + 1));
 	if (!tab[j])
 		return (-1);
 	k = 0;
-	while (!is_delim(str[k], charset) && str[k])
+	while (k < i)
 	{
 		tab[j][k] = str[k];
 		k++;
@@ -68,7 +54,7 @@ static int	add_word(char **tab, char *str, int j, char *charset)
 	return (i);
 }
 
-static char	**process_words(char **tab, char *str, char *charset)
+static char	**process_words(char **tab, char *str, char c)
 {
 	int	i;
 	int	j;
@@ -78,11 +64,11 @@ static char	**process_words(char **tab, char *str, char *charset)
 	j = 0;
 	while (str[i])
 	{
-		while (is_delim(str[i], charset) && str[i])
+		while (str[i] == c && str[i])
 			i++;
-		if (!is_delim(str[i], charset) && str[i])
+		if (str[i] != c && str[i])
 		{
-			word_len = add_word(tab, &str[i], j, charset);
+			word_len = add_word(tab, &str[i], j, c);
 			if (word_len == -1)
 			{
 				while (j > 0)
@@ -97,15 +83,15 @@ static char	**process_words(char **tab, char *str, char *charset)
 	return (tab);
 }
 
-char	**ft_split(char *str, char *charset)
+char	**ft_split(const char *str, char c)
 {
 	char	**tab;
 	int		words;
 
-	words = count_words(str, charset);
+	words = count_words((char *) str, c);
 	tab = malloc(sizeof(char *) * (words + 1));
 	if (!tab)
 		return (NULL);
 	tab[words] = 0;
-	return (process_words(tab, str, charset));
+	return (process_words(tab, (char *) str, c));
 }

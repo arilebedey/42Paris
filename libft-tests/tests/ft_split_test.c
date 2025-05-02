@@ -1,155 +1,114 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split_test.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tester <tester@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/02 13:45:00 by tester            #+#    #+#             */
+/*   Updated: 2025/05/02 12:07:22 by alebedev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int is_delimiter(char c, char *charset);
-int count_words(char *str, char *charset);
-char *extract_word(char *str, char *charset, int *i);
-char **allocate_result(char *str, char *charset);
-char **ft_split(char *str, char *charset);
+char	**ft_split(const char *str, char c);
 
-int compare_arrays(char **expected, char **result) {
-    int i = 0;
-    
-    if (!expected && !result)
-        return (1);
-    if (!expected || !result)
-        return (0);
-        
-    while (expected[i] && result[i]) {
-        if (strcmp(expected[i], result[i]) != 0)
-            return (0);
-        i++;
-    }
-    
-    if (expected[i] != result[i])  // Check if both arrays end at the same point
-        return (0);
-        
-    return (1);
+static void	free_split_result(char **result)
+{
+	int	i;
+
+	i = 0;
+	if (!result)
+		return ;
+	while (result[i])
+	{
+		free(result[i]);
+		i++;
+	}
+	free(result);
 }
 
-void print_array(char **arr) {
-    int i = 0;
-    printf("[");
-    while (arr && arr[i]) {
-        printf("\"%s\"", arr[i]);
-        if (arr[i + 1])
-            printf(", ");
-        i++;
-    }
-    printf("]");
+static int	test_split(const char *str, char c, char **expected, int expected_size)
+{
+	char	**result;
+	int		i;
+	int		success;
+
+	result = ft_split(str, c);
+	success = 1;
+	
+	if (!result && expected)
+		return (0);
+	if (result && !expected)
+	{
+		free_split_result(result);
+		return (0);
+	}
+	
+	i = 0;
+	while (i < expected_size)
+	{
+		if (!result[i] || strcmp(result[i], expected[i]) != 0)
+		{
+			success = 0;
+			break;
+		}
+		i++;
+	}
+	
+	if (success && result[expected_size] != NULL)
+		success = 0;
+		
+	free_split_result(result);
+	return (success);
 }
 
-void free_array(char **arr) {
-    int i = 0;
-    if (!arr)
-        return;
-    while (arr[i]) {
-        free(arr[i]);
-        i++;
-    }
-    free(arr);
-}
+int	main(void)
+{
+	int		success;
+	char	*expected1[] = {"Hello", "World"};
+	char	*expected2[] = {"apple", "banana", "cherry"};
+	char	*expected3[] = {"42", "is", "fun"};
+	char	*expected4[] = {"one"};
+	char	*expected5[] = {"a", "b", "c", "d", "e"};
+	char	*expected6[] = {""};
 
-void test_split(char *str, char *charset, char **expected, int test_num, char *description) {
-    char **result = ft_split(str, charset);
-    int success = compare_arrays(expected, result);
-    
-    if (success)
-        printf("SUCCESS: Test %d - %s - Input: \"%s\", Charset: \"%s\" - Result: ", test_num, description, str, charset);
-    else
-        printf("FAILURE: Test %d - %s - Input: \"%s\", Charset: \"%s\" - Result: ", test_num, description, str, charset);
-    
-    print_array(result);
-    printf(" | Expected: ");
-    print_array(expected);
-    printf("\n");
-    
-    free_array(result);
-}
-
-char **create_expected(char **strings) {
-    int i = 0;
-    while (strings[i])
-        i++;
-    
-    char **expected = (char **)malloc(sizeof(char *) * (i + 1));
-    if (!expected)
-        return NULL;
-    
-    for (i = 0; strings[i]; i++) {
-        expected[i] = strdup(strings[i]);
-        if (!expected[i]) {
-            free_array(expected);
-            return NULL;
-        }
-    }
-    expected[i] = NULL;
-    
-    return expected;
-}
-
-int main(void) {
-    printf("ft_split\n");
-    
-    // Test 1: Basic split with space delimiter
-    {
-        char *strings[] = {"Hello", "World", NULL};
-        char **expected = create_expected(strings);
-        test_split("Hello World", " ", expected, 1, "Basic split with space");
-        free_array(expected);
-    }
-    
-    // Test 2: Multiple consecutive delimiters
-    {
-        char *strings[] = {"Hello", "World", NULL};
-        char **expected = create_expected(strings);
-        test_split("Hello   World", " ", expected, 2, "Multiple consecutive spaces");
-        free_array(expected);
-    }
-    
-    // Test 3: Multiple different delimiters
-    {
-        char *strings[] = {"Hello", "World", NULL};
-        char **expected = create_expected(strings);
-        test_split("Hello,;World", ",;", expected, 3, "Multiple different delimiters");
-        free_array(expected);
-    }
-    
-    // Test 4: Empty string
-    {
-        char *strings[] = {NULL};
-        char **expected = create_expected(strings);
-        test_split("", " ", expected, 4, "Empty string");
-        free_array(expected);
-    }
-    
-    // Test 5: String with only delimiters
-    {
-        char *strings[] = {NULL};
-        char **expected = create_expected(strings);
-        test_split("   ", " ", expected, 5, "String with only delimiters");
-        free_array(expected);
-    }
-    
-    // Test 6: String with delimiters at start and end
-    {
-        char *strings[] = {"middle", NULL};
-        char **expected = create_expected(strings);
-        test_split(" middle ", " ", expected, 6, "Delimiters at start and end");
-        free_array(expected);
-    }
-    
-    // Test 7: Multiple words
-    {
-        char *strings[] = {"This", "is", "a", "test", "string", NULL};
-        char **expected = create_expected(strings);
-        test_split("This is a test string", " ", expected, 7, "Multiple words");
-        free_array(expected);
-    }
-    
-    // Test 9: NULL string
-    test_split(NULL, " ", NULL, 8, "NULL string");
-    
-    return 0;
+	printf("ft_split\n");
+	
+	success = test_split("Hello,World", ',', expected1, 2);
+	printf("%s: Test 1 - Basic split with comma - Input: \"Hello,World\", ',' - Result: %s\n", 
+		success ? "SUCCESS" : "FAILURE", success ? "{\"Hello\", \"World\"}" : "Incorrect");
+	
+	success = test_split("apple-banana-cherry", '-', expected2, 3);
+	printf("%s: Test 2 - Multiple splits with hyphen - Input: \"apple-banana-cherry\", '-' - Result: %s\n", 
+		success ? "SUCCESS" : "FAILURE", success ? "{\"apple\", \"banana\", \"cherry\"}" : "Incorrect");
+	
+	success = test_split("42 is fun", ' ', expected3, 3);
+	printf("%s: Test 3 - Split with spaces - Input: \"42 is fun\", ' ' - Result: %s\n", 
+		success ? "SUCCESS" : "FAILURE", success ? "{\"42\", \"is\", \"fun\"}" : "Incorrect");
+	
+	success = test_split("one", 'x', expected4, 1);
+	printf("%s: Test 4 - No delimiter in string - Input: \"one\", 'x' - Result: %s\n", 
+		success ? "SUCCESS" : "FAILURE", success ? "{\"one\"}" : "Incorrect");
+	
+	success = test_split("a:b:c:d:e", ':', expected5, 5);
+	printf("%s: Test 5 - Multiple single characters - Input: \"a:b:c:d:e\", ':' - Result: %s\n", 
+		success ? "SUCCESS" : "FAILURE", success ? "{\"a\", \"b\", \"c\", \"d\", \"e\"}" : "Incorrect");
+	
+	success = test_split("", ',', expected6, 0);
+	printf("%s: Test 6 - Empty string - Input: \"\", ',' - Result: %s\n", 
+		success ? "SUCCESS" : "FAILURE", success ? "{}" : "Incorrect");
+	
+	success = test_split(",,,,", ',', expected6, 0);
+	printf("%s: Test 7 - String with only delimiters - Input: \",,,,\", ',' - Result: %s\n", 
+		success ? "SUCCESS" : "FAILURE", success ? "{}" : "Incorrect");
+	
+	success = test_split("Hello,,,World", ',', expected1, 2);
+	printf("%s: Test 8 - Multiple consecutive delimiters - Input: \"Hello,,,World\", ',' - Result: %s\n", 
+		success ? "SUCCESS" : "FAILURE", success ? "{\"Hello\", \"World\"}" : "Incorrect");
+	
+	return (0);
 }
