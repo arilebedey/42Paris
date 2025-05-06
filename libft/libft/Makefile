@@ -1,4 +1,4 @@
-LIB := libft.a
+NAME := libft.a
 
 LIBC :=				ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 							ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c \
@@ -17,16 +17,16 @@ CFLAGS := -Wall -Werror -Wextra -I ./
 .c.o:
 		${CC} ${CFLAGS} -c $< -o $@
 
-${LIB}:	${OBJS}
-		ar -rsc ${LIB} ${OBJS}
+all:	${NAME}
 
-all:	${LIB}
+${NAME}:	${OBJS}
+		ar -rsc ${NAME} ${OBJS}
 
 clean:	
 		rm -f ${OBJS}
 
 fclean:	clean
-		rm -f ${LIB}
+		rm -f ${NAME}
 
 re:	fclean all
 
