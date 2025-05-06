@@ -15,3 +15,10 @@ cc -g get_next_line.c get_next_line_utils.c test_stdin_manual_compilation.c -o g
 valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./gnl_test
 
 ```
+### Questions
+- Why does it work with different buffer sizes?
+- Why did you use a static variable? What is a static variable?
+- Do you check for invalid FDs? Did you think of optimizing the check? What is an invalid FD?
+- Why do we pass an FD to read()?
+- Do you zero-terminate buffer?
+- Do you read line-by-line?
