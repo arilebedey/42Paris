@@ -1,0 +1,8 @@
+// Paste the signature of the machine vdisk here (SHA1 hash of the disk file)
+- What is that?
+
+- What is AppArmor? What do I need to know about it?
+
+
+
+

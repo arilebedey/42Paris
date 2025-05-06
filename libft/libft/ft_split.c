@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:20:09 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/02 12:23:13 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:03:55 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	count_words(char *str, char c)
 	{
 		while (str[i] && str[i] == c)
 			i++;
-		if (str[i] != c && str[i])
+		if (str[i] && str[i] != c)
 		{
 			count++;
 			while (str[i] != c && str[i])
@@ -64,9 +64,9 @@ static char	**process_words(char **tab, char *str, char c)
 	j = 0;
 	while (str[i])
 	{
-		while (str[i] == c && str[i])
+		while (str[i] && str[i] == c)
 			i++;
-		if (str[i] != c && str[i])
+		if (str[i] && str[i] != c)
 		{
 			word_len = add_word(tab, &str[i], j, c);
 			if (word_len == -1)
