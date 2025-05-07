@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/07 09:46:42 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/07 09:47:02 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,24 @@ static	char	*read_file(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char		*stash = NULL;
+	static char		*stashes[1024] = {NULL};
 	char			*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read(fd, NULL, 0) < 0)
+	{
+		if (stashes[fd])
+		{
+			free(stashes[fd]);
+			stashes[fd] = NULL;
+		}
 		return (NULL);
-	stash = read_file(fd, stash);
-	if (!stash)
+	}
+	stashes[fd] = read_file(fd, stashes[fd]);
+	if (!stashes[fd])
 		return (NULL);
-	line = extract_line(stash);
-	stash = update_stash(stash);
+	line = extract_line(stashes[fd]);
+	stashes[fd] = update_stash(stashes[fd]);
 	return (line);
 }

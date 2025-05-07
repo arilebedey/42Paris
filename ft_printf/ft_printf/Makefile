@@ -1,4 +1,4 @@
-LIB := libftprintf.a
+NAME := libftprintf.a
 
 SRCS := ft_printf.c numbers.c pointers.c chars.c
 
@@ -10,16 +10,16 @@ CFLAGS := -Wall -Werror -Wextra -I ./
 .c.o:
 		${CC} ${CFLAGS} -c $< -o $@
 
-${LIB}:	${OBJS}
-		ar -rsc ${LIB} ${OBJS}
+all:	${NAME}
 
-all:	${LIB}
+${NAME}:	${OBJS}
+		ar -rsc ${NAME} ${OBJS}
 
 clean:	
 		rm -f ${OBJS}
 
 fclean:	clean
-		rm -f ${LIB}
+		rm -f ${NAME}
 
 re:	fclean all
 

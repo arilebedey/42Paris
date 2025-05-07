@@ -22,3 +22,4 @@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./gnl_test
 - Why do we pass an FD to read()?
 - Do you zero-terminate buffer?
 - Do you read line-by-line?
+- Buffer size irrelavance. It doesn't assume a line will fit within one buffer read. It accumulates data in stash?
