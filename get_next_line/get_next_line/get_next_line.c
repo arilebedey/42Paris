@@ -6,13 +6,13 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/07 09:46:42 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/08 22:35:29 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static	char	*extract_line(char *stash)
+static char	*extract_line(char *stash)
 {
 	int		i;
 	char	*line;
@@ -39,7 +39,7 @@ static	char	*extract_line(char *stash)
 	return (line);
 }
 
-static	char	*update_stash(char *stash)
+static char	*update_stash(char *stash)
 {
 	int		i;
 	int		j;
@@ -67,13 +67,13 @@ static	char	*update_stash(char *stash)
 	return (new_stash);
 }
 
-static	char	*handle_read_error(char *stash, char *buffer)
+static char	*handle_read_error(char *stash, char *buffer)
 {
 	free_all(buffer, stash);
 	return (NULL);
 }
 
-static	char	*read_file(int fd, char *stash)
+static char	*read_file(int fd, char *stash)
 {
 	char	*buffer;
 	ssize_t	bytes_read;
@@ -103,8 +103,8 @@ static	char	*read_file(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char		*stash = NULL;
-	char			*line;
+	static char	*stash = NULL;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
