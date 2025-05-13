@@ -1,0 +1,1 @@
+- Generate and test the signature file

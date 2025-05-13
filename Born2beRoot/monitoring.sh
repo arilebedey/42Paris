@@ -53,5 +53,5 @@ echo "
 #LVM use: $lvm_check
 #Connections TCP: $tcp_connections ESTABLISHED
 #User log: $user_count
-#Network: IP $ip_addr ($mac_addr)
+#Network: IP $ip_addr($mac_addr)
 #Sudo: $sudo_count cmd"
