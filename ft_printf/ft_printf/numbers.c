@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 12:58:30 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/30 15:10:50 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:20:43 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_print_nbr(int n)
 {

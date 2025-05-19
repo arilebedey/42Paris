@@ -1,10 +1,11 @@
 NAME = test_printf
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
+CFLAGS =
 INCLUDES = -I ../
 
-SRCS = ./*.c
+SRCS = ./tests.c
 OBJS = $(SRCS:.c=.o)
 
 all: run-test fclean
@@ -14,10 +15,10 @@ run-test: $(NAME)
 
 $(NAME): test
 
-test: ../libftprintf.a
+test: ../ft_printf.a
 	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS) ../libftprintf.a -o $(NAME)
 
-../libftprintf.a:
+../ft_printf.a:
 	$(MAKE) -C ..
 
 clean:

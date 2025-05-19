@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:10:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/01 10:06:50 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:20:34 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_format_check(va_list args, const char fmt_string)
 {
@@ -44,6 +44,8 @@ int	ft_printf(const char *fmt_string, ...)
 	int		i;
 	int		count;
 
+	if (!fmt_string)
+		return (-1);
 	i = 0;
 	count = 0;
 	va_start(args, fmt_string);
