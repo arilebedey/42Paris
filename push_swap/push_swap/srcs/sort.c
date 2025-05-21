@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/21 11:56:28 by alebedev          #+#    #+#             */
+/*   Updated: 2025/05/21 16:49:51 by alebedev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 static bool	is_sorted(t_context *ctx)
@@ -17,10 +29,37 @@ static bool	is_sorted(t_context *ctx)
 	return (true);
 }
 
+static void	sort_three_elements(t_context *ctx)
+{
+	int	first;
+	int	second;
+	int	third;
+
+	first = get_value_at(&ctx->stack_a, 1);
+	second = get_value_at(&ctx->stack_a, 2);
+	third = get_value_at(&ctx->stack_a, 3);
+	if (first > second && third > second && third > first)
+		swap_a(ctx);
+	else if (first > second && first > third && third > second)
+		rotate_a(ctx);
+	else if (second > first && first > third && second > third)
+		reverse_rotate_a(ctx);
+	else if (second > third && third > first && second > first)
+	{
+		swap_a(ctx);
+		rotate_a(ctx);
+	}
+	else if (first > third && first > second && second > third)
+	{
+		swap_a(ctx);
+		reverse_rotate_a(ctx);
+	}
+}
+
 void	sort(t_context *ctx)
 {
 	if (ctx->stack_a.capacity <= 1 || is_sorted(ctx))
-		return;
+		return ;
 	if (ctx->stack_a.capacity == 3)
 		sort_three_elements(ctx);
 	if (ctx->stack_a.capacity == 5)

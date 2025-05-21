@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lists.c                                            :+:      :+:    :+:   */
+/*   op_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 16:48:23 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/21 16:48:25 by alebedev         ###   ########.fr       */
+/*   Created: 2025/05/21 16:49:33 by alebedev          #+#    #+#             */
+/*   Updated: 2025/05/21 16:49:33 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	clear_list(t_opnode **list)
+void	push(t_stack *src, t_stack *dst)
 {
-	t_opnode	*current;
-	t_opnode	*next;
+	int	dst_idx;
 
-	if (!list || !*list)
+	if (get_stack_size(dst) == dst->capacity)
 		return ;
-	current = *list;
-	while (current)
-	{
-		next = current->next;
-		free(current);
-		current = next;
-	}
-	*list = NULL;
+	dst_idx = get_next_top_idx(src, dst->newest_idx);
 }
