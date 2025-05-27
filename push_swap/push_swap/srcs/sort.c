@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:56:28 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/21 16:49:51 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:30:34 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	sort_three_elements(t_context *ctx)
 	else if (first > second && first > third && third > second)
 		rotate_a(ctx);
 	else if (second > first && first > third && second > third)
-		reverse_rotate_a(ctx);
+		r_rotate_a(ctx);
 	else if (second > third && third > first && second > first)
 	{
 		swap_a(ctx);
@@ -52,8 +52,27 @@ static void	sort_three_elements(t_context *ctx)
 	else if (first > third && first > second && second > third)
 	{
 		swap_a(ctx);
-		reverse_rotate_a(ctx);
+		r_rotate_a(ctx);
 	}
+}
+
+static void	sort_five_elements(t_context *ctx)
+{
+	int	top_a;
+
+	while (get_stack_size(&ctx->stack_a) > 3)
+	{
+		top_a = get_value_at(&ctx->stack_a, 1);
+		if (top_a == 1 || top_a == 2)
+			push_b(ctx);
+		else
+			rotate_a(ctx);
+	}
+	if (get_value_at(&ctx->stack_b, 1) < get_value_at(&ctx->stack_b, 2))
+		swap_b(ctx);
+	sort_three_elements(ctx);
+	push_a(ctx);
+	push_a(ctx);
 }
 
 void	sort(t_context *ctx)

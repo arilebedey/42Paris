@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 11:13:00 by alebedev          #+#    #+#             */
+/*   Updated: 2025/05/27 11:13:05 by alebedev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 static void	check_duplicates(t_context *ctx, int *values, int count)
@@ -49,8 +61,8 @@ static void	init_stack(t_context *ctx, t_stack *stack, int capacity)
 	stack->values = malloc(sizeof(int) * capacity);
 	if (!stack->values)
 		handle_error(ctx);
-	stack->top_idx = 0;
-	stack->bottom_idx = 0;
+	stack->newest_idx = 0;
+	stack->oldest_idx = 0;
 	stack->capacity = capacity;
 }
 
@@ -72,7 +84,7 @@ static void	fill_stack(t_context *ctx, t_stack *stack, int count, char **args)
 	}
 	check_duplicates(ctx, raw_nums, count);
 	convert_to_ranks(raw_nums, stack->values, count);
-	stack->bottom_idx = count - 1;
+	stack->oldest_idx = count - 1;
 	free(raw_nums);
 }
 
