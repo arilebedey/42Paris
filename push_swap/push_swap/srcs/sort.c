@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:56:28 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/27 16:30:34 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:49:11 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ void	sort(t_context *ctx)
 	if (ctx->stack_a.capacity == 5)
 		sort_five_elements(ctx);
 	else
-		recuresive_segment_sort(ctx);
+		recursive_segment_sort(ctx);
 	optimize_operations(ctx);
 }

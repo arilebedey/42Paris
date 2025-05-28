@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/27 15:50:46 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:19:00 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,10 @@ void					rotate_ab(t_context *ctx);
 void					r_rotate_a(t_context *ctx);
 void					r_rotate_b(t_context *ctx);
 void					r_rotate_ab(t_context *ctx);
+
+// SPLITTING UTILITY FUNCTIONS
+void					move_segment_to_top(t_context *ctx,
+							t_stack_segmnt *seg);
 
 // SORTING FUNCTIONS
 
