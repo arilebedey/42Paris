@@ -6,19 +6,12 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:13:06 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/28 14:49:32 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:23:05 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-/* WARN: Untested code */
-/* NOTE: */
-/* Ensures the segment is marked as being at the top of its stack, */
-/* avoiding unnecessary rotations or moves in functions like sort_segment */
-/* or split_segment. */
-/* Simplifies logic in recursive sorting by assuming segments are at the top */
-/* when they span the entire stack. */
 void	move_segment_to_top(t_context *ctx, t_stack_segmnt *seg)
 {
 	if (seg->location == LOCATION_BOTTOM_A
@@ -31,7 +24,7 @@ void	move_segment_to_top(t_context *ctx, t_stack_segmnt *seg)
 
 t_stack	*stack_from_location(t_context *ctx, t_stack_location loc)
 {
-	if (loc == LOCATION_TOP_A || LOCATION_BOTTOM_A)
+	if (loc == LOCATION_TOP_A || loc == LOCATION_BOTTOM_A)
 		return (&ctx->stack_a);
 	return (&ctx->stack_b);
 }
@@ -55,4 +48,30 @@ int	segment_value(t_context *ctx, t_stack_segmnt *seg, int n)
 		while (--n > 0)
 			idx = get_next_top_idx(stack, idx);
 	return (stack->values[idx]);
+}
+
+int	segment_max_value(t_context *ctx, t_stack_segmnt *seg)
+{
+	t_stack	*stack;
+	int		count;
+	int		max_val;
+	int		idx;
+
+	stack = stack_from_location(ctx, seg->location);
+	count = seg->elem_count;
+	max_val = 0;
+	if (seg->location == LOCATION_TOP_A || seg->location == LOCATION_TOP_B)
+		idx = stack->newest_idx;
+	else
+		idx = stack->oldest_idx;
+	while (count--)
+	{
+		if (stack->values[idx] > max_val)
+			max_val = stack->values[idx];
+		if (seg->location == LOCATION_TOP_A || seg->location == LOCATION_TOP_B)
+			idx = get_next_bottom_idx(stack, idx);
+		else
+			idx = get_next_top_idx(stack, idx);
+	}
+	return (max_val);
 }

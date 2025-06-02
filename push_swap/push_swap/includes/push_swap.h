@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/28 13:19:00 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:33:06 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,23 @@ void					r_rotate_ab(t_context *ctx);
 // SPLITTING UTILITY FUNCTIONS
 void					move_segment_to_top(t_context *ctx,
 							t_stack_segmnt *seg);
+int						segment_value(t_context *ctx, t_stack_segmnt *seg,
+							int n);
+
+// SEGMENT UTILITY FUNCTIONS
+int						segment_max_value(t_context *ctx, t_stack_segmnt *seg);
+t_stack					*stack_from_location(t_context *ctx,
+							t_stack_location loc);
 
 // SORTING FUNCTIONS
+void					recursive_segment_sort(t_context *ctx);
+void					sort_small_segment(t_context *ctx, t_stack_segmnt *seg);
+void					move_to_location(t_context *ctx, t_stack_location from,
+							t_stack_location to);
+void					sort_small_second(t_context *ctx, t_stack_segmnt *seg);
+void					sort_one_element(t_context *ctx, t_stack_segmnt *seg);
+void					sort_two_elements(t_context *ctx, t_stack_segmnt *seg);
+void					sort_three_elements_segment(t_context *ctx,
+							t_stack_segmnt *seg);
 
 #endif
