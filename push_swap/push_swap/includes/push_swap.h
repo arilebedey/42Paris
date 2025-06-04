@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/02 15:33:06 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:40:38 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,15 @@ typedef enum s_stack_location
 
 typedef struct s_stack_segmnt
 {
-	t_stack_location	location;
-	int					elem_count;
+	t_stack_location	loc;
+	int					count;
 }						t_stack_segmnt;
 
 typedef struct s_segmnt_split
 {
-	t_stack_segmnt		min_values;
-	t_stack_segmnt		mid_values;
-	t_stack_segmnt		max_values;
+	t_stack_segmnt		min;
+	t_stack_segmnt		mid;
+	t_stack_segmnt		max;
 }						t_segmnt_split;
 
 // BASIC FUNCTIONS
@@ -106,7 +106,7 @@ int						get_stack_size(t_stack *stack);
 bool					is_stack_full(t_stack *stack);
 int						get_next_bottom_idx(t_stack *stack, int current_idx);
 int						get_next_top_idx(t_stack *stack, int current_idx);
-int						get_value_at(t_stack *stack, int pos);
+int						value_at(t_stack *stack, int pos);
 
 // OPERATION UTILITY FUNCTIONS
 void					record_op(t_context *ctx, t_ops op);
@@ -138,7 +138,7 @@ t_stack					*stack_from_location(t_context *ctx,
 // SORTING FUNCTIONS
 void					recursive_segment_sort(t_context *ctx);
 void					sort_small_segment(t_context *ctx, t_stack_segmnt *seg);
-void					move_to_location(t_context *ctx, t_stack_location from,
+int						move_to_loc(t_context *ctx, t_stack_location from,
 							t_stack_location to);
 void					sort_small_second(t_context *ctx, t_stack_segmnt *seg);
 void					sort_one_element(t_context *ctx, t_stack_segmnt *seg);

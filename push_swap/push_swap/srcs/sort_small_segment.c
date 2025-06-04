@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:05:26 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/02 15:25:10 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:23:53 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	sort_one_element(t_context *ctx, t_stack_segmnt *seg)
 
 void	sort_two_elements(t_context *ctx, t_stack_segmnt *seg)
 {
-	if (seg->location == LOCATION_TOP_A || seg->location == LOCATION_TOP_B
+	if (seg->location == LOCATION_BOTTOM_A || seg->location == LOCATION_TOP_B
 		|| seg->location == LOCATION_BOTTOM_B)
 	{
 		move_to_location(ctx, seg->location, LOCATION_TOP_A);

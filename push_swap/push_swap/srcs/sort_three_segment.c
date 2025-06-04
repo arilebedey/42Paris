@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:25:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/02 15:54:19 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:28:17 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,100 @@ static void	sort_three_top_a(t_context *ctx, t_stack_segmnt *seg,
 		t_stack *stack, int max_val)
 {
 	if (stack->values[stack->newest_idx] == max_val)
+	{
+		swap_a(ctx);
+		rotate_a(ctx);
+		swap_a(ctx);
+		r_rotate_a(ctx);
+	}
+	else if (stack->values[get_next_bottom_idx(stack,
+			stack->newest_idx)] == max_val)
+	{
+		rotate_a(ctx);
+		swap_a(ctx);
+		r_rotate_a(ctx);
+	}
+	seg->location = LOCATION_TOP_A;
+	seg->elem_count -= 1;
+	sort_two_elements(ctx, seg);
+}
+
+static void	sort_three_top_b(t_context *ctx, t_stack_segmnt *seg,
+		t_stack *stack, int max_val)
+{
+	if (stack->values[stack->newest_idx] == max_val)
+		push_a(ctx);
+	else if (stack->values[get_next_bottom_idx(stack,
+			stack->newest_idx)] == max_val)
+	{
+		swap_b(ctx);
+		push_a(ctx);
+	}
+	else
+	{
+		rotate_b(ctx);
+		rotate_b(ctx);
+		push_a(ctx);
+		r_rotate_b(ctx);
+		r_rotate_b(ctx);
+	}
+	push_a(ctx);
+	push_a(ctx);
+	seg->location = LOCATION_TOP_A;
+	seg->elem_count -= 1;
+	sort_two_elements(ctx, seg);
+}
+
+static void	sort_three_bottom_a(t_context *ctx, t_stack_segmnt *seg,
+		t_stack *stack, int max_val)
+{
+	r_rotate_a(ctx);
+	r_rotate_a(ctx);
+	if (stack->values[stack->newest_idx] == max_val)
+	{
+		swap_a(ctx);
+		r_rotate_a(ctx);
+	}
+	else if (stack->values[get_next_top_idx(stack,
+			stack->newest_idx)] == max_val)
+		r_rotate_a(ctx);
+	else
+	{
+		push_b(ctx);
+		r_rotate_a(ctx);
+		swap_a(ctx);
+		push_a(ctx);
+	}
+	seg->location = LOCATION_TOP_A;
+	seg->elem_count -= 1;
+	sort_two_elements(ctx, seg);
+}
+
+static void	sort_three_bottom_b(t_context *ctx, t_stack_segmnt *seg,
+		t_stack *stack, int max_val)
+{
+	r_rotate_b(ctx);
+	r_rotate_b(ctx);
+	if (stack->values[stack->newest_idx] == max_val)
+	{
+		push_a(ctx);
+		r_rotate_b(ctx);
+	}
+	else if (stack->values[get_next_top_idx(stack,
+			stack->newest_idx)] == max_val)
+	{
+		swap_b(ctx);
+		push_a(ctx);
+		r_rotate_b(ctx);
+	}
+	else
+	{
+		r_rotate_b(ctx);
+		push_a(ctx);
+	}
+	seg->location = LOCATION_TOP_B;
+	seg->elem_count -= 1;
+	sort_two_elements(ctx, seg);
 }
 
 void	sort_three_elements_segment(t_context *ctx, t_stack_segmnt *seg)
@@ -24,7 +118,7 @@ void	sort_three_elements_segment(t_context *ctx, t_stack_segmnt *seg)
 	int		max_val;
 
 	stack = stack_from_location(ctx, seg->location);
-	max_val = segment_value(&ctx, seg);
+	max_val = segment_max_value(ctx, seg);
 	if (seg->location == LOCATION_TOP_A)
 		sort_three_top_a(ctx, seg, stack, max_val);
 	else if (seg->location == LOCATION_BOTTOM_A)

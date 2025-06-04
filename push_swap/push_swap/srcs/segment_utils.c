@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:13:06 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/02 15:23:05 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:40:38 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	move_segment_to_top(t_context *ctx, t_stack_segmnt *seg)
 {
-	if (seg->location == LOCATION_BOTTOM_A
-		&& get_stack_size(&ctx->stack_a) == seg->elem_count)
-		seg->location = LOCATION_TOP_A;
-	if (seg->location == LOCATION_BOTTOM_B
-		&& get_stack_size(&ctx->stack_b) == seg->elem_count)
-		seg->location = LOCATION_TOP_B;
+	if (seg->loc == LOCATION_BOTTOM_A
+		&& get_stack_size(&ctx->stack_a) == seg->count)
+		seg->loc = LOCATION_TOP_A;
+	if (seg->loc == LOCATION_BOTTOM_B
+		&& get_stack_size(&ctx->stack_b) == seg->count)
+		seg->loc = LOCATION_TOP_B;
 }
 
 t_stack	*stack_from_location(t_context *ctx, t_stack_location loc)
@@ -35,7 +35,7 @@ int	segment_value(t_context *ctx, t_stack_segmnt *seg, int n)
 	t_stack				*stack;
 	int					idx;
 
-	loc = seg->location;
+	loc = seg->loc;
 	stack = stack_from_location(ctx, loc);
 	if (loc == LOCATION_TOP_A || loc == LOCATION_TOP_B)
 		idx = stack->newest_idx;
@@ -57,10 +57,10 @@ int	segment_max_value(t_context *ctx, t_stack_segmnt *seg)
 	int		max_val;
 	int		idx;
 
-	stack = stack_from_location(ctx, seg->location);
-	count = seg->elem_count;
+	stack = stack_from_location(ctx, seg->loc);
+	count = seg->count;
 	max_val = 0;
-	if (seg->location == LOCATION_TOP_A || seg->location == LOCATION_TOP_B)
+	if (seg->loc == LOCATION_TOP_A || seg->loc == LOCATION_TOP_B)
 		idx = stack->newest_idx;
 	else
 		idx = stack->oldest_idx;
@@ -68,7 +68,7 @@ int	segment_max_value(t_context *ctx, t_stack_segmnt *seg)
 	{
 		if (stack->values[idx] > max_val)
 			max_val = stack->values[idx];
-		if (seg->location == LOCATION_TOP_A || seg->location == LOCATION_TOP_B)
+		if (seg->loc == LOCATION_TOP_A || seg->loc == LOCATION_TOP_B)
 			idx = get_next_bottom_idx(stack, idx);
 		else
 			idx = get_next_top_idx(stack, idx);

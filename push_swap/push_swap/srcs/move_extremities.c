@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:51:52 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/02 13:05:44 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/04 15:45:50 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ static void	move_from_bottom_b(t_context *ctx, t_stack_location to)
 	}
 }
 
-void	move_to_location(t_context *ctx, t_stack_location from,
-		t_stack_location to)
+int	move_to_loc(t_context *ctx, t_stack_location from, t_stack_location to)
 {
 	if (from == LOCATION_TOP_A)
 		move_from_top_a(ctx, to);
@@ -83,4 +82,5 @@ void	move_to_location(t_context *ctx, t_stack_location from,
 		move_from_bottom_a(ctx, to);
 	else if (from == LOCATION_BOTTOM_B)
 		move_from_bottom_b(ctx, to);
+	return (1);
 }
