@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:25:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/04 15:28:17 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:40:39 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	sort_three_top_a(t_context *ctx, t_stack_segmnt *seg,
 		swap_a(ctx);
 		r_rotate_a(ctx);
 	}
-	seg->location = LOCATION_TOP_A;
-	seg->elem_count -= 1;
+	seg->loc = LOCATION_TOP_A;
+	seg->count -= 1;
 	sort_two_elements(ctx, seg);
 }
 
@@ -55,8 +55,8 @@ static void	sort_three_top_b(t_context *ctx, t_stack_segmnt *seg,
 	}
 	push_a(ctx);
 	push_a(ctx);
-	seg->location = LOCATION_TOP_A;
-	seg->elem_count -= 1;
+	seg->loc = LOCATION_TOP_A;
+	seg->count -= 1;
 	sort_two_elements(ctx, seg);
 }
 
@@ -80,8 +80,8 @@ static void	sort_three_bottom_a(t_context *ctx, t_stack_segmnt *seg,
 		swap_a(ctx);
 		push_a(ctx);
 	}
-	seg->location = LOCATION_TOP_A;
-	seg->elem_count -= 1;
+	seg->loc = LOCATION_TOP_A;
+	seg->count -= 1;
 	sort_two_elements(ctx, seg);
 }
 
@@ -107,8 +107,8 @@ static void	sort_three_bottom_b(t_context *ctx, t_stack_segmnt *seg,
 		r_rotate_b(ctx);
 		push_a(ctx);
 	}
-	seg->location = LOCATION_TOP_B;
-	seg->elem_count -= 1;
+	seg->loc = LOCATION_TOP_B;
+	seg->count -= 1;
 	sort_two_elements(ctx, seg);
 }
 
@@ -117,14 +117,14 @@ void	sort_three_elements_segment(t_context *ctx, t_stack_segmnt *seg)
 	t_stack	*stack;
 	int		max_val;
 
-	stack = stack_from_location(ctx, seg->location);
+	stack = stack_from_location(ctx, seg->loc);
 	max_val = segment_max_value(ctx, seg);
-	if (seg->location == LOCATION_TOP_A)
+	if (seg->loc == LOCATION_TOP_A)
 		sort_three_top_a(ctx, seg, stack, max_val);
-	else if (seg->location == LOCATION_BOTTOM_A)
+	else if (seg->loc == LOCATION_BOTTOM_A)
 		sort_three_bottom_a(ctx, seg, stack, max_val);
-	else if (seg->location == LOCATION_TOP_B)
+	else if (seg->loc == LOCATION_TOP_B)
 		sort_three_top_b(ctx, seg, stack, max_val);
-	else if (seg->location == LOCATION_BOTTOM_B)
+	else if (seg->loc == LOCATION_BOTTOM_B)
 		sort_three_bottom_b(ctx, seg, stack, max_val);
 }

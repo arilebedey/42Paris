@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:56:28 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/02 14:59:24 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/09 12:58:13 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	sort_three_elements(t_context *ctx)
 	int	second;
 	int	third;
 
-	first = get_value_at(&ctx->stack_a, 1);
-	second = get_value_at(&ctx->stack_a, 2);
-	third = get_value_at(&ctx->stack_a, 3);
+	first = value_at(&ctx->stack_a, 1);
+	second = value_at(&ctx->stack_a, 2);
+	third = value_at(&ctx->stack_a, 3);
 	if (first > second && third > second && third > first)
 		swap_a(ctx);
 	else if (first > second && first > third && third > second)
@@ -62,13 +62,13 @@ static void	sort_five_elements(t_context *ctx)
 
 	while (get_stack_size(&ctx->stack_a) > 3)
 	{
-		top_a = get_value_at(&ctx->stack_a, 1);
+		top_a = value_at(&ctx->stack_a, 1);
 		if (top_a == 1 || top_a == 2)
 			push_b(ctx);
 		else
 			rotate_a(ctx);
 	}
-	if (get_value_at(&ctx->stack_b, 1) < get_value_at(&ctx->stack_b, 2))
+	if (value_at(&ctx->stack_b, 1) < value_at(&ctx->stack_b, 2))
 		swap_b(ctx);
 	sort_three_elements(ctx);
 	push_a(ctx);
@@ -85,5 +85,5 @@ void	sort(t_context *ctx)
 		sort_five_elements(ctx);
 	else
 		recursive_segment_sort(ctx);
-	optimize_operations(ctx);
+	/* optimize_operations(ctx); */
 }

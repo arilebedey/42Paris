@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:36:30 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/28 11:59:07 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:35:34 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
@@ -24,7 +24,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		*(unsigned char *)(b + i) = (unsigned char) c;
+		*(unsigned char *)(b + i) = (unsigned char)c;
 		i++;
 	}
 	return (b);

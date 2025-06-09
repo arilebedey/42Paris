@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/04 16:40:38 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:36:36 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_segmnt_split
 size_t					ft_strlen(const char *s);
 void					ft_putendl_fd(char *s, int fd);
 int						ft_atoi(char *str);
+void					*ft_memset(void *b, int c, size_t len);
 
 // LIST FUNCTIONS
 void					clear_list(t_opnode **list);
@@ -129,11 +130,15 @@ void					move_segment_to_top(t_context *ctx,
 							t_stack_segmnt *seg);
 int						segment_value(t_context *ctx, t_stack_segmnt *seg,
 							int n);
+void					split_segment(t_context *ctx, t_stack_segmnt *seg,
+							t_segmnt_split *split);
 
 // SEGMENT UTILITY FUNCTIONS
 int						segment_max_value(t_context *ctx, t_stack_segmnt *seg);
 t_stack					*stack_from_location(t_context *ctx,
 							t_stack_location loc);
+bool					is_stack_a_part_sorted(t_context *ctx, int start_pos);
+void					reduce_max_segment(t_context *ctx, t_stack_segmnt *seg);
 
 // SORTING FUNCTIONS
 void					recursive_segment_sort(t_context *ctx);
@@ -145,5 +150,9 @@ void					sort_one_element(t_context *ctx, t_stack_segmnt *seg);
 void					sort_two_elements(t_context *ctx, t_stack_segmnt *seg);
 void					sort_three_elements_segment(t_context *ctx,
 							t_stack_segmnt *seg);
+void					sort(t_context *ctx);
+
+// PRINTING
+void					print_operations(t_opnode *op_list);
 
 #endif

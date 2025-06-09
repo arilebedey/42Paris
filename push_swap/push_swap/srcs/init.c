@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:13:00 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/27 11:13:05 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/09 13:35:12 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	init_stack(t_context *ctx, t_stack *stack, int capacity)
 	stack->newest_idx = 0;
 	stack->oldest_idx = 0;
 	stack->capacity = capacity;
+	ft_memset(stack->values, 0, sizeof(int) * capacity);
 }
 
 static void	fill_stack(t_context *ctx, t_stack *stack, int count, char **args)

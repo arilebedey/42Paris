@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   memset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 16:49:36 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/09 14:20:51 by alebedev         ###   ########.fr       */
+/*   Created: 2025/06/09 13:36:04 by alebedev          #+#    #+#             */
+/*   Updated: 2025/06/09 13:36:24 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	main(int argc, char *argv[])
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_context	ctx;
+	size_t	i;
 
-	init_context(&ctx, argc, argv);
-	sort(&ctx);
-	print_operations(ctx.op_hist);
+	if (!b)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		*(unsigned char *)(b + i) = (unsigned char)c;
+		i++;
+	}
+	return (b);
 }
