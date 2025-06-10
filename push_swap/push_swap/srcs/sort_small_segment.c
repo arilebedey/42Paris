@@ -6,15 +6,16 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:05:26 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/09 13:59:06 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:37:08 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include <stdio.h>
 
 void	sort_one_element(t_context *ctx, t_stack_segmnt *seg)
 {
-	if (seg->loc == LOCATION_TOP_A || seg->loc == LOCATION_TOP_B
+	if (seg->loc == LOCATION_BOTTOM_A || seg->loc == LOCATION_TOP_B
 		|| seg->loc == LOCATION_BOTTOM_B)
 		move_to_loc(ctx, seg->loc, LOCATION_TOP_A);
 	seg->count -= 1;
@@ -22,6 +23,11 @@ void	sort_one_element(t_context *ctx, t_stack_segmnt *seg)
 
 void	sort_two_elements(t_context *ctx, t_stack_segmnt *seg)
 {
+	/* printf("|sort_two_elements |\n"); */
+	/* printf("|first el stack_a: %i\n", value_at(&ctx->stack_a, 1)); */
+	/* printf("|second el stack_a: %i\n", value_at(&ctx->stack_a, 2)); */
+	/* printf("|newest idx stack_b: %i\n", (&ctx->stack_b)->newest_idx); */
+	/* printf("|oldest idx stack_b: %i\n", (&ctx->stack_b)->oldest_idx); */
 	if (seg->loc == LOCATION_BOTTOM_A || seg->loc == LOCATION_TOP_B
 		|| seg->loc == LOCATION_BOTTOM_B)
 	{
@@ -45,9 +51,10 @@ void	sort_small_segment(t_context *ctx, t_stack_segmnt *seg)
 	{
 		seg_val_1 = segment_value(ctx, seg, 1);
 		seg_val_2 = segment_value(ctx, seg, 2);
-		if (seg_val_1 == value_at(&ctx->stack_a, 1) && seg->count > 0)
+		if (seg_val_1 + 1 == value_at(&ctx->stack_a, 1) && seg->count > 0)
 			sort_one_element(ctx, seg);
-		else if ((seg_val_2 == value_at(&ctx->stack_a, 2)) && seg->count > 1)
+		else if ((seg_val_2 + 1 == value_at(&ctx->stack_a, 1))
+			&& seg->count > 1)
 			sort_small_second(ctx, seg);
 		else
 			break ;

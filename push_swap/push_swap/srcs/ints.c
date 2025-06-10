@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:14:00 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/19 13:14:01 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:58:36 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ bool	is_valid_int(char *str)
 		return (false);
 	num = 0;
 	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
 	while (str[i])
 	{
 		if (str[i] > '9' || str[i] < '0')
 			return (false);
 		num = num * 10 + (str[i] - '0');
-		if ((sign == 1 && num > INT_MAX) || \
-			(sign == -1 && - num < (long long) INT_MIN))
+		if ((sign == 1 && num > INT_MAX) || (sign == -1 &&
+				-num < (long long)INT_MIN))
 			return (false);
 		i++;
 	}

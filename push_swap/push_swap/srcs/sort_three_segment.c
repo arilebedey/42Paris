@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:25:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/09 12:40:39 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:43:50 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,29 @@ static void	sort_three_top_a(t_context *ctx, t_stack_segmnt *seg,
 	sort_two_elements(ctx, seg);
 }
 
+/* static void	sort_three_top_b(t_context *ctx, t_stack_segmnt *seg, */
+/* 		t_stack *stack, int max_val) */
+/* { */
+/* 	push_a(ctx); */
+/* 	if (stack->values[stack->newest_idx] == max_val) */
+/* 	{ */
+/* 		push_a(ctx); */
+/* 		swap_a(ctx); */
+/* 	} */
+/* 	else if (stack->values[get_next_bottom_idx(stack, */
+/* 			stack->newest_idx)] == max_val) */
+/* 	{ */
+/* 		swap_b(ctx); */
+/* 		push_a(ctx); */
+/* 		swap_a(ctx); */
+/* 	} */
+/* 	else */
+/* 		push_a(ctx); */
+/* 	push_a(ctx); */
+/* 	seg->loc = LOCATION_TOP_A; */
+/* 	seg->count -= 1; */
+/* 	sort_two_elements(ctx, seg); */
+/* } */
 static void	sort_three_top_b(t_context *ctx, t_stack_segmnt *seg,
 		t_stack *stack, int max_val)
 {

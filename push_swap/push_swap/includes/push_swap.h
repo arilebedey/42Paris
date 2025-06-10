@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/09 13:36:36 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:02:52 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void					r_rotate_b(t_context *ctx);
 void					r_rotate_ab(t_context *ctx);
 
 // SPLITTING UTILITY FUNCTIONS
-void					move_segment_to_top(t_context *ctx,
+void					approach_seg_from_top(t_context *ctx,
 							t_stack_segmnt *seg);
 int						segment_value(t_context *ctx, t_stack_segmnt *seg,
 							int n);

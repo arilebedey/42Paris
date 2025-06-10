@@ -6,11 +6,12 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:12:27 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/04 16:40:38 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/10 16:37:32 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+#include <stdio.h>
 
 static void	init_split_sizes(t_stack_segmnt *min, t_stack_segmnt *mid,
 		t_stack_segmnt *max)
@@ -75,9 +76,12 @@ void	split_segment(t_context *ctx, t_stack_segmnt *seg,
 	set_split_locations(seg->loc, &split->min, &split->mid, &split->max);
 	set_pivot_values(seg->loc, seg->count, &pivot_small, &pivot_large);
 	max_val = segment_max_value(ctx, seg);
+	/* printf("pivot_small: %i \n", pivot_small); */
+	/* printf("pivot_large %i \n", pivot_large); */
 	while (seg->count--)
 	{
 		next_val = segment_value(ctx, seg, 1);
+		/* printf("next_val: %i \n", next_val); */
 		if (next_val > max_val - pivot_large)
 		{
 			split->max.count += move_to_loc(ctx, seg->loc, split->max.loc);

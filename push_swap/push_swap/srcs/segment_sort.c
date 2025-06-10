@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_segment_sort.c                                :+:      :+:    :+:   */
+/*   segment_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 12:53:59 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/09 12:44:35 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:02:39 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	sort_segment(t_context *ctx, t_stack_segmnt *seg)
 {
 	t_segmnt_split	split;
 
-	move_segment_to_top(ctx, seg);
+	approach_seg_from_top(ctx, seg);
 	sort_small_segment(ctx, seg);
 	if (seg->count <= 3)
 	{

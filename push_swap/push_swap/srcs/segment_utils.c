@@ -6,13 +6,13 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:13:06 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/04 16:40:38 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/10 13:02:39 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	move_segment_to_top(t_context *ctx, t_stack_segmnt *seg)
+void	approach_seg_from_top(t_context *ctx, t_stack_segmnt *seg)
 {
 	if (seg->loc == LOCATION_BOTTOM_A
 		&& get_stack_size(&ctx->stack_a) == seg->count)

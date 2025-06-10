@@ -4,7 +4,7 @@ RM						= rm -rf
 NAME					= push_swap
 VPATH					= srcs
 
-SRCS					= main.c atoi.c exit.c init.c init_segment_sort.c ints.c \
+SRCS					= main.c atoi.c exit.c init.c segment_sort.c ints.c \
 								len.c list_utils.c move_extremities.c op_push.c \
 								op_revrotate.c op_rotate.c op_swap.c op_utils.c \
 								segment_optimize.c segment_utils.c sort.c sort_second.c \
@@ -28,8 +28,7 @@ ${NAME}:				${OBJS}
 clean:	
 								${RM} obj
 
-fclean:	
-								clean
+fclean:					clean
 								${RM} ${NAME}
 
 re: 						fclean all
