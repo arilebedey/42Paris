@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/26 13:20:11 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/11 12:10:01 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,14 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read(fd, NULL, 0) < 0)
+	{
+		if (stash)
+		{
+			free(stash);
+			stash = NULL;
+		}
 		return (NULL);
+	}
 	stash = read_file(fd, stash);
 	if (!stash)
 		return (NULL);
