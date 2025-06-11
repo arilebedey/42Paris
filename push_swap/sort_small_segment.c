@@ -6,12 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:05:26 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/11 12:55:22 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:40:16 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
-#include <stdio.h>
 
 void	sort_one_element(t_context *ctx, t_stack_segmnt *seg)
 {

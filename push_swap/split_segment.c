@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:12:27 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/11 13:33:28 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:37:12 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,7 @@ void	split_segment(t_context *ctx, t_stack_segmnt *seg,
 	{
 		next_val = segment_value(ctx, seg, 1);
 		if (next_val > max_val - pivot_large)
-		{
 			split->max.count += move_to_loc(ctx, seg->loc, split->max.loc);
-			reduce_max_segment(ctx, &split->max);
-			if (is_stack_a_part_sorted(ctx, 1) && seg->count)
-				sort_small_segment(ctx, seg);
-		}
 		else if (next_val > max_val - pivot_small)
 			split->mid.count += move_to_loc(ctx, seg->loc, split->mid.loc);
 		else

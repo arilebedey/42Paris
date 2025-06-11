@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/11 13:26:23 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:36:58 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,6 @@ void					split_segment(t_context *ctx, t_stack_segmnt *seg,
 int						segment_max_value(t_context *ctx, t_stack_segmnt *seg);
 t_stack					*stack_from_location(t_context *ctx,
 							t_stack_location loc);
-bool					is_stack_a_part_sorted(t_context *ctx, int start_pos);
-void					reduce_max_segment(t_context *ctx, t_stack_segmnt *seg);
 
 // SORTING FUNCTIONS
 void					recursive_segment_sort(t_context *ctx);
