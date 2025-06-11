@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 16:24:08 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/09 14:01:13 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:24:19 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	reduce_max_segment(t_context *ctx, t_stack_segmnt *seg)
 		&& are_vals_consec(value_at(a, 1), value_at(a, 2), value_at(a, 3),
 			value_at(a, 4)) && is_stack_a_part_sorted(ctx, 4))
 	{
-		sort_three_elements_segment(ctx, seg);
+		place_three_elements(ctx, seg);
 		return ;
 	}
 	if (seg->loc == LOCATION_TOP_A && value_at(a, 1) == value_at(a, 3) - 1

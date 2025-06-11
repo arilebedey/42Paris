@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/11 13:26:23 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:22:07 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdint.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -141,13 +142,14 @@ void					reduce_max_segment(t_context *ctx, t_stack_segmnt *seg);
 
 // SORTING FUNCTIONS
 void					recursive_segment_sort(t_context *ctx);
-void					sort_small_segment(t_context *ctx, t_stack_segmnt *seg);
+void					push_a_if_consec(t_context *ctx, t_stack_segmnt *seg);
 int						move_to_loc(t_context *ctx, t_stack_location from,
 							t_stack_location to);
-void					sort_small_second(t_context *ctx, t_stack_segmnt *seg);
-void					sort_one_element(t_context *ctx, t_stack_segmnt *seg);
-void					sort_two_elements(t_context *ctx, t_stack_segmnt *seg);
-void					sort_three_elements_segment(t_context *ctx,
+void					place_second_elem(t_context *ctx, t_stack_segmnt *seg);
+void					place_elements(t_context *ctx, t_stack_segmnt *seg);
+void					place_one_element(t_context *ctx, t_stack_segmnt *seg);
+void					place_two_elements(t_context *ctx, t_stack_segmnt *seg);
+void					place_three_elements(t_context *ctx,
 							t_stack_segmnt *seg);
 void					sort(t_context *ctx);
 
