@@ -6,11 +6,12 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:12:27 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/11 13:37:12 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/12 12:51:58 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
+#include <stdio.h>
 
 static void	init_split_sizes(t_stack_segmnt *min, t_stack_segmnt *mid,
 		t_stack_segmnt *max)
@@ -53,14 +54,18 @@ static void	set_pivot_values(t_stack_location loc, int seg_size,
 		int *pivot_small, int *pivot_large)
 {
 	*pivot_large = seg_size / 3;
-	if (loc == LOCATION_TOP_A || loc == LOCATION_BOTTOM_A)
-		*pivot_small = 2 * (seg_size / 3);
-	if (loc == LOCATION_TOP_B || loc == LOCATION_BOTTOM_B)
-		*pivot_small = seg_size / 2;
-	if ((loc == LOCATION_TOP_A || loc == LOCATION_BOTTOM_A) && seg_size < 15)
-		*pivot_small = seg_size;
-	if (loc == LOCATION_BOTTOM_B && seg_size < 8)
-		*pivot_large = seg_size / 2;
+	*pivot_small = 2 * (seg_size / 3);
+	(void)loc;
+	printf("pivot_small: %i pivot_large: %i\n", *pivot_small, *pivot_large);
+	/* if (loc == LOCATION_TOP_A || loc == LOCATION_BOTTOM_A) */
+	/* 	*pivot_small = 2 * (seg_size / 3); */
+	/* if (loc == LOCATION_TOP_B || loc == LOCATION_BOTTOM_B) */
+	/* 	*pivot_small = seg_size / 2; */
+	/* if ((loc == LOCATION_TOP_A || loc == LOCATION_BOTTOM_A)
+		&& seg_size < 15) */
+	/* 	*pivot_small = seg_size; */
+	/* if (loc == LOCATION_BOTTOM_B && seg_size < 8) */
+	/* 	*pivot_large = seg_size / 2; */
 }
 
 void	split_segment(t_context *ctx, t_stack_segmnt *seg,
