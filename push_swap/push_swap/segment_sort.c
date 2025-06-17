@@ -6,13 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 12:53:59 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/17 13:37:20 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/17 18:34:35 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
-
-void		print_stack(t_stack *stack);
 
 static void	sort_segment(t_context *ctx, t_stack_segmnt *seg)
 {
