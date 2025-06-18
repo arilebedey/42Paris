@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/17 18:34:18 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:48:42 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_opnode				*new_opnode(void *operation);
 void					add_opnode_back(t_opnode **lst, t_opnode *to_add);
 
 // PARSING FUNCTIONS
+char					**parse_args(int *argc, char **argv);
 bool					is_valid_int(char *str);
 void					init_context(t_context *ctx, int argc, char **argv);
 
@@ -155,7 +156,10 @@ void					sort(t_context *ctx);
 void					print_operations(t_opnode *op_list);
 
 // EXITING
+void					free_args(char **args);
+void					early_error(void);
 void					handle_error(t_context *ctx);
+void					handle_exit(t_context *ctx);
 void					free_context(t_context *ctx);
 
 #endif

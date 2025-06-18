@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:13:00 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/11 13:22:03 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:51:03 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,15 @@ static void	fill_stack(t_context *ctx, t_stack *stack, int count, char **args)
 
 void	init_context(t_context *ctx, int argc, char **argv)
 {
-	--argc;
+	char	**args;
+
+	if (argc == 2 && argv[1][0] == '\0')
+		early_error();
 	ctx->op_hist = NULL;
-	init_stack(ctx, &ctx->stack_a, argc);
-	init_stack(ctx, &ctx->stack_b, argc);
-	fill_stack(ctx, &ctx->stack_a, argc, ++argv);
+	args = parse_args(&argc, argv);
+	init_stack(ctx, &ctx->stack_a, argc - 1);
+	init_stack(ctx, &ctx->stack_b, argc - 1);
+	fill_stack(ctx, &ctx->stack_a, argc - 1, args);
+	if (args != argv + 1)
+		free_args(args);
 }

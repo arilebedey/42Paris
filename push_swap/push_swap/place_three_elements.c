@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 15:25:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/17 18:35:46 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:01:32 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	sort_three_top_a(t_context *ctx, t_stack_segmnt *seg,
 		r_rotate_a(ctx);
 	}
 	else if (stack->values[get_next_bottom_idx(stack,
-			stack->newest_idx)] == max_val)
+				stack->newest_idx)] == max_val)
 	{
 		rotate_a(ctx);
 		swap_a(ctx);
@@ -40,7 +40,7 @@ static void	sort_three_top_b(t_context *ctx, t_stack_segmnt *seg,
 	if (stack->values[stack->newest_idx] == max_val)
 		push_a(ctx);
 	else if (stack->values[get_next_bottom_idx(stack,
-			stack->newest_idx)] == max_val)
+				stack->newest_idx)] == max_val)
 	{
 		swap_b(ctx);
 		push_a(ctx);
@@ -71,7 +71,7 @@ static void	sort_three_bottom_a(t_context *ctx, t_stack_segmnt *seg,
 		r_rotate_a(ctx);
 	}
 	else if (stack->values[get_next_top_idx(stack,
-			stack->newest_idx)] == max_val)
+				stack->newest_idx)] == max_val)
 		r_rotate_a(ctx);
 	else
 	{
@@ -96,7 +96,7 @@ static void	sort_three_bottom_b(t_context *ctx, t_stack_segmnt *seg,
 		r_rotate_b(ctx);
 	}
 	else if (stack->values[get_next_top_idx(stack,
-			stack->newest_idx)] == max_val)
+				stack->newest_idx)] == max_val)
 	{
 		swap_b(ctx);
 		push_a(ctx);
