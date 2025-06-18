@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:31 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/18 14:48:27 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:58:52 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,6 @@ static char	**ft_split(const char *str, char c)
 	char	**tab;
 	int		words;
 
-	if (!str || !str[0])
-	{
-		tab = malloc(sizeof(char *) * 1);
-		if (!tab)
-			return (NULL);
-		tab[0] = NULL;
-		return (tab);
-	}
 	words = count_words((char *)str, c);
 	tab = malloc(sizeof(char *) * (words + 1));
 	if (!tab)
@@ -114,12 +106,8 @@ char	**parse_args(int *argc, char **argv)
 		if (!argv[1][0])
 			early_error();
 		args = ft_split(argv[1], ' ');
-		if (!args || !args[0])
-		{
-			if (args)
-				free_args(args);
+		if (!args)
 			early_error();
-		}
 		count = 0;
 		while (args[count])
 			count++;
