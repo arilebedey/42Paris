@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:50:12 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/20 17:59:04 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:09:51 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define PIPEX_H
 
 # define ERR_INPUT "Invalid number of arguments\n"
-# define ERR_INFILE "Infile"
-# define ERR_OUTFILE "Outfile"
-# define ERR_PIPE "Pipe"
+# define ERR_INFILE "Infile\n"
+# define ERR_OUTFILE "Outfile\n"
+# define ERR_PIPE "Pipe\n"
 # define ERR_CMD "Command not found\n"
 # define ERR_PATH "Path not found\n"
 # define ERR_EXECVE "Failed to execute command\n"
@@ -47,6 +47,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlen(const char *s);
 
 // error.c
+int			print_warn(char *err);
 int			print_error(char *err);
 void		perror_exit(char *err);
 

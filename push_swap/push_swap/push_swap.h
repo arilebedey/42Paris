@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/18 15:13:07 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:36:34 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-
-typedef struct s_list
-{
-	void				*operation;
-	struct s_list		*prev;
-	struct s_list		*next;
-}						t_list;
 
 typedef struct s_stack
 {

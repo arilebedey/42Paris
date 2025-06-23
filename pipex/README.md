@@ -1,3 +1,13 @@
+### Beware when implementing
+
+In a real shell, the exit status of a pipeline is the exit status of the last command in the pipeline.
+
+Always check the return value of dup2 (will fail with invalid FDs) and return early safely. (File permission problems)
+
+Use write(2, ...) when you want to print a custom message without the system error.
+
+Use perror(...) when you want to print a message with the system's explanation of the error (e.g., after a failed system call).
+
 ### Intro
 
 `fork()` effectively returns in two places simultaneously: once in the parent process (returning the child's PID) and once in the child process (returning 0). This happens because `fork()` creates a new process by duplicating the calling process, and both processes continue execution from the point of the `fork()` call with their respective return values.

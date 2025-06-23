@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:03:08 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/20 17:54:58 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/23 16:37:57 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ static void	free_cmd_args(char **cmd_args)
 	free(cmd_args);
 }
 
+static char	**split_cmd_args(char *cmd)
+{
+	char	**cmd_args;
+
+	cmd_args = ft_split(cmd, ' ');
+	if (!cmd_args)
+		return (NULL);
+	if (!cmd_args[0])
+	{
+		free(cmd_args);
+		return (NULL);
+	}
+	return (cmd_args);
+}
+
 char	**find_path(char **env)
 {
 	while (ft_strncmp("PATH", *env, 4))
@@ -39,8 +54,8 @@ char	**get_cmd(char **paths, char *cmd)
 	char	*command;
 	char	**cmd_args;
 
-	cmd_args = ft_split(cmd, ' ');
-	if (!cmd_args || !cmd_args[0])
+	cmd_args = split_cmd_args(cmd);
+	if (!cmd_args)
 		return (NULL);
 	while (*paths)
 	{

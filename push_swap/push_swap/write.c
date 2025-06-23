@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 13:13:10 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/11 13:00:07 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/06/23 17:31:17 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_putendl_fd(char *s, int fd)
 	write(fd, "\n", 1);
 }
 
-const char	*op_to_str(t_ops op)
+char	*op_to_str(t_ops op)
 {
-	static const char	*strings[12];
+	char	*strings[12];
 
 	strings[0] = "null_op";
 	strings[1] = "pa";
@@ -46,8 +46,7 @@ void	print_operations(t_opnode *op_list)
 	current = op_list;
 	while (current)
 	{
-		ft_putendl_fd((char *)op_to_str((t_ops)(uintptr_t)current->operation),
-			1);
+		ft_putendl_fd(op_to_str((t_ops)(uintptr_t)current->operation), 1);
 		current = current->next;
 	}
 }
