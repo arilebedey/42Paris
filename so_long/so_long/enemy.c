@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 14:32:36 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/24 16:26:50 by alebedev         ###   ########.fr       */
+/*   Created: 2025/07/01 22:51:57 by alebedev          #+#    #+#             */
+/*   Updated: 2025/07/01 22:53:27 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	main(int argc, char *argv[])
+bool	check_enemy(char **map)
 {
-	t_game	game;
+	int	count;
+	int	x;
+	int	y;
 
-	arg_error(argc, argv[1]);
-	game.map = read_file(argv[1]);
-	return (EXIT_SUCCESS);
+	count = 0;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x++] == 'M')
+				count++;
+		}
+		y++;
+	}
+	if (count == 1)
+		return (true);
+	return (false);
 }

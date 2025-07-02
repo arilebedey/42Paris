@@ -6,25 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:18:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/24 17:54:48 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/02 23:26:01 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
-
-void	malloc_error(char **map)
-{
-	if (map)
-		free_map(map);
-	ft_printf("Error\nProblème d'allocation mémoire\n");
-	exit(1);
-}
-
-void	file_read_error(void)
-{
-	ft_putstr_fd("Error\nCannot read file\n", 2);
-	exit(1);
-}
+#include "./so_long.h"
 
 static void	file_format_error(char *file)
 {
@@ -38,7 +24,7 @@ static void	file_format_error(char *file)
 	}
 }
 
-void	arg_error(int argc, char *file)
+void	check_argc(int argc, char *file)
 {
 	if (argc == 1)
 	{
@@ -51,4 +37,26 @@ void	arg_error(int argc, char *file)
 		exit(1);
 	}
 	file_format_error(file);
+}
+
+void	malloc_error(char **map)
+{
+	if (map)
+		free_map(map);
+	ft_putstr_fd("Error\nMalloc error\n", 2);
+	exit(1);
+}
+
+void	file_read_error(void)
+{
+	ft_putstr_fd("Error\nCannot read file\n", 2);
+	exit(1);
+}
+
+void	map_error(char **map)
+{
+	if (map)
+		free_map(map);
+	ft_putstr_fd("Error\nMalloc error\n", 2);
+	exit(1);
 }

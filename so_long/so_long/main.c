@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 14:33:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/24 16:48:16 by alebedev         ###   ########.fr       */
+/*   Created: 2025/06/24 14:32:36 by alebedev          #+#    #+#             */
+/*   Updated: 2025/07/02 23:54:36 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#include "./so_long.h"
 
-# include "libft/libft.h"
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-
-typedef struct s_game
+int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*win;
-	char	**map;
-}			t_game;
+	t_game	game;
 
-// error.c
-void		arg_error(int argc, char *file);
-void		file_read_error(void);
-
-#endif
+	check_argc(argc, argv[1]);
+	game.map = read_file(argv[1]);
+	parse_map(&game);
+	game.sprite_frame = 0;
+	game.moves_count = 0;
+	init_game(&game);
+	//
+	return (EXIT_SUCCESS);
+}
