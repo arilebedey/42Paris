@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:33:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/02 23:34:02 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/04 23:33:47 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 # define SO_LONG_H
 
 # include "libft/libft.h"
+# include "minilibx/mlx.h"
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define TILE_SIZE 32
 
 typedef struct s_game
 {
@@ -28,6 +31,12 @@ typedef struct s_game
 	bool	enemy_is_alive;
 	int		sprite_frame;
 	int		moves_count;
+	void	*img_wall;
+	void	*img_floor;
+	void	*img_player;
+	void	*img_exit_open;
+	void	*img_exit_closed;
+	void	*img_enemy;
 }			t_game;
 
 // error.c
@@ -35,6 +44,10 @@ void		check_argc(int argc, char *file);
 void		malloc_error(char **map);
 void		file_read_error(void);
 void		map_error(char **map);
+
+// error2.c
+void		mlx_init_error(t_game *game);
+void		img_load_error(t_game *game);
 
 // free.c
 void		free_map(char **map);
