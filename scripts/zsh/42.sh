@@ -8,16 +8,30 @@ if [ "$(whoami)" = "alebedev" ]; then
   xset r rate 250 80
 fi
 
-# Check if running on Wayland or X11 and use appropriate clipboard tool
 if [[ -n $WAYLAND_DISPLAY ]]; then
-  # Already using Wayland, so wl-copy is appropriate
-  # No need for an alias in this case
 else
-  # On X11, alias wl-copy to xclip
   alias wl-copy='xclip -selection clipboard'
   alias wl-paste='xclip -selection clipboard -o'
 fi
 
+
+
 if [ "$HOST" = "ls" ]; then
   eval "$(direnv hook zsh)"
+
+
+  export PATH="$PATH:/home/ari/.local/bin"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+fi
+
+if [[ "$(uname)" == "Darwin" ]]; then
+  defaults write -g InitialKeyRepeat -int 15
+  defaults write -g KeyRepeat -int 1
+  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+  defaults write -g NSWindowShouldDragOnGesture -bool true
+
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 fi

@@ -1,0 +1,389 @@
+{
+  "description": "Remap Cmd-{workspaces} to Cmd-Shift-Alt-{workspaces} + Shifted",
+  "manipulators": [
+    {
+      "from": {
+        "key_code": "y",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "y",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "y",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "y",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "u",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "u",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "u",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "u",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "i",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "i",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "i",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "i",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "o",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "o",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "o",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "o",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "h",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "h",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "h",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "h",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "j",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "j",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "j",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "j",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "k",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "k",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "k",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "k",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "l",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "l",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "l",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "l",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "n",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "n",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "n",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "n",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "m",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "m",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "m",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "m",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "comma",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "comma",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "comma",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "comma",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "period",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "period",
+          "modifiers": ["command", "option"]
+        }
+      ],
+      "type": "basic"
+    },
+    {
+      "from": {
+        "key_code": "period",
+        "modifiers": {
+          "mandatory": ["command"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "key_code": "period",
+          "modifiers": ["command", "option", "shift"]
+        }
+      ],
+      "type": "basic"
+    }
+  ]
+}

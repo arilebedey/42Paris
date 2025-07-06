@@ -9,15 +9,16 @@ GHOSTTY_CONFIG_PATH="$CONFIG_DIR/config"
 # Source directory (where the actual config files are located)
 SOURCE_DIR="$HOME/System/dotfiles/.config/ghostty"
 
+# Default environment for Mac Mini M1
+DEFAULT_ENVIRONMENT="m1mini"
+
 # Check if an environment was provided
 if [ -z "$1" ]; then
-    echo "Usage: $0 [environment-name]"
-    echo "Available environments: 42-dell, home"
-    exit 1
+    echo "No environment provided. Using default: $DEFAULT_ENVIRONMENT"
+    ENVIRONMENT="$DEFAULT_ENVIRONMENT"
+else
+    ENVIRONMENT="$1"
 fi
-
-# Define the environment
-ENVIRONMENT="$1"
 
 # Create config directory if it doesn't exist
 mkdir -p "$CONFIG_DIR"
@@ -32,7 +33,7 @@ setup_config() {
         exit 1
     fi
     
-    # Handle existing config file
+    # Handle existing config file or symlink
     if [ -e "$GHOSTTY_CONFIG_PATH" ]; then
         if [ -L "$GHOSTTY_CONFIG_PATH" ]; then
             # It's a symlink, remove it
@@ -62,9 +63,12 @@ case "$ENVIRONMENT" in
     "home")
         setup_config
         ;;
+    "m1mini")
+        setup_config
+        ;;
     *)
         echo "Unknown environment: $ENVIRONMENT"
-        echo "Available environments: 42-dell, home"
+        echo "Available environments: 42-dell, home, m1mini"
         exit 1
         ;;
 esac

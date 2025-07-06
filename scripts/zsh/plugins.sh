@@ -2,14 +2,20 @@
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 # zinit snippet OMZP::sudo
+
+
 # zsh-you-should-use
-if [ "$(whoami)" = "alebedev" ]; then
+if [[ "$(uname)" == "Darwin" ]]; then
+  # Source from Homebrew location for Mac systems
+  source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
+elif [ "$(whoami)" = "alebedev" ]; then
   # Source from home directory for alebedev user
   source $HOME/.zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 else
   # Source from system location for other users
   source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 fi
+
 # fast-syntax-highlighting
 zinit light zdharma-continuum/fast-syntax-highlighting
 # zinit light zsh-users/zsh-completions
