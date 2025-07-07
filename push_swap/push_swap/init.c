@@ -6,13 +6,14 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:13:00 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/18 15:13:43 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/07 22:38:08 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-static void	check_duplicates(t_context *ctx, int *values, int count)
+static void	check_duplicates(t_context *ctx, int *values, int count,
+		char **args)
 {
 	int	i;
 	int	j;
@@ -26,6 +27,7 @@ static void	check_duplicates(t_context *ctx, int *values, int count)
 			if (values[i] == values[j])
 			{
 				free(values);
+				free_args(args);
 				handle_error(ctx);
 			}
 			j++;
@@ -81,12 +83,13 @@ static void	fill_stack(t_context *ctx, t_stack *stack, int count, char **args)
 		if (!is_valid_int(args[i]))
 		{
 			free(raw_nums);
+			free_args(args);
 			handle_error(ctx);
 		}
 		raw_nums[i] = ft_atoi(args[i]);
 		i++;
 	}
-	check_duplicates(ctx, raw_nums, count);
+	check_duplicates(ctx, raw_nums, count, args);
 	convert_to_ranks(raw_nums, stack->values, count);
 	stack->oldest_idx = count - 1;
 	free(raw_nums);
@@ -99,6 +102,8 @@ void	init_context(t_context *ctx, int argc, char **argv)
 	if (argc == 2 && argv[1][0] == '\0')
 		early_error();
 	ctx->op_hist = NULL;
+	ctx->stack_a.values = NULL;
+	ctx->stack_b.values = NULL;
 	args = parse_args(&argc, argv);
 	init_stack(ctx, &ctx->stack_a, argc - 1);
 	init_stack(ctx, &ctx->stack_b, argc - 1);
