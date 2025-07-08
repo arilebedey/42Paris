@@ -1,16 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   load_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 21:30:49 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/04 23:33:54 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:47:47 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	load_collectible(t_game *game, int size)
+{
+	int		i;
+	char	*filename;
+	char	*nbr;
+	char	*tmp;
+
+	i = 0;
+	game->collectible_frame = 11;
+	game->collectible_img = malloc(sizeof(void *) * 11);
+	if (!game->collectible_img)
+		malloc_error(game->map);
+	while (i < game->collectible_frame)
+	{
+		nbr = ft_itoa(i + 1);
+		tmp = ft_strjoin("./imgs/", nbr);
+		free(nbr);
+		filename = ft_strjoin(tmp, ".xpm");
+		free(tmp);
+		game->collectible_img[i] = mlx_xpm_file_to_image(game->mlx, filename,
+				&size, &size);
+		free(filename);
+		if (!game->collectible_img[i])
+			img_load_error(game);
+		i++;
+	}
+}
 
 void	load_images(t_game *game)
 {

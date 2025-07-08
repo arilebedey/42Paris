@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   game_handlers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 14:32:36 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/08 21:30:26 by alebedev         ###   ########.fr       */
+/*   Created: 2025/07/08 22:21:14 by alebedev          #+#    #+#             */
+/*   Updated: 2025/07/08 22:39:19 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./so_long.h"
 
-int	main(int argc, char **argv)
+void	on_hit_enemy(t_game *game)
 {
-	t_game	game;
-
-	check_argc(argc, argv[1]);
-	game.map = read_file(argv[1]);
-	parse_map(&game);
-	game.sprite_frame = 0;
-	game.moves_count = 0;
-	init_game(&game);
-	mlx_key_hook(game.win, on_keypress, &game);
-	//
-	return (EXIT_SUCCESS);
+	destroy_game(game);
+	ft_putstr_fd("You touched an enemy\n", 2);
 }

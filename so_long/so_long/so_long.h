@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:33:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/04 23:33:47 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/08 22:38:12 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_game
 	void	*mlx;
 	void	*win;
 	char	**map;
-	int		collectible_count;
+	int		current_frame;
 	bool	enemy_is_alive;
 	int		sprite_frame;
 	int		moves_count;
@@ -37,6 +37,9 @@ typedef struct s_game
 	void	*img_exit_open;
 	void	*img_exit_closed;
 	void	*img_enemy;
+	int		collectible_count;
+	int		collectible_frame;
+	void	**collectible_img;
 }			t_game;
 
 // error.c
@@ -48,9 +51,13 @@ void		map_error(char **map);
 // error2.c
 void		mlx_init_error(t_game *game);
 void		img_load_error(t_game *game);
+void		malloc_error_late(t_game *game);
+void		destroy_game(t_game *game);
 
 // free.c
 void		free_map(char **map);
+void		free_game_early(t_game *game);
+void		destroy_game(t_game *game);
 
 // read_file.c
 char		**read_file(char *file);
@@ -66,5 +73,17 @@ bool		check_enemy(char **map);
 
 // validate_path.c
 void		validate_path(char **map);
+
+// init.c
+void		init_game(t_game *game);
+
+// load_images.c
+void		load_images(t_game *game);
+
+// render_map.c
+void		render_map(t_game *game);
+
+// on_key_press.c
+int			on_key_press(int key, t_game *game);
 
 #endif
