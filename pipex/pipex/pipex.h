@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:50:12 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/23 17:09:51 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/13 02:06:18 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define ERR_CMD "Command not found\n"
 # define ERR_PATH "Path not found\n"
 # define ERR_EXECVE "Failed to execute command\n"
+# define ERR_MALLOC "Malloc failed\n"
 
 # include <fcntl.h>
 # include <stdio.h>
@@ -31,13 +32,13 @@
 
 typedef struct s_pipex
 {
-	pid_t	pid1;
-	pid_t	pid2;
-	int		pipefd[2];
+	pid_t	*pids;
+	int		**pipes;
 	int		infile;
 	int		outfile;
 	char	**paths;
-	char	**cmd;
+	char	***cmds;
+	int		cmd_count;
 }			t_pipex;
 
 // utils/
@@ -46,23 +47,32 @@ char		**ft_split(const char *str, char c);
 char		*ft_strjoin(char const *s1, char const *s2);
 size_t		ft_strlen(const char *s);
 
-// error.c
+// print_exit.c
 int			print_warn(char *err);
 int			print_error(char *err);
-void		perror_exit(char *err);
+void		print_error_exit(t_pipex *ctx, char *err);
+void		print_sys_error_exit(t_pipex *ctx, char *err);
+
+// init_struct.c
+void		init_struct(t_pipex *ctx, int cmd_count);
+
+// free_pipex.c
+void		free_pipex(t_pipex *ctx);
+
+// connect.c
+void		get_pipes(t_pipex *ctx);
+void		get_file_fds(t_pipex *ctx, char **av, int ac);
+void		get_paths(t_pipex *ctx, char **env);
+
+// close.c
+void		close_forks(t_pipex *ctx, int i);
+void    close_pipes(t_pipex *ctx, int i);
 
 // parse.c
 char		**find_path(char **env);
 char		**get_cmd(char **paths, char *cmd);
 
-// free.c
-void		close_pipes(t_pipex *ctx);
-void		free_child(t_pipex *ctx);
-int			free_parent(t_pipex *ctx);
-void		free_paths(char **paths);
-
-// processes.c
-void		first_child(t_pipex ctx, char *av[], char *env[]);
-void		second_child(t_pipex ctx, char *av[], char *env[]);
+// pipeline.c
+void		exec_pipeline(t_pipex *ctx, char **av, char **env);
 
 #endif

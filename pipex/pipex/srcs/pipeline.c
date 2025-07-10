@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 13:48:02 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/23 17:17:38 by alebedev         ###   ########.fr       */
+/*   Created: 2025/07/11 21:11:03 by alebedev          #+#    #+#             */
+/*   Updated: 2025/07/13 01:59:15 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	print_warn(char *err)
+void	exec_pipeline(t_pipex *ctx, char **av, char **env)
 {
-	write(2, err, ft_strlen(err));
-	return (0);
-}
+	int	i;
 
-int	print_error(char *err)
-{
-	write(2, err, ft_strlen(err));
-	return (1);
-}
-
-void	perror_exit(char *err)
-{
-	perror(err);
-	exit(1);
+	i = 0;
+	while (i < ctx->cmd_count)
+	{
+		ctx->pids[i] = fork();
+		if (ctx->pids[i] == 0)
+			exec_command(ctx, av[i + 2], env, i);
+		else if (ctx->pids[i] == -1)
+		{
+			close_forks(ctx, i);
+			close_pipes(ctx, 0);
+			print_sys_error_exit(ctx, "C fork() failed");
+		}
+	}
+	close_pipes(ctx, 0);
 }

@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:16:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/13 02:05:43 by alebedev         ###   ########.fr       */
+/*   Created: 2025/07/11 20:56:56 by alebedev          #+#    #+#             */
+/*   Updated: 2025/07/11 22:25:03 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	main(int ac, char **av, char **env)
+int	print_warn(char *err)
 {
-	t_pipex	ctx;
-	int		exit_status;
+	write(2, err, ft_strlen(err));
+	return (0);
+}
 
-	init_struct(&ctx, ac - 3);
-	get_file_fds(&ctx, av, ac);
-	get_paths(&ctx, env);
-	get_pipes(&ctx);
-	exec_pipeline(&ctx, av, env);
-	exit_status = wait_for_children(&ctx);
-	cleanup(&ctx);
-	return (exit_status);
+int	print_error(char *err)
+{
+	write(2, err, ft_strlen(err));
+	return (1);
+}
+
+void	print_error_exit(t_pipex *ctx, char *err)
+{
+	print_error(err);
+	free_pipex(ctx);
+	exit(1);
+}
+
+void	print_sys_error_exit(t_pipex *ctx, char *err)
+{
+	perror(err);
+	free_pipex(ctx);
+	exit(1);
 }
