@@ -133,6 +133,8 @@ int pipe(int pipefd[2]);
 
 The `pipe()` function creates a unidirectional data channel (a pipe) for interprocess communication. It returns two file descriptors in the `pipefd` array:
 
+Returns -1 on failure, 0 on success. Does not modify pipefd on failure.
+
 - `pipefd[0]`: Read end of the pipe.
 - `pipefd[1]`: Write end of the pipe.
 
@@ -217,3 +219,16 @@ int unlink(const char *pathname);
 - If the name was the last link but the file is still open by any process, the file persists until all file descriptors referencing it are closed.
 
 Returns 0 on success, or -1 on error, with `errno` set accordingly.
+
+## Implementation overview
+
+The first child need the writes to the pipefd[1] (gotten from pipe()):
+
+```c
+void	first_child(t_pipex ctx, char *av[], char *env[])
+{
+	close(ctx.pipefd[0]);
+	if (dup2(ctx.pipefd[1], 1) < 0)
+	{
+		free_paths(ctx.paths);
+```

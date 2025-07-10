@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:16:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/11 21:30:45 by alebedev         ###   ########.fr       */
+/*   Created: 2025/07/11 22:31:43 by alebedev          #+#    #+#             */
+/*   Updated: 2025/07/11 22:35:39 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	main(int ac, char **av, char **env)
+void	close_forks(t_pipex *ctx, int i)
 {
-	t_pipex	ctx;
-	int		exit_status;
+	int	j;
 
-	init_pipex_struct(&ctx, ac - 3);
-	get_file_fds(&ctx, av, ac);
-	get_paths(&ctx, env);
-	get_pipes(&ctx);
-	execute_pipeline(&ctx, av, env);
-	exit_status = wait_for_children(&ctx);
-	return (cleanup_pipex(&ctx));
-	return (exit_status);
+	j = 0;
+	while (j < i)
+		waitpid(ctx->pids[j], NULL, 0);
+}
+
+void	close_pipes(t_pipex *ctx)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx->cmd_count - 1)
+	{
+		close(ctx->pipes[i][0]);
+		close(ctx->pipes[i][1]);
+		i++;
+	}
+	if (ctx->infile > -1)
+		close(ctx->infile);
+	close(ctx->outfile);
 }
