@@ -1,6 +1,6 @@
 ### M1 CONFIG
 
-font-size = 28
+font-size = 20
 window-decoration = false
 fullscreen = true
 command = "$HOME/System/scripts/ui/launch_tmux.sh"
@@ -13,3 +13,5 @@ cursor-style-blink = false
 shell-integration-features = no-cursor
 cursor-style = bar
 confirm-close-surface = false
+
+keybind = super+a=text:\x01

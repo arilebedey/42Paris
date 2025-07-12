@@ -44,4 +44,3 @@ source $HOME/System/scripts/zsh/plugins-end.sh
 
 ## SECRETS
 source $HOME/.config/keys/secrets.sh
-
