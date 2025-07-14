@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 11:27:27 by alebedev          #+#    #+#             */
-/*   Updated: 2025/04/25 15:39:36 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/16 17:41:35 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,16 @@ int	ft_atoi(char *str)
 	return (0);
 }
 /*
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 int	main(int argc, char **argv)
 {
-	int	a;
+	int		a;
+	char	*c;
+
 	(void) argc;
-	char	*c = argv[1];
+	c = argv[1];
 	//a = atoi(c);
 	a = ft_atoi(c);
 	printf("%i\n", a);

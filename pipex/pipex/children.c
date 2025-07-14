@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 03:50:02 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 18:16:50 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 23:14:55 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static void	setup_input(t_pipex *ctx, int cmd_index)
 		if (ctx->here_doc)
 		{
 			if (dup2(ctx->here_pipe[0], 0) < 0)
-				print_sys_error_exit(ctx, "dup2 here_doc");
+				print_perror_exit(ctx, "dup2 here_doc");
 			close(ctx->here_pipe[0]);
 			ctx->here_pipe[0] = -1;
 		}
 		else
 		{
 			if (dup2(ctx->infile, 0) < 0)
-				print_sys_error_exit(ctx, "dup2 infile");
+				print_perror_exit(ctx, "dup2 infile");
 			if (ctx->infile >= 0)
 				close(ctx->infile);
 		}
@@ -49,7 +49,7 @@ static void	setup_input(t_pipex *ctx, int cmd_index)
 	else
 	{
 		if (dup2(ctx->pipes[cmd_index - 1][0], 0) < 0)
-			print_sys_error_exit(ctx, "dup2 pipe read");
+			print_perror_exit(ctx, "dup2 pipe read");
 		close(ctx->pipes[cmd_index - 1][0]);
 	}
 }
@@ -59,13 +59,13 @@ static void	setup_output(t_pipex *ctx, int cmd_index)
 	if (cmd_index == ctx->cmd_count - 1)
 	{
 		if (dup2(ctx->outfile, 1) < 0)
-			print_sys_error_exit(ctx, "dup2 outfile");
+			print_perror_exit(ctx, "dup2 outfile");
 		close(ctx->outfile);
 	}
 	else
 	{
 		if (dup2(ctx->pipes[cmd_index][1], 1) < 0)
-			print_sys_error_exit(ctx, "dup2 pipe write");
+			print_perror_exit(ctx, "dup2 pipe write");
 		close(ctx->pipes[cmd_index][1]);
 	}
 }

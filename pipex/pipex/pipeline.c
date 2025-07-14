@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 21:11:03 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 18:19:40 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 23:14:55 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	pipeline(t_pipex *ctx, char **av, char **env)
 		{
 			close_forks(ctx, i);
 			close_pipes(ctx, 0);
-			print_sys_error_exit(ctx, "C fork() failed");
+			print_perror_exit(ctx, "C fork() failed");
 		}
 		i++;
 	}

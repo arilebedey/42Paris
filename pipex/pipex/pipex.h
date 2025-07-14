@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:50:12 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 17:39:04 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/16 19:43:04 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define ERR_OUTFILE "Outfile\n"
 # define ERR_PIPE "Pipe\n"
 # define ERR_CMD "Command not found\n"
+# define ERR_FEW_ARGS "Too few arguments\n"
+# define ERR_ARGS "Please provide 4 arguments to ./pipex\n"
 # define ERR_PATH "Path not found\n"
 # define ERR_EXECVE "Failed to execute command\n"
 # define ERR_MALLOC "Malloc failed\n"
@@ -45,11 +47,15 @@ typedef struct s_pipex
 	int		here_pipe[2];
 }			t_pipex;
 
-// print_exit.c
+// print.c
 int			print_warn(char *err);
 int			print_error(char *err);
+
+// exit.c
 void		print_error_exit(t_pipex *ctx, char *err);
-void		print_sys_error_exit(t_pipex *ctx, char *err);
+void		print_error_exit_code(t_pipex *ctx, char *err, int exit_code);
+void		print_perror_exit(t_pipex *ctx, char *err);
+void		print_perror_exit_code(t_pipex *ctx, char *err, int exit_code);
 
 // init_struct.c
 void		init_struct(t_pipex *ctx, int cmd_count);

@@ -6,11 +6,30 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 17:17:57 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/16 17:41:28 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+
+char		*g_stashes[1024] = {NULL};
+
+void	free_gnl_stashes(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < 1024)
+	{
+		if (g_stashes[i])
+		{
+			free(g_stashes[i]);
+			g_stashes[i] = NULL;
+		}
+		i++;
+	}
+}
 
 static char	*extract_line(char *stash)
 {
@@ -67,12 +86,6 @@ static char	*update_stash(char *stash)
 	return (new_stash);
 }
 
-static char	*handle_read_error(char *stash, char *buffer)
-{
-	free_all(buffer, stash);
-	return (NULL);
-}
-
 static char	*read_file(int fd, char *stash)
 {
 	char	*buffer;
@@ -103,27 +116,26 @@ static char	*read_file(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stashes[1024] = {NULL};
-	char		*line;
+	char	*line;
 
 	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read(fd, NULL, 0) < 0)
 	{
-		if (stashes[fd])
+		if (g_stashes[fd])
 		{
-			free(stashes[fd]);
-			stashes[fd] = NULL;
+			free(g_stashes[fd]);
+			g_stashes[fd] = NULL;
 		}
 		return (NULL);
 	}
-	stashes[fd] = read_file(fd, stashes[fd]);
-	if (!stashes[fd])
+	g_stashes[fd] = read_file(fd, g_stashes[fd]);
+	if (!g_stashes[fd])
 	{
-		stashes[fd] = NULL;
+		g_stashes[fd] = NULL;
 		return (NULL);
 	}
-	line = extract_line(stashes[fd]);
-	stashes[fd] = update_stash(stashes[fd]);
+	line = extract_line(g_stashes[fd]);
+	g_stashes[fd] = update_stash(g_stashes[fd]);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:03:08 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 18:15:26 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/15 20:57:10 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,19 @@ static char	**split_cmd_args(char *cmd)
 	return (cmd_args);
 }
 
-char	**find_path(char **env)
+static char	**get_cmd_with_slash(char *cmd)
 {
-	while (ft_strncmp("PATH", *env, 4))
-		env++;
-	if (!*env)
+	char	**cmd_args;
+
+	cmd_args = malloc(sizeof(char *) * 2);
+	if (!cmd_args)
 		return (NULL);
-	return (ft_split(*env + 5, ':'));
+	cmd_args[0] = ft_strdup(cmd);
+	cmd_args[1] = NULL;
+	if (access(cmd_args[0], F_OK | X_OK) == 0)
+		return (cmd_args);
+	free_cmd_args(cmd_args);
+	return (NULL);
 }
 
 char	**get_cmd(char **paths, char *cmd)
@@ -54,6 +60,8 @@ char	**get_cmd(char **paths, char *cmd)
 	char	*command;
 	char	**cmd_args;
 
+	if (ft_strchr(cmd, '/'))
+		return (get_cmd_with_slash(cmd));
 	cmd_args = split_cmd_args(cmd);
 	if (!cmd_args)
 		return (NULL);
@@ -62,7 +70,7 @@ char	**get_cmd(char **paths, char *cmd)
 		tmp = ft_strjoin(*paths, "/");
 		command = ft_strjoin(tmp, cmd_args[0]);
 		free(tmp);
-		if (access(command, F_OK) == 0)
+		if (access(command, X_OK) == 0)
 		{
 			free(cmd_args[0]);
 			cmd_args[0] = command;
@@ -73,20 +81,4 @@ char	**get_cmd(char **paths, char *cmd)
 	}
 	free_cmd_args(cmd_args);
 	return (NULL);
-}
-
-void	parse_args(t_pipex *ctx, int ac, char **av)
-{
-	if (ft_strncmp(av[1], "here_doc", 9) == 0)
-	{
-		ctx->here_doc = 1;
-		ctx->limiter = av[2];
-		init_struct(ctx, ac - 4);
-	}
-	else
-	{
-		ctx->here_doc = 0;
-		ctx->limiter = NULL;
-		init_struct(ctx, ac - 3);
-	}
 }

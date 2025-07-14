@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:15:53 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 17:18:33 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/15 22:15:46 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
@@ -81,7 +81,9 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 /* get_next_line */
 void	free_all(char *buffer, char *stash);
+char	*handle_read_error(char *stash, char *buffer);
 char	*ft_strjoin_free(char const *s1, char const *s2);
 char	*get_next_line(int fd);
+void	free_gnl_stashes(void);
 
 #endif

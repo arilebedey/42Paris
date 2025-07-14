@@ -6,27 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:45:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 17:50:21 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/15 22:15:38 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			break ;
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
-	return (NULL);
-}
 
 void	free_all(char *buffer, char *stash)
 {
@@ -62,21 +46,8 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	return (new);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+char	*handle_read_error(char *stash, char *buffer)
 {
-	size_t	i;
-	void	*mem_ptr;
-
-	if (size != 0 && count > ((size_t)-1 / size))
-		return (NULL);
-	mem_ptr = malloc(size * count);
-	if (!mem_ptr)
-		return (NULL);
-	i = 0;
-	while (i < (size * count))
-	{
-		*(char *)(mem_ptr + i) = 0;
-		i++;
-	}
-	return (mem_ptr);
+	free_all(buffer, stash);
+	return (NULL);
 }
