@@ -1,37 +1,40 @@
 CC						= cc
-CFLAGS					= -Wall -Wextra -Werror -I. -g
+CFLAGS	  		= -Wall -Wextra -Werror -I. -I./libft -g
 RM						= rm -rf
 NAME					= pipex
+LIBFT_DIR     = libft
+LIBFT_A       = $(LIBFT_DIR)/libft.a
 
-SRCS					= srcs/main.c srcs/parse.c srcs/error.c srcs/free.c \
-							srcs/processes.c utils/ft_split.c utils/ft_strjoin.c \
-							utils/ft_strlen.c utils/ft_strncmp.c
+SRCS    = main.c parse.c print_exit.c free_struct.c init_struct.c \
+          connect.c close.c pipeline.c children.c exec_cmd.c
 
-OBJS					= $(SRCS:%.c=obj/%.o)
+OBJDIR  = obj
+OBJS    = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
-INCS					= pipex.h
+INCS    = pipex.h
 
-# Rules
-all:						${NAME}
+all: $(LIBFT_A) $(NAME)
 
-obj:
-							mkdir -p obj/srcs obj/utils
+$(LIBFT_A):
+	$(MAKE) -C $(LIBFT_DIR)
 
-$(OBJS):				obj/%.o: %.c $(INCS) | obj
-							$(CC) $(CFLAGS) -c $< -o $@
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-$(NAME):				$(OBJS)
-							${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+$(OBJDIR)/%.o: %.c $(INCS) | $(OBJDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-clean:	
-							${RM} obj
+$(NAME): $(OBJS) $(LIBFT_A)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME)
 
-fclean:					clean
-							${RM} ${NAME}
+clean:
+	$(RM) $(OBJDIR)
+	$(MAKE) -C $(LIBFT_DIR) clean
 
-re:						fclean all
+fclean: clean
+	$(RM) $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
-rc:
-							$(MAKE) re && $(MAKE) clean
+re: fclean all
 
-.PHONY:					all clean fclean re rc
+.PHONY: all clean fclean re

@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:16:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/13 02:05:43 by alebedev         ###   ########.fr       */
+/*   Created: 2025/03/18 18:11:28 by alebedev          #+#    #+#             */
+/*   Updated: 2025/03/18 18:11:29 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_toupper(int c)
 {
-	t_pipex	ctx;
-	int		exit_status;
-
-	init_struct(&ctx, ac - 3);
-	get_file_fds(&ctx, av, ac);
-	get_paths(&ctx, env);
-	get_pipes(&ctx);
-	exec_pipeline(&ctx, av, env);
-	exit_status = wait_for_children(&ctx);
-	cleanup(&ctx);
-	return (exit_status);
+	if (c >= 'a' && 'z' >= c)
+		return (c - 'a' + 'A');
+	return (c);
 }

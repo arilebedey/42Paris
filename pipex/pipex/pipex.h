@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:50:12 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/13 02:06:18 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 07:26:45 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define ERR_EXECVE "Failed to execute command\n"
 # define ERR_MALLOC "Malloc failed\n"
 
+# include "libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -66,13 +67,20 @@ void		get_paths(t_pipex *ctx, char **env);
 
 // close.c
 void		close_forks(t_pipex *ctx, int i);
-void    close_pipes(t_pipex *ctx, int i);
+void		close_pipes(t_pipex *ctx, int i);
 
 // parse.c
 char		**find_path(char **env);
 char		**get_cmd(char **paths, char *cmd);
 
 // pipeline.c
-void		exec_pipeline(t_pipex *ctx, char **av, char **env);
+void		pipeline(t_pipex *ctx, char **av, char **env);
+
+// children.c
+void		setup_child_pipes(t_pipex *ctx, int cmd_index);
+int			wait_for_children(t_pipex *ctx);
+
+// exec_cmd.c
+void		exec_cmd(t_pipex *ctx, char *cmd_str, char **env, int cmd_index);
 
 #endif

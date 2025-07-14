@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:53:50 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/11 21:02:07 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 07:47:23 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ static void	free_paths(t_pipex *ctx)
 
 void	free_pipex(t_pipex *ctx)
 {
-	int	i;
-
 	if (ctx->pids)
 		free(ctx->pids);
 	if (ctx->pipes)

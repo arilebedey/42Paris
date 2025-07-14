@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 16:20:09 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/20 17:59:19 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/05/05 11:03:55 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include <stdlib.h>
 
 static int	count_words(char *str, char c)
 {
@@ -88,10 +88,10 @@ char	**ft_split(const char *str, char c)
 	char	**tab;
 	int		words;
 
-	words = count_words((char *)str, c);
+	words = count_words((char *) str, c);
 	tab = malloc(sizeof(char *) * (words + 1));
 	if (!tab)
 		return (NULL);
 	tab[words] = 0;
-	return (process_words(tab, (char *)str, c));
+	return (process_words(tab, (char *) str, c));
 }

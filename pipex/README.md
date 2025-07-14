@@ -232,3 +232,14 @@ void	first_child(t_pipex ctx, char *av[], char *env[])
 	{
 		free_paths(ctx.paths);
 ```
+
+### (Makefile) Order-only prerequisites
+
+In Makefiles, **order-only prerequisites** (listed after a `|` in a rule) ensure that certain dependencies, like directories, exist before building a target, but changes to their timestamps do **not** trigger a rebuild of the target. This is especially useful for directories that must be present for object files, but whose modification should not cause unnecessary recompilation. For example:
+
+```makefile
+obj/%.o: %.c | obj/
+	$(CC) -c $< -o $@
+```
+
+Here, `obj/` is an order-only prerequisite: it will be created if missing, but touching or recreating the directory won’t force all object files to be rebuilt.
