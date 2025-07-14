@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 03:50:02 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 07:13:52 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 18:16:50 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "./pipex.h"
 
 static void	close_unused_pipes(t_pipex *ctx, int cmd_index)
 {
@@ -31,10 +31,20 @@ static void	setup_input(t_pipex *ctx, int cmd_index)
 {
 	if (cmd_index == 0)
 	{
-		if (dup2(ctx->infile, 0) < 0)
-			print_sys_error_exit(ctx, "dup2 infile");
-		if (ctx->infile >= 0)
-			close(ctx->infile);
+		if (ctx->here_doc)
+		{
+			if (dup2(ctx->here_pipe[0], 0) < 0)
+				print_sys_error_exit(ctx, "dup2 here_doc");
+			close(ctx->here_pipe[0]);
+			ctx->here_pipe[0] = -1;
+		}
+		else
+		{
+			if (dup2(ctx->infile, 0) < 0)
+				print_sys_error_exit(ctx, "dup2 infile");
+			if (ctx->infile >= 0)
+				close(ctx->infile);
+		}
 	}
 	else
 	{

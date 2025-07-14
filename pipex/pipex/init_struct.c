@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 17:13:34 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/13 02:05:56 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 18:14:53 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "./pipex.h"
 
 static void	init_pids(t_pipex *ctx)
 {
@@ -70,6 +70,8 @@ void	init_struct(t_pipex *ctx, int cmd_count)
 		print_sys_error_exit(ctx, ERR_MALLOC);
 	ctx->infile = -1;
 	ctx->outfile = -1;
+	ctx->here_pipe[0] = -1;
+	ctx->here_pipe[1] = -1;
 	ctx->paths = NULL;
 	init_pids(ctx);
 	init_pipes(ctx);

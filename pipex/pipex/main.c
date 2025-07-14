@@ -6,18 +6,18 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:16:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 07:45:53 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 17:39:39 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "./pipex.h"
 
 int	main(int ac, char **av, char **env)
 {
 	t_pipex	ctx;
 	int		exit_status;
 
-	init_struct(&ctx, ac - 3);
+	parse_args(&ctx, ac, av);
 	get_file_fds(&ctx, av, ac);
 	get_paths(&ctx, env);
 	get_pipes(&ctx);

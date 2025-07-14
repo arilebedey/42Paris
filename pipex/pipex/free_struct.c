@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:53:50 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 07:47:23 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 18:01:11 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "./pipex.h"
 
 static void	free_pipes(t_pipex *ctx)
 {

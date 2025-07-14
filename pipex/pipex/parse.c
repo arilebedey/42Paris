@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 15:03:08 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/23 16:37:57 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 18:15:26 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "./pipex.h"
 
 static void	free_cmd_args(char **cmd_args)
 {
@@ -73,4 +73,20 @@ char	**get_cmd(char **paths, char *cmd)
 	}
 	free_cmd_args(cmd_args);
 	return (NULL);
+}
+
+void	parse_args(t_pipex *ctx, int ac, char **av)
+{
+	if (ft_strncmp(av[1], "here_doc", 9) == 0)
+	{
+		ctx->here_doc = 1;
+		ctx->limiter = av[2];
+		init_struct(ctx, ac - 4);
+	}
+	else
+	{
+		ctx->here_doc = 0;
+		ctx->limiter = NULL;
+		init_struct(ctx, ac - 3);
+	}
 }

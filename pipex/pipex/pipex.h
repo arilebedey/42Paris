@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:50:12 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 07:26:45 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 17:39:04 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,10 @@ typedef struct s_pipex
 	char	**paths;
 	char	***cmds;
 	int		cmd_count;
+	int		here_doc;
+	char	*limiter;
+	int		here_pipe[2];
 }			t_pipex;
-
-// utils/
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
-char		**ft_split(const char *str, char c);
-char		*ft_strjoin(char const *s1, char const *s2);
-size_t		ft_strlen(const char *s);
 
 // print_exit.c
 int			print_warn(char *err);
@@ -72,6 +69,7 @@ void		close_pipes(t_pipex *ctx, int i);
 // parse.c
 char		**find_path(char **env);
 char		**get_cmd(char **paths, char *cmd);
+void		parse_args(t_pipex *ctx, int ac, char **av);
 
 // pipeline.c
 void		pipeline(t_pipex *ctx, char **av, char **env);

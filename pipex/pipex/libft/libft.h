@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:15:53 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/01 11:37:30 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/14 17:18:33 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
@@ -32,9 +32,13 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
+
+# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stddef.h>
 
 /* libc functions */
 void	*ft_memset(void *b, int c, size_t len);
@@ -74,5 +78,10 @@ void	ft_putstr_fd(char const *s, int fd);
 void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+
+/* get_next_line */
+void	free_all(char *buffer, char *stash);
+char	*ft_strjoin_free(char const *s1, char const *s2);
+char	*get_next_line(int fd);
 
 #endif
