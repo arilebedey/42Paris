@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 20:56:56 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/15 22:50:24 by alebedev         ###   ########.fr       */
+/*   Created: 2025/06/20 13:48:02 by alebedev          #+#    #+#             */
+/*   Updated: 2025/06/23 17:17:38 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./pipex.h"
+#include "../pipex.h"
 
-void	print_error_exit(t_pipex *ctx, char *err)
+int	print_warn(char *err)
 {
-	print_error(err);
-	free_pipex(ctx);
-	exit(1);
+	write(2, err, ft_strlen(err));
+	return (0);
 }
 
-void	print_error_exit_code(t_pipex *ctx, char *err, int exit_code)
+int	print_error(char *err)
 {
-	print_error(err);
-	free_pipex(ctx);
-	exit(exit_code);
+	write(2, err, ft_strlen(err));
+	return (1);
 }
 
-void	print_perror_exit(t_pipex *ctx, char *err)
+void	perror_exit(char *err)
 {
 	perror(err);
-	free_pipex(ctx);
 	exit(1);
-}
-
-void	print_perror_exit_code(t_pipex *ctx, char *err, int exit_code)
-{
-	perror(err);
-	free_pipex(ctx);
-	exit(exit_code);
 }

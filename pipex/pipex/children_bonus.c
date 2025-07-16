@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   children.c                                         :+:      :+:    :+:   */
+/*   children_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 03:50:02 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 23:14:55 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/16 20:27:10 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./pipex.h"
+#include "./pipex_bonus.h"
 
 static void	close_unused_pipes(t_pipex *ctx, int cmd_index)
 {

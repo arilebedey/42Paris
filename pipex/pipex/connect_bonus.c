@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   connect.c                                          :+:      :+:    :+:   */
+/*   connect_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 17:41:32 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/14 23:47:53 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/16 20:26:51 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./pipex.h"
+#include "./pipex_bonus.h"
 
 static void	handle_here_doc(t_pipex *ctx, char *limiter)
 {
