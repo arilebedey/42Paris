@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:33:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/08 22:38:12 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:32:46 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,14 @@ void		render_map(t_game *game);
 
 // on_key_press.c
 int			on_key_press(int key, t_game *game);
+
+// on_gameplay.c
+void		record_new_move(t_game *game);
+void		on_hit_enemy(t_game *game);
+void		on_hit_collectible(t_game *game, int new_y, int new_x);
+void		on_game_complete(t_game *game);
+
+// change_state.c
+void		open_game_exit(char **map);
 
 #endif

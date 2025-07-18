@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:12 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/08 22:38:12 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/18 19:32:52 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	on_move_player(t_game *game, int to_x, int to_y)
 		on_game_complete(game);
 		return ;
 	}
-	count_moves(game);
+	record_new_move(game);
 	game->map[current_x][current_y] = '0';
 	game->map[new_y][new_x] = 'P';
 	render_map(game);

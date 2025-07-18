@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_handlers.c                                    :+:      :+:    :+:   */
+/*   change_state.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 22:21:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/08 22:39:19 by alebedev         ###   ########.fr       */
+/*   Created: 2025/07/18 19:22:46 by alebedev          #+#    #+#             */
+/*   Updated: 2025/07/18 19:22:46 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./so_long.h"
 
-void	on_hit_enemy(t_game *game)
+void	open_game_exit(char **map)
 {
-	destroy_game(game);
-	ft_putstr_fd("You touched an enemy\n", 2);
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'E')
+				map[y][x] = 'e';
+			x++;
+		}
+		y++;
+	}
 }
