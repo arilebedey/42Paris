@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:57:42 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/23 17:36:34 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/19 22:59:59 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_context
 	t_stack				stack_a;
 	t_stack				stack_b;
 	t_opnode			*op_hist;
+	bool				args_allocated;
 }						t_context;
 
 typedef enum e_ops

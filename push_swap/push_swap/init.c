@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 11:13:00 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/07 22:38:08 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/19 23:23:29 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	check_duplicates(t_context *ctx, int *values, int count,
 			if (values[i] == values[j])
 			{
 				free(values);
-				free_args(args);
+				if (ctx->args_allocated)
+					free_args(args);
 				handle_error(ctx);
 			}
 			j++;
@@ -83,7 +84,8 @@ static void	fill_stack(t_context *ctx, t_stack *stack, int count, char **args)
 		if (!is_valid_int(args[i]))
 		{
 			free(raw_nums);
-			free_args(args);
+			if (ctx->args_allocated)
+				free_args(args);
 			handle_error(ctx);
 		}
 		raw_nums[i] = ft_atoi(args[i]);
@@ -99,12 +101,13 @@ void	init_context(t_context *ctx, int argc, char **argv)
 {
 	char	**args;
 
-	if (argc == 2 && argv[1][0] == '\0')
+	if ((argc == 2 && argv[1][0] == '\0') || argc < 2)
 		early_error();
 	ctx->op_hist = NULL;
 	ctx->stack_a.values = NULL;
 	ctx->stack_b.values = NULL;
 	args = parse_args(&argc, argv);
+	ctx->args_allocated = (args != argv + 1);
 	init_stack(ctx, &ctx->stack_a, argc - 1);
 	init_stack(ctx, &ctx->stack_b, argc - 1);
 	fill_stack(ctx, &ctx->stack_a, argc - 1, args);

@@ -16,3 +16,7 @@ For `cat file | grep foo | wc -l`:
   1.  fork() for cat, set its output to pipe1
   2.  fork() for grep, set its input to pipe1, output to pipe2
   3.  fork() for wc, set its input to pipe2
+
+### Regress testing
+
+Do tests for each functionality at the moment of writing it, because regress error can happen very easily on minishell
