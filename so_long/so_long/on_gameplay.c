@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 22:21:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/18 20:42:59 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:42:34 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	record_new_move(t_game *game)
 	ft_putstr_fd("New movement count: ", 1);
 	ft_putstr_fd(moves, 1);
 	ft_putstr_fd("\n", 1);
+	free(moves);
 }
 
 void	on_hit_enemy(t_game *game)

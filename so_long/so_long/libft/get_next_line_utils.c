@@ -6,27 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:45:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/02 14:35:57 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/15 22:15:38 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char) c)
-			break ;
-		i++;
-	}
-	if (s[i] == (char) c)
-		return ((char *) s + i);
-	return (NULL);
-}
+#include "libft.h"
 
 void	free_all(char *buffer, char *stash)
 {
@@ -58,35 +42,12 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 		j++;
 	}
 	new[i + j] = '\0';
-	free((char *) s1);
+	free((char *)s1);
 	return (new);
 }
 
-size_t	ft_strlen(const char *s)
+char	*handle_read_error(char *stash, char *buffer)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	size_t	i;
-	void	*mem_ptr;
-
-	if (size != 0 && count > ((size_t) -1 / size))
-		return (NULL);
-	mem_ptr = malloc(size * count);
-	if (!mem_ptr)
-		return (NULL);
-	i = 0;
-	while (i < (size * count))
-	{
-		*(char *)(mem_ptr + i) = 0;
-		i++;
-	}
-	return (mem_ptr);
+	free_all(buffer, stash);
+	return (NULL);
 }

@@ -6,13 +6,13 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 21:10:12 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/18 19:32:52 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:36:53 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./so_long.h"
 
-static void	get_player_coords(char **map, int *y, int *x)
+static void	get_player_coords(char **map, int *x, int *y)
 {
 	int	row;
 	int	col;
@@ -35,7 +35,7 @@ static void	get_player_coords(char **map, int *y, int *x)
 	}
 }
 
-static void	on_move_player(t_game *game, int to_x, int to_y)
+static void	on_move_player(t_game *game, int to_y, int to_x)
 {
 	int	current_x;
 	int	current_y;
@@ -43,8 +43,8 @@ static void	on_move_player(t_game *game, int to_x, int to_y)
 	int	new_y;
 
 	get_player_coords(game->map, &current_x, &current_y);
-	new_x += to_x;
-	new_y += to_y;
+	new_x = current_x + to_x;
+	new_y = current_y + to_y;
 	if (game->map[new_y][new_x] == '1' || game->map[new_y][new_x] == 'E')
 		return ;
 	if (game->map[new_y][new_x] == 'M')
@@ -57,7 +57,7 @@ static void	on_move_player(t_game *game, int to_x, int to_y)
 		return ;
 	}
 	record_new_move(game);
-	game->map[current_x][current_y] = '0';
+	game->map[current_y][current_x] = '0';
 	game->map[new_y][new_x] = 'P';
 	render_map(game);
 }

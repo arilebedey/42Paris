@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_chars.c                                      :+:      :+:    :+:   */
+/*   parse_chars_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:09:37 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/21 19:02:28 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/21 19:07:31 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./so_long.h"
+#include "./so_long_bonus.h"
 
 static int	check_collectible(char **map)
 {
@@ -92,7 +92,8 @@ static int	check_chars(char **map)
 		while (map[y][x])
 		{
 			if (map[y][x] != 'P' && map[y][x] != '0' && map[y][x] != 'E'
-				&& map[y][x] != '1' && map[y][x] != 'C' && map[y][x] != '\n')
+				&& map[y][x] != '1' && map[y][x] != 'C' && map[y][x] != '\n'
+				&& map[y][x] != 'M')
 				return (0);
 			x++;
 		}
@@ -111,5 +112,8 @@ void	parse_chars(t_game *game)
 	if (!check_player(game->map))
 		map_error(game->map);
 	if (!check_chars(game->map))
+		map_error(game->map);
+	game->enemy_is_alive = check_enemy(game->map);
+	if (!game->enemy_is_alive)
 		map_error(game->map);
 }

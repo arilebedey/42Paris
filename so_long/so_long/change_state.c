@@ -6,10 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:22:46 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/18 19:22:46 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:54:14 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./so_long.h"
 
 void	open_game_exit(char **map)
 {

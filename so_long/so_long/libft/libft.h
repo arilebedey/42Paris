@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:15:53 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/24 16:33:58 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/15 22:15:46 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /*
@@ -31,6 +31,10 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
 # include <stddef.h>
 # include <stdlib.h>
@@ -76,12 +80,10 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 /* get_next_line */
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
-# endif
-
 void	free_all(char *buffer, char *stash);
-char	*get_next_line(int fd);
+char	*handle_read_error(char *stash, char *buffer);
 char	*ft_strjoin_free(char const *s1, char const *s2);
+char	*get_next_line(int fd);
+void	free_gnl_stashes(void);
 
 #endif

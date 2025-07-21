@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:33:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/21 19:00:02 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:25:50 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ void		parse_map(t_game *game);
 
 // parse_chars.c
 void		parse_chars(t_game *game);
+
+// enemy.c
+bool		check_enemy(char **map);
+void		move_enemy(t_game *game, int *enemy_direction);
 
 // validate_path.c
 void		validate_path(char **map);
