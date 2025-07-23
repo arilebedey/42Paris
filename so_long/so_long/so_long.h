@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:33:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/21 19:00:02 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:34:32 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_game
 }			t_game;
 
 // error.c
-void		check_argc(int argc, char *file);
+void		file_format_error(char *file);
 void		malloc_error(char **map);
 void		file_read_error(int fd);
 void		map_error(char **map);
@@ -51,12 +51,12 @@ void		map_error(char **map);
 void		mlx_init_error(t_game *game);
 void		img_load_error(t_game *game);
 void		malloc_error_late(t_game *game);
-void		destroy_game(t_game *game);
 
-// free.c
+// close_game.c
 void		free_map(char **map);
 void		free_game_early(t_game *game);
 void		destroy_game(t_game *game);
+int			close_game(t_game *game);
 
 // read_file.c
 char		**read_file(char *file);
@@ -71,6 +71,7 @@ void		parse_chars(t_game *game);
 void		validate_path(char **map);
 
 // init.c
+void		check_argc(int argc, char *file);
 void		init_game(t_game *game);
 
 // load_images.c
@@ -93,8 +94,5 @@ void		open_game_exit(char **map);
 
 // update_animation.c
 int			update_animation(t_game *game);
-
-// close_game.c
-int			close_game(t_game *game);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 15:18:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/21 18:47:38 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:30:19 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./so_long.h"
 
-static void	file_format_error(char *file)
+void	file_format_error(char *file)
 {
 	int	len;
 
@@ -22,21 +22,6 @@ static void	file_format_error(char *file)
 		ft_putstr_fd("Error\nInvalid file extension\n", 2);
 		exit(1);
 	}
-}
-
-void	check_argc(int argc, char *file)
-{
-	if (argc == 1)
-	{
-		ft_putstr_fd("Error\nNo map given\n", 2);
-		exit(1);
-	}
-	if (argc > 2)
-	{
-		ft_putstr_fd("Error\nToo many arguments\n", 2);
-		exit(1);
-	}
-	file_format_error(file);
 }
 
 void	malloc_error(char **map)

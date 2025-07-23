@@ -83,6 +83,8 @@ Both functions accept exactly the same parameters and their usage is identical.
 
 If the returned variable is equal to NULL, it means that the image reading has failed.
 
-### Colors
+### Putting text on screen
 
-0a4431
+```c
+	mlx_string_put(game->mlx, game->win, 20, 40, 0xFFFFFF, tmp);
+```

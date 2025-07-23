@@ -4,7 +4,6 @@ SRCS        = change_state.c \
               close_game.c \
               error2.c \
               error.c \
-              free.c \
               init.c \
               load_images.c \
               main.c \
@@ -21,7 +20,6 @@ SRCS_BONUS  = change_state.c \
               enemy_bonus.c \
               error2.c \
               error.c \
-              free.c \
               init.c \
               load_images.c \
               main.c \

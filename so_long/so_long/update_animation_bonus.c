@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:38:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/21 19:07:37 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/21 22:10:33 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	update_animation(t_game *game)
 
 	counter++;
 	counter_enemy++;
-	if (counter >= 4000)
+	if (counter >= 20000)
 	{
 		game->current_frame++;
 		if (game->current_frame >= game->collectible_frame)

@@ -6,11 +6,26 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:41:24 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/21 18:12:52 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/23 18:30:10 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	check_argc(int argc, char *file)
+{
+	if (argc == 1)
+	{
+		ft_putstr_fd("Error\nNo map given\n", 2);
+		exit(1);
+	}
+	if (argc > 2)
+	{
+		ft_putstr_fd("Error\nToo many arguments\n", 2);
+		exit(1);
+	}
+	file_format_error(file);
+}
 
 void	init_game(t_game *game)
 {
