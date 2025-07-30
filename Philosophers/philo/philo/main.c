@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 19:38:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/29 21:26:00 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:12:05 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ int	main(int argc, char **argv)
 	t_sim	sim;
 
 	if (parse_args(argc, argv, &sim))
-		return (1);
+		return (EXIT_FAILURE);
+	if (create_structs(&sim))
+		return (EXIT_FAILURE);
+	if (init_mutexes(&sim))
+		return (EXIT_FAILURE);
+	init_philos(&sim);
 	launch_sim(&sim);
 	clean_sim(&sim);
 	return (0);
