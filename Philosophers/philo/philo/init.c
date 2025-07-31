@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:30:56 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/30 21:57:08 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:25:02 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ int	init_mutexes(t_sim *sim)
 
 	i = 0;
 	if (pthread_mutex_init(&sim->write_lock, NULL))
-		return (free, EXIT_FAILURE);
+		return (free_mutex_stage(sim, 1));
 	if (pthread_mutex_init(&sim->meal_lock, NULL))
-		return (EXIT_FAILURE);
+		return (free_mutex_stage(sim, 2));
 	if (pthread_mutex_init(&sim->death_lock, NULL))
-		return (EXIT_FAILURE);
+		return (free_mutex_stage(sim, 3));
 	while (i < sim->count)
 	{
 		if (pthread_mutex_init(&sim->forks[i], NULL))
-			return (EXIT_FAILURE);
+			return (free_mutex_forks(sim, i));
 		i++;
 	}
 	return (EXIT_SUCCESS);

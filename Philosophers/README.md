@@ -39,4 +39,18 @@ Ensure that the main thread waits for all philosopher threads and the monitor th
 `pthread_mutex_lock` will either lock a mutex or wait for the mutex to be unlocked before locking it.
 `pthread_mutex_unlock`
 
-###
+### Avoiding busy waiting
+
+- Instead of continuously checking the elapsed time (busy waiting), one can write a function that uses usleep(500) to pause the thread for short intervals.
+- This approach reduces CPU usage while maintaining precision, as the thread only wakes up periodically to check the elapsed time.
+
+- When you use usleep directly to sleep for a long duration (e.g., 100 milliseconds), the thread is completely blocked for the entire duration. During this time:
+
+- The thread cannot check for external conditions (e.g., whether the simulation should terminate because a philosopher has died).
+
+### Check for race conditions
+
+`valgrind --tool=helgrind --leak-check=full --show-leak-kinds=all ./philo`
+`valgrind --tool=drd --leak-check=full --show-leak-kinds=all ./philo`
+
+Helgrind is more resource intensive
