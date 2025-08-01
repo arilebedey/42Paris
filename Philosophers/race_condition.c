@@ -6,9 +6,16 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 23:34:47 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/31 02:50:03 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/08/01 19:21:09 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+/*
+ * This program showcases the race condition that emerges when two threads
+ * read the same value. One thread will often read an outdated value.
+ *
+ * The solution is locking the variable by first declaring it as mutex.
+ *
+ **/
 
 #include <pthread.h>
 #include <stdio.h>

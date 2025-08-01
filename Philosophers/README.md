@@ -8,6 +8,8 @@ Each thread can have its own set of CPU registers, which act as temporary storag
 
 This is related to cache coherence and memory visibility issues in multithreaded programming. Without proper synchronization mechanisms (e.g., locks, atomic operations, or memory barriers), threads may not see the most up-to-date values of shared variables.
 
+The C standard does not guarantee atomicity for all types and platforms, thus, locking before writing/reading needs to be implemented on all variables that can be written to by more than 1 thread.
+
 #### Creating a thread
 
 ```c

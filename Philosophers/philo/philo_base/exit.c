@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 21:31:36 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/31 20:26:14 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/08/01 21:30:04 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	free_dynamics(t_sim *sim)
 
 int	free_mutex_stage(t_sim *sim, int stage)
 {
-	int	i;
-
 	if (stage >= 2)
 		pthread_mutex_destroy(&sim->write_lock);
 	if (stage >= 3)
@@ -49,4 +47,9 @@ int	free_mutex_forks(t_sim *sim, int i)
 	}
 	free_mutex_stage(sim, 4);
 	return (EXIT_FAILURE);
+}
+
+void	clean_sim(t_sim *sim)
+{
+	free_mutex_forks(sim, sim->count - 1);
 }

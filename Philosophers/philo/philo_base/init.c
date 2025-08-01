@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:30:56 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/31 20:25:02 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/08/01 21:55:10 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	create_structs(t_sim *sim)
 	sim->forks = malloc(sizeof(pthread_mutex_t) * sim->count);
 	if (!sim->philos || !sim->forks)
 		return (free_dynamics(sim), EXIT_FAILURE);
-	sim->someone_dead = 0;
+	sim->finished = 0;
 	sim->start_time = get_time();
 	return (EXIT_SUCCESS);
 }

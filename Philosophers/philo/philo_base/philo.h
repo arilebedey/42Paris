@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 19:38:15 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/31 21:47:34 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/08/01 21:54:54 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ struct					s_sim
 	size_t				time_eat;
 	size_t				time_sleep;
 	size_t				start_time;
-	int					someone_dead;
+	int					finished;
 	t_philo				*philos;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		write_lock;
@@ -51,7 +51,7 @@ struct					s_sim
 	pthread_mutex_t		death_lock;
 };
 
-// libft*.c
+// libft.c
 int						ft_atoi(char *str);
 size_t					ft_strlen(const char *s);
 
@@ -63,6 +63,7 @@ void					print_state(t_philo *philo, char *msg);
 void					free_dynamics(t_sim *sim);
 int						free_mutex_stage(t_sim *sim, int stage);
 int						free_mutex_forks(t_sim *sim, int i);
+void					clean_sim(t_sim *sim);
 
 // init.c
 int						parse_args(int ac, char **av, t_sim *sim);
@@ -78,5 +79,11 @@ void					msleep(size_t ms);
 void					action_eat(t_philo *philo);
 void					action_sleep(t_philo *philo);
 void					action_think(t_philo *philo);
+
+// monitor.c
+void					*monitor_routine(void *pthread_arg);
+
+// threads.c
+int						launch_sim(t_sim *sim);
 
 #endif
