@@ -6,31 +6,16 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 11:15:53 by alebedev          #+#    #+#             */
-/*   Updated: 2025/08/02 22:00:34 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/08/02 22:06:26 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/*
-** size_t is specifically designed for memory addressing and counting. Memory
-** addressing refers to the process of identifying and accessing specific
-** locations in computer memory. Each byte in memory has a unique address,
-** and size_t is guaranteed to be large enough to represent any valid memory
-** address or offset on the target system.
-**
-** This makes size_t ideal for:
-** - Array indexing and offsets
-** - Pointer arithmetic
-** - Memory allocation sizes
-** - String lengths and buffer sizes
-**
-** This larger range is essential for functions like strlen() that need to
-** handle potentially very large memory sizes safely.
-**
-** To avoid potential issues with different compiler implementations,
-** include <stddef.h>
-*/
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
 # include <limits.h>
 # include <stddef.h>
@@ -75,5 +60,12 @@ void	ft_putstr_fd(char const *s, int fd);
 void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+
+/* get_next_line */
+void	free_all(char *buffer, char *stash);
+char	*handle_read_error(char *stash, char *buffer);
+char	*ft_strjoin_free(char const *s1, char const *s2);
+char	*get_next_line(int fd);
+void	free_gnl_stashes(void);
 
 #endif
