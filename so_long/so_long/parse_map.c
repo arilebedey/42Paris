@@ -6,22 +6,22 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:06:36 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/02 23:26:01 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/08/02 19:07:40 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./so_long.h"
 
-static int	check_nls(char **map)
+static int	check_rectangular(char **map)
 {
-	int	x_max;
-	int	i;
+	size_t	i;
+	size_t	len;
 
-	i = 0;
-	x_max = ft_strlen(map[i]);
+	len = ft_strlen(map[0]);
+	i = 1;
 	while (map[i])
 	{
-		if (map[i][x_max - 1] != '\n')
+		if (ft_strlen(map[i]) != len)
 			return (0);
 		i++;
 	}
@@ -58,7 +58,7 @@ static int	check_walls(char **map)
 void	parse_map(t_game *game)
 {
 	parse_chars(game);
-	if (!check_nls(game->map))
+	if (!check_rectangular(game->map))
 		map_error(game->map);
 	if (!check_walls(game->map))
 		map_error(game->map);

@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 19:38:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/21 22:10:33 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/08/02 20:38:08 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ int	update_animation(t_game *game)
 			game->current_frame = 0;
 		render_map(game);
 		counter = 0;
-	}
-	if (counter_enemy >= 20000)
-	{
 		if (game->enemy_is_alive)
 			move_enemy(game, &enemy);
 		counter_enemy = 0;

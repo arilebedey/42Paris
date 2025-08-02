@@ -71,4 +71,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+norme:
+	norminette libft/*.c; norminette *.c; norminette *.h
+
+.PHONY: all bonus clean fclean re norme

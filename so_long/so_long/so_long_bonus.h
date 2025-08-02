@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 14:33:14 by alebedev          #+#    #+#             */
-/*   Updated: 2025/07/23 18:23:16 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/08/02 20:48:18 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,10 @@ void		map_error(char **map);
 void		mlx_init_error(t_game *game);
 void		img_load_error(t_game *game);
 void		malloc_error_late(t_game *game);
-void		destroy_game(t_game *game);
 
 // free.c
 void		free_map(char **map);
 void		free_game_early(t_game *game);
-void		destroy_game(t_game *game);
 
 // read_file.c
 char		**read_file(char *file);
@@ -99,6 +97,6 @@ void		open_game_exit(char **map);
 int			update_animation(t_game *game);
 
 // close_game.c
-int			close_game(t_game *game);
+int			destroy_game(t_game *game);
 
 #endif
