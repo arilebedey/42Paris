@@ -1,9 +1,14 @@
 .PHONY: all clean fclean re debug quiet
 
 CC          = cc
-CFLAGS      = -Wall -Werror -Wextra -MMD -MP
+CFLAGS      = -Wall -Werror -Wextra -MMD -MP -g3
 AR          = ar -rcs
 NAME        = minishell
+
+# add flag to hide directory messages
+makeflags += --no-print-directory
+# quiet = @ mutes make in terminal, remove @ to show again
+quiet		=	@
 
 UNAME_S     := $(shell uname -s)
 
@@ -21,7 +26,13 @@ LIBFT_A     = $(LIBFT_DIR)/libft.a
 INCLUDES    = -I$(LIBFT_DIR)/includes \
               -I./includes
 
-FILES       = main
+FILES       = main						\
+							lexer 					\
+							ast							\
+							exec/get_cmd		\
+							exec/exec				\
+							free/free_tab		\
+
 SRC_DIR     = src/
 SRC_FILES   = $(addsuffix .c, $(FILES))
 SRC         = $(addprefix $(SRC_DIR), $(SRC_FILES))
@@ -43,6 +54,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)/signal
 	@mkdir -p $(OBJ_DIR)/exec
 	@mkdir -p $(OBJ_DIR)/expand
+	@mkdir -p $(OBJ_DIR)/free
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
