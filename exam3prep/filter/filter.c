@@ -18,6 +18,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#ifndef BSIZE
+# define BSIZE 100
+#endif
+
 char	*ft_strdup(char *s)
 {
 	int		i;
@@ -30,14 +34,17 @@ char	*ft_strdup(char *s)
 		i++;
 	str = malloc(sizeof(char) * (i + 1));
 	if (!str)
+	{
 		perror("Error: ");
+		return (NULL);
+	}
+	str[i] = '\0';
 	i = 0;
 	while (s[i])
 	{
 		str[i] = s[i];
 		i++;
 	}
-	str[i] = '\0';
 	return (str);
 }
 
@@ -47,9 +54,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 	char	*str;
 
-	if (!s1 || !s2)
-		return (NULL);
 	i = 0;
+	if (!s2)
+		return (ft_strdup(s1));
 	while (s1[i])
 		i++;
 	j = 0;
@@ -57,7 +64,10 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	str = malloc(sizeof(char) * (i + j + 1));
 	if (!str)
+	{
 		perror("Error: ");
+		return (NULL);
+	}
 	i = 0;
 	while (s1[i])
 	{
@@ -71,14 +81,37 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 		j++;
 	}
-	str[j] = '\0';
+	str[i] = '\0';
+	free(s1);
 	return (str);
+}
+
+void	replace_with_stars(char *text, char *pattern)
+{
+	int	pat_len;
+	int	j;
+
+	pat_len = 0;
+	while (pattern[pat_len])
+		pat_len++;
+	for (int i = 0; text[i]; i++)
+	{
+		j = 0;
+		while (pattern[j] && text[i + j] == pattern[j])
+			j++;
+		if (j == pat_len)
+		{
+			for (int k = 0; k < pat_len; k++)
+				text[i + k] = '*';
+			i += pat_len - 1;
+		}
+	}
 }
 
 int	main(int ac, char **av)
 {
 	char	*stash;
-	char	buffer[2];
+	char	*buffer;
 	char	*tmp;
 	ssize_t	bytes;
 
@@ -86,20 +119,32 @@ int	main(int ac, char **av)
 	(void)av;
 	if (ac != 2)
 		return (1);
-	buffer[1] = '\0';
-	while ((bytes = read(0, buffer, 1)) > 0)
+	buffer = malloc(sizeof(char) * (BSIZE + 1));
+	if (!buffer)
 	{
+		perror("Error: ");
+		return (1);
+	}
+	buffer[BSIZE] = '\0';
+	while ((bytes = read(0, buffer, BSIZE)) > 0)
+	{
+		buffer[bytes] = '\0';
 		if (!stash)
-			stash = strdup(buffer);
-		tmp = buffer;
-		if (read(0, buffer, 1) < 0)
-			return (perror("Error: "), 1);
-		if (buffer[0])
+			stash = ft_strjoin(buffer, NULL);
+		else
 		{
-			stash = ft_strjoin(tmp, buffer);
-			if (!stash)
-				return (perror("Error: "), 1);
+			tmp = ft_strjoin(stash, buffer);
+			if (!tmp)
+				return (1);
+			stash = tmp;
 		}
 	}
-	printf("%s", stash);
+	free(buffer);
+	if (stash)
+	{
+		replace_with_stars(stash, av[1]);
+		printf("%s", stash);
+		free(stash);
+	}
+	return (0);
 }
