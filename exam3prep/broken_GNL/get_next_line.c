@@ -173,5 +173,4 @@ char	*get_next_line(int fd)
 		stash = NULL;
 	}
 	return (line);
-	return (NULL);
 }
