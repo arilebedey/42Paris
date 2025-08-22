@@ -56,3 +56,16 @@ Ensure that the main thread waits for all philosopher threads and the monitor th
 `valgrind --tool=drd --leak-check=full --show-leak-kinds=all ./philo`
 
 Helgrind is more resource intensive
+
+### Locking and unlocking by address value to avoid races
+
+Inconsistent lock order can be problematic
+
+- Each philosopher needs two fork mutexes.
+- In the naive implementation, every philosopher always locks left_fork first, then right_fork.
+- But because forks are shared, what is "left" for one philosopher is "right" for another.
+  - Example: Philosopher 1 locks fork[0] then fork[1].
+  - Philosopher 2 locks fork[1] then fork[2].
+  - Philosopher N locks fork[N] then fork[0].
+- This creates a cycle: each thread can hold one fork and wait forever for the other → deadlock.
+- Helgrind detects this as a lock-order inversion: one thread locks A then B, another locks B then A.
