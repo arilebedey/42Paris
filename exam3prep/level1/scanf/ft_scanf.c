@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_scanf.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/15 08:19:03 by alebedev          #+#    #+#             */
+/*   Updated: 2025/09/15 10:17:12 by alebedev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <ctype.h>
 #include <stdarg.h>
@@ -14,19 +25,6 @@ int	match_space(FILE *f)
 		x = fgetc(f);
 	ungetc(x, f);
 	return (1);
-}
-
-int	match_char(FILE *f, char c)
-{
-	int	x;
-
-	x = fgetc(f);
-	if (x == EOF)
-		return (-1);
-	if (x == c)
-		return (1);
-	ungetc(x, f);
-	return (0);
 }
 
 int	scan_char(FILE *f, va_list ap)
@@ -113,22 +111,21 @@ int	match_conv(FILE *f, const char **format, va_list ap)
 	case 'c':
 		return (scan_char(f, ap));
 	case 'd':
-		match_space(f);
+		/* match_space(f); */
 		return (scan_int(f, ap));
 	case 's':
-		match_space(f);
+		/* match_space(f); */
 		return (scan_string(f, ap));
-	case EOF:
-		return (-1);
 	default:
 		return (-1);
 	}
 }
 
 int	ft_vfscanf(FILE *f, const char *format, va_list ap)
+
 {
-	int	nconv;
-	int	c;
+	int nconv;
+	int c;
 
 	nconv = 0;
 	c = fgetc(f);
@@ -150,8 +147,6 @@ int	ft_vfscanf(FILE *f, const char *format, va_list ap)
 			if (match_space(f) == -1)
 				break ;
 		}
-		else if (match_char(f, *format) != 1)
-			break ;
 		format++;
 	}
 	if (ferror(f))
@@ -172,13 +167,13 @@ int	ft_scanf(const char *format, ...)
 
 int	main(void)
 {
-	int	a;
-	int	ret;
+	int		a;
+	int		ret;
+	char	c;
+	char	s[100];
 
-	char c, s[100];
-	// Test 1: scanf normal
 	printf("Test: %%d %%c %%s\n");
-	ret = ft_scanf("%d %c %s", &a, &c, s);
+	ret = scanf("%d %c %s", &a, &c, s);
 	printf("ret=%d, a=%d, c='%c', s='%s'\n", ret, a, c, s);
 	return (0);
 }
