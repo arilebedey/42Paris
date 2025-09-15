@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 10:58:21 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/19 17:20:51 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:50:14 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int	ft_print_str(char *str)
 		str = "(null)";
 	while (str[i])
 		count += ft_print_char(str[i++]);
-	return (i);
+	return (count);
 }
