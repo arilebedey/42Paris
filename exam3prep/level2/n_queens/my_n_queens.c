@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   n_queens.c                                         :+:      :+:    :+:   */
+/*   my_n_queens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:51:48 by alebedev          #+#    #+#             */
-/*   Updated: 2025/09/20 10:40:57 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/09/20 10:46:24 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	write_solutions(int nb)
 
 void	write_solutions_recursive(int *positions, int n, int index)
 {
-	if (n == index)
+	if (index == n)
 	{
 		write(1, "\n", 1);
 		return ;
 	}
 	write_solutions(positions[index]);
-	if (index != n - 1)
+	if (index < n - 1)
 		write(1, " ", 1);
 	write_solutions_recursive(positions, n, index + 1);
 }
@@ -62,10 +62,7 @@ void	find_solutions(int *positions, int n, int col)
 	int	row;
 
 	if (col == n)
-	{
-		write_solutions_recursive(positions, n, 0);
-		return ;
-	}
+		return (write_solutions_recursive(positions, n, 0));
 	row = 0;
 	while (row < n)
 	{

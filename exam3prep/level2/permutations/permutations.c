@@ -69,7 +69,7 @@ int	next_permutations(char *s, int len)
 	j = len - 1;
 	while (s[j] <= s[i])
 		j--;
-	ft_swap(&s[i], &s[j]);
+	ft_swap(&s[j], &s[i]);
 	reverse(s, i + 1, len - 1);
 	return (1);
 }
