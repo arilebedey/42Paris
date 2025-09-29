@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 07:55:10 by alebedev          #+#    #+#             */
-/*   Updated: 2025/09/17 08:45:45 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/09/23 09:16:29 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
  *
  * */
 
-#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -135,9 +134,7 @@ int	main(int ac, char **av)
 		perror("Error: ");
 		return (1);
 	}
-	needle = av[1];
 	stash = NULL;
-	buf[BUFSIZ] = 0;
 	while ((bytes = read(0, buf, BUFSIZ)) > 0)
 	{
 		buf[bytes] = 0;
@@ -146,7 +143,6 @@ int	main(int ac, char **av)
 			stash = ft_strjoin(buf, NULL);
 			if (!stash)
 			{
-				free(stash);
 				free(buf);
 				perror("Error: ");
 				return (1);
@@ -173,6 +169,7 @@ int	main(int ac, char **av)
 	free(buf);
 	i = 0;
 	nlen = 0;
+	needle = av[1];
 	while (needle[nlen])
 		nlen++;
 	i = 0;

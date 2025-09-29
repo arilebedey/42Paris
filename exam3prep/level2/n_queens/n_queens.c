@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 10:51:48 by alebedev          #+#    #+#             */
-/*   Updated: 2025/09/22 08:16:08 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/09/23 08:28:31 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,22 @@ int	is_valid_positions(int *positions, int row, int col)
 	return (1);
 }
 
-void	find_solutions(int *positions, int n, int col)
+void	find_solutions(int *positions, int n, int index)
 {
 	int	row;
 
-	row = 0;
-	if (col == n)
+	if (index == n)
 	{
 		write_solutions_recursive(positions, n, 0);
 		return ;
 	}
+	row = 0;
 	while (row < n)
 	{
-		if (is_valid_positions(positions, row, col))
+		if (is_valid_positions(positions, row, index))
 		{
-			positions[col] = row;
-			find_solutions(positions, n, col + 1);
+			positions[index] = row;
+			find_solutions(positions, n, index + 1);
 		}
 		row++;
 	}
@@ -80,12 +80,12 @@ void	find_solutions(int *positions, int n, int col)
 int	main(int ac, char *av[])
 {
 	int	n;
-	int	positions[n];
 
 	if (ac != 2)
 		return (1);
 	n = atoi(av[1]);
-	if (n <= 0)
+	int	positions[n];
+	if (n < 1)
 		return (1);
 	find_solutions(positions, n, 0);
 	return (0);

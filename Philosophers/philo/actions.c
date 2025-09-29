@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 21:12:54 by alebedev          #+#    #+#             */
-/*   Updated: 2025/08/22 21:39:39 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:12:04 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,19 @@ void	action_sleep(t_philo *philo)
 void	action_think(t_philo *philo)
 {
 	size_t	think_ms;
+	size_t	time_since_meal;
+	size_t	time_until_death;
 
 	pthread_mutex_lock(&philo->sim->meal_lock);
-	think_ms = (philo->sim->time_die - (get_time() - philo->last_meal)
-			- philo->sim->time_eat) / 2;
+	time_since_meal = get_time() - philo->last_meal;
 	pthread_mutex_unlock(&philo->sim->meal_lock);
-	if ((long)think_ms < 0)
+	time_until_death = philo->sim->time_die - time_since_meal;
+	think_ms = (time_until_death - philo->sim->time_eat) / 2;
+	if ((long)think_ms < 0 || time_until_death <= philo->sim->time_eat + 50)
 		think_ms = 0;
-	if (think_ms > 600)
+	if (think_ms > 200)
 		think_ms = 200;
 	print_state(philo, "is thinking");
-	if (think_ms)
+	if (think_ms > 0)
 		msleep(think_ms);
 }

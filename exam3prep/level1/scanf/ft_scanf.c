@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 08:19:03 by alebedev          #+#    #+#             */
-/*   Updated: 2025/09/15 10:17:12 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/09/23 09:07:36 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int	ft_scanf(const char *format, ...)
 	int		ret;
 
 	va_start(ap, format);
-	ret = ft_vfscanf(stdin, format, ap);
+	ret = ft_vfscanf(0, format, ap);
 	va_end(ap);
 	return (ret);
 }

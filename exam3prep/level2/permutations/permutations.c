@@ -12,11 +12,8 @@ int	ft_strlen(char *s)
 
 void	ft_putstr_nl(char *s)
 {
-	char	c;
-
-	c = '\n';
 	write(1, s, ft_strlen(s));
-	write(1, &c, 1);
+	write(1, "\n", 1);
 }
 
 void	ft_swap(char *a, char *b)

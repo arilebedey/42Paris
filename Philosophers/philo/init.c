@@ -6,16 +6,41 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 21:30:56 by alebedev          #+#    #+#             */
-/*   Updated: 2025/08/01 21:55:10 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/09/29 10:09:24 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static int	check_arg(char *arg)
+{
+	int	i;
+
+	if (!arg || !*arg)
+		return (1);
+	i = 0;
+	if (arg[i] == '+')
+		i++;
+	else if (arg[i] == '-')
+		return (1);
+	if (!arg[i])
+		return (1);
+	while (arg[i])
+	{
+		if (arg[i] < '0' || arg[i] > '9')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	parse_args(int ac, char **av, t_sim *sim)
 {
 	if (ac != 5 && ac != 6)
 		return (print_error("Wrong args\n"));
+	if (check_arg(av[1]) || check_arg(av[2]) || check_arg(av[3])
+		|| check_arg(av[4]) || (ac == 6 && check_arg(av[5])))
+		return (print_error("Invalid args\n"));
 	sim->count = ft_atoi(av[1]);
 	sim->time_die = ft_atoi(av[2]);
 	sim->time_eat = ft_atoi(av[3]);
