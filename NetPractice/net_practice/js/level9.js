@@ -33,12 +33,12 @@ var ifs = [
     {'if':'B1', 'hid':'B', 'ip':'192.168.[1-254]h.42', 'mask':'255.255.0.0', 'ip_edit':'true', 'mask_edit':'true', 'type':'std', 'pos':'100,200'},
     {'if':'C1', 'hid':'C', 'ip':'10.0.0.1', 'mask':'255.255.255.0', 'ip_edit':'true', 'mask_edit':'true', 'type':'std', 'pos':'20,-50'},
     {'if':'D1', 'hid':'D', 'ip':'[j].[k].19.131', 'mask':'255.255.255.192', 'ip_edit':'true', 'mask_edit':'true', 'type':'std', 'pos':'0,-50'},
-    {'if':'R11', 'hid':'R1', 'ip':'192.168.[1-254]i.1', 'mask':'255.255.255.128', 'ip_edit':'true', 'mask_edit':'false', 'type':'std', 'pos':'-150,0'},
+    {'if':'R11', 'hid':'R1', 'ip':'192.168.[1-254]i.1', 'mask':'255.255.255.128', 'ip_edit':'true', 'mask_edit':'false', 'type':'std', 'pos':'-150,30'},
     {'if':'R12', 'hid':'R1', 'ip':'163.172.250.12', 'mask':'255.255.255.240', 'ip_edit':'false', 'mask_edit':'false', 'type':'std', 'pos':'190,10'},
-    {'if':'R13', 'hid':'R1', 'ip':'[j].[k].17.254', 'mask':'255.255.255.0', 'ip_edit':'true', 'mask_edit':'true', 'type':'std', 'pos':'130,140'},
+    {'if':'R13', 'hid':'R1', 'ip':'[j].[k].17.254', 'mask':'255.255.255.0', 'ip_edit':'true', 'mask_edit':'true', 'type':'std', 'pos':'170,140'},
     {'if':'R21', 'hid':'R2', 'ip':'[j].[k].18.253', 'mask':'255.255.255.252', 'ip_edit':'true', 'mask_edit':'false', 'type':'std', 'pos':'0,-50'},
     {'if':'R22', 'hid':'R2', 'ip':'10.0.0.254', 'mask':'255.255.255.0', 'ip_edit':'true', 'mask_edit':'true', 'type':'std', 'pos':'190,80'},
-    {'if':'R23', 'hid':'R2', 'ip':'8.8.8.8', 'mask':'/18', 'ip_edit':'true', 'mask_edit':'false', 'type':'std', 'pos':'30,180'},
+    {'if':'R23', 'hid':'R2', 'ip':'8.8.8.8', 'mask':'/18', 'ip_edit':'true', 'mask_edit':'false', 'type':'std', 'pos':'30,185'},
     {'if':'S1', 'hid':'S', 'ip':'0.0.0.0', 'mask':'/32', 'ip_edit':'false', 'mask_edit':'false', 'pos':'0,0', 'type':'hidden'},
     {'if':'I1', 'hid':'I', 'ip':'163.172.250.1', 'mask':'/28', 'ip_edit':'false', 'mask_edit':'false', 'pos':'0,0', 'type':'hidden'}
 ];

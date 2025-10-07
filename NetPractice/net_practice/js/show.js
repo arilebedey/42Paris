@@ -95,6 +95,10 @@ function show_host(root, h)
     h['h'] = parseInt(tab[1]);
     h['x'] = parseInt(tab[2]);
     h['y'] = parseInt(tab[3]);
+
+    const spacingFactor = 1.3; // 1.2–1.5 recommended
+    h['x'] = Math.round(h['x'] * spacingFactor);
+    h['y'] = Math.round(h['y'] * spacingFactor);
     
     var newelem = document.createElement('div');
     newelem.className = 'host_div';

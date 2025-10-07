@@ -11,7 +11,7 @@ body {
   padding: 0px;
   margin: 0px;
   background-color: #000;
-  transform: scale(0.8);
+  transform: scale(0.65);
   transform-origin: top center;
 }
 
@@ -170,6 +170,7 @@ div {
   padding: 3px 5px;
   font-family: "Consolas", monospace;
   font-size: 0.9em;
+  width: 18ch;
 }
 
 .host_info_div b,
