@@ -6,7 +6,7 @@ var hosts = [
     {'id':'B', 'type':'host', 'name':'ion', 'geometry':'200x220+100+200', 'img':'host.png', 'labelpos':'180,30'},
     {'id':'C', 'type':'host', 'name':'cation', 'geometry':'200x220+1000+800', 'img':'host.png', 'labelpos':'100,190'},
     {'id':'D', 'type':'host', 'name':'gluon', 'geometry':'200x220+600+1300', 'img':'host.png', 'labelpos':'180,80'},
-    {'id':'R1', 'type':'router', 'name':'proton', 'geometry':'200x200+500+500', 'img':'router.png', 'labelpos':'-150,150'},
+    {'id':'R1', 'type':'router', 'name':'proton', 'geometry':'200x200+500+500', 'img':'router.png', 'labelpos':'-250,150'},
     {'id':'R2', 'type':'router', 'name':'boson', 'geometry':'200x200+600+900', 'img':'router.png', 'labelpos':'-200,100'},
     {'id':'I', 'type':'internet', 'name':'Internet', 'geometry':'200x240+800+200', 'img':'internet.png', 'labelpos':'100,200'},
     {'id':'S', 'type':'switch', 'name':'neutron', 'geometry':'150x150+200+500', 'img':'switch.png', 'labelpos':'-80,110'}

@@ -33,7 +33,7 @@ var ifs = [
     {'if':'H41', 'hid':'H4', 'ip':'[a].[b].[c].131', 'mask':'255.255.255.192', 'ip_edit':'false', 'mask_edit':'false', 'type':'std', 'pos':'0,-50'},
     {'if':'R11', 'hid':'R1', 'ip':'[a].[b].[c].1', 'mask':'255.255.255.128', 'ip_edit':'false', 'mask_edit':'false', 'type':'std', 'pos':'190,10'},
     {'if':'R12', 'hid':'R1', 'ip':'163.172.250.12', 'mask':'255.255.255.240', 'ip_edit':'false', 'mask_edit':'false', 'type':'std', 'pos':'-150,0'},
-    {'if':'R13', 'hid':'R1', 'ip':'[a].[b].[c].254', 'mask':'255.255.255.0', 'ip_edit':'false', 'mask_edit':'true', 'type':'std', 'pos':'130,140'},
+    {'if':'R13', 'hid':'R1', 'ip':'[a].[b].[c].254', 'mask':'255.255.255.0', 'ip_edit':'false', 'mask_edit':'true', 'type':'std', 'pos':'130,120'},
     {'if':'R21', 'hid':'R2', 'ip':'[a].[b].[c].253', 'mask':'255.255.255.252', 'ip_edit':'false', 'mask_edit':'false', 'type':'std', 'pos':'0,-50'},
     {'if':'R22', 'hid':'R2', 'ip':'10.0.0.254', 'mask':'255.255.255.0', 'ip_edit':'true', 'mask_edit':'true', 'type':'std', 'pos':'190,90'},
     {'if':'R23', 'hid':'R2', 'ip':'8.8.8.8', 'mask':'/18', 'ip_edit':'true', 'mask_edit':'true', 'type':'std', 'pos':'-150,90'},
