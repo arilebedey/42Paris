@@ -1,0 +1,36 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-pedantic",
+      "-c",
+      "-o",
+      "Account.o",
+      "Account.cpp"
+    ],
+    "directory": "/Users/ari/Code/42/others/made-by-pix-cpp00/ex02",
+    "file": "/Users/ari/Code/42/others/made-by-pix-cpp00/ex02/Account.cpp",
+    "output": "/Users/ari/Code/42/others/made-by-pix-cpp00/ex02/Account.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-pedantic",
+      "-c",
+      "-o",
+      "tests.o",
+      "tests.cpp"
+    ],
+    "directory": "/Users/ari/Code/42/others/made-by-pix-cpp00/ex02",
+    "file": "/Users/ari/Code/42/others/made-by-pix-cpp00/ex02/tests.cpp",
+    "output": "/Users/ari/Code/42/others/made-by-pix-cpp00/ex02/tests.o"
+  }
+]
