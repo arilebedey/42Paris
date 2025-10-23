@@ -6,11 +6,20 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:45:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/02 14:35:57 by alebedev         ###   ########.fr       */
+/*   Updated: 2025/10/21 10:06:33 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	clean_stash(char **stash)
+{
+	if (*stash)
+	{
+		free(*stash);
+		*stash = NULL;
+	}
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -19,12 +28,12 @@ char	*ft_strchr(const char *s, int c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == (char) c)
+		if (s[i] == (char)c)
 			break ;
 		i++;
 	}
-	if (s[i] == (char) c)
-		return ((char *) s + i);
+	if (s[i] == (char)c)
+		return ((char *)s + i);
 	return (NULL);
 }
 
@@ -58,7 +67,7 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 		j++;
 	}
 	new[i + j] = '\0';
-	free((char *) s1);
+	free((char *)s1);
 	return (new);
 }
 
@@ -77,7 +86,7 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	i;
 	void	*mem_ptr;
 
-	if (size != 0 && count > ((size_t) -1 / size))
+	if (size != 0 && count > ((size_t)-1 / size))
 		return (NULL);
 	mem_ptr = malloc(size * count);
 	if (!mem_ptr)
