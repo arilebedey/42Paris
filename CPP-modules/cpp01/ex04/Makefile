@@ -1,4 +1,4 @@
-NAME = hi
+NAME = replace
 
 SRC_DIR = .
 INC_DIR = .
