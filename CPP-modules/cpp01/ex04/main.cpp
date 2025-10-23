@@ -49,8 +49,11 @@ int	main(int argc, char **argv)
 		" no such file or directory" << std::endl;
 		return (1);
 	}
-	while(!infile.eof() && infile >> std::noskipws >> c)
+	while(!infile.eof())
+  {
+    infile >> std::noskipws >> c;
 		str += c;
+  }
 	infile.close();
 	return (replace(argv, str));
 }
