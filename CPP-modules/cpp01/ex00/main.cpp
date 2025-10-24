@@ -3,12 +3,12 @@
 
 int main(void) {
   std::cout << "Creating zombie on stack:\n";
-  Zombie stackZombie("S-Zomb");
+  Zombie stackZombie("Stack-Zomb");
   stackZombie.announce();
 
   std::cout << "\n";
   std::cout << "Creating zombie on heap:\n";
-  Zombie *heapZombie = newZombie("H-Zomb");
+  Zombie *heapZombie = newZombie("Heap-Zomb");
   if (heapZombie) {
     heapZombie->announce();
     std::cout << "\n";
