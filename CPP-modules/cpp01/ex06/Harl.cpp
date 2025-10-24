@@ -29,25 +29,37 @@ void Harl::error(void) {
 }
 
 void Harl::filter(std::string level) {
-  void (Harl::*complain_fns[4])(void) = {&Harl::debug, &Harl::info,
-                                         &Harl::warning, &Harl::error};
-  std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+  int lvl = -1;
 
-  int i = 0;
-  int found = 0;
-  while (i < 4) {
-    if (levels[i] == level) {
-      found = 1;
-      i++;
-      break;
-    }
-    i++;
-  }
-  if (found) {
-    for (int j = 0; j < i; j++)
-      (this->*complain_fns[j])();
-  } else {
-    std::cout << "*Birds flying high, you know how I feel...*";
-    std::cout << std::endl;
+  if (level == "DEBUG")
+    lvl = 0;
+  else if (level == "INFO")
+    lvl = 1;
+  else if (level == "WARNING")
+    lvl = 2;
+  else if (level == "ERROR")
+    lvl = 3;
+
+  switch (lvl) {
+  case 0:
+    this->debug();
+    break;
+  case 1:
+    this->info();
+    this->debug();
+    break;
+  case 2:
+    this->warning();
+    this->info();
+    this->debug();
+    break;
+  case 3:
+    this->warning();
+    this->info();
+    this->debug();
+    this->error();
+    break;
+  default:
+    std::cout << "*Birds flying high, you know how I feel...*" << std::endl;
   }
 }

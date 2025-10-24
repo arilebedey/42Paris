@@ -32,9 +32,8 @@ int replace(char **argv, std::string str) {
 }
 
 int main(int argc, char **argv) {
-  char c;
   std::ifstream infile;
-  std::string str;
+  std::string str, line;
 
   if (argc != 4) {
     std::cout << "usage: replace <file> old_word new_word" << std::endl;
@@ -47,9 +46,10 @@ int main(int argc, char **argv) {
               << std::endl;
     return (1);
   }
-  while (!infile.eof()) {
-    infile >> std::noskipws >> c;
-    str += c;
+  while (std::getline(infile, line)) {
+    str += line;
+    if (!infile.eof())
+      str += "\n";
   }
   infile.close();
   return (replace(argv, str));
