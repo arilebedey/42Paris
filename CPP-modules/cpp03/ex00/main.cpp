@@ -1,50 +1,44 @@
 #include "ClapTrap.hpp"
+#include <iostream>
 
 int main() {
-  std::cout << "----- Création -----" << std::endl;
+  std::cout << "----- Creation -----" << std::endl;
   ClapTrap a("Alpha");
 
-  std::cout << "\n----- Attaque normale -----" << std::endl;
+  std::cout << "\n----- Attack with _attackDamage = 0 -----" << std::endl;
   a.attack("Enemy1");
 
-  std::cout << "\n----- Réparation -----" << std::endl;
+  std::cout << "\n----- Healing -----" << std::endl;
   a.beRepaired(5);
 
-  std::cout << "\n----- Prendre des dégâts -----" << std::endl;
+  std::cout << "\n----- Sustaining damamge -----" << std::endl;
   a.takeDamage(3);
 
-  std::cout << "\n----- Réparer à nouveau -----" << std::endl;
+  std::cout << "\n----- Healing -----" << std::endl;
   a.beRepaired(2);
 
-  std::cout << "\n----- Vider l'énergie -----" << std::endl;
-  for (int i = 0; i < 10; ++i)
-    a.attack("Training Dummy");
-
-  std::cout << "\n----- Essayer d'attaquer sans énergie -----" << std::endl;
+  std::cout << "\n----- Attack with _attackDamage = 0 -----" << std::endl;
   a.attack("Enemy2");
 
-  std::cout << "\n----- Essayer de se réparer sans énergie -----" << std::endl;
-  a.beRepaired(1);
-
-  std::cout << "\n----- Recevoir des dégâts fatals -----" << std::endl;
+  std::cout << "\n----- Fatal damage -----" << std::endl;
   a.takeDamage(100);
 
-  std::cout << "\n----- Essayer d'agir en étant mort -----" << std::endl;
+  std::cout << "\n----- Act with _hitPoints = 0 -----" << std::endl;
   a.attack("Enemy3");
-  a.beRepaired(10);
 
-  std::cout << "\n----- Constructeur de copie -----" << std::endl;
-  ClapTrap b(a); // Devrait copier l'état de a (qui est mort)
+  std::cout << "\n----- Create b -----" << std::endl;
+  ClapTrap b("Beta");
 
-  std::cout << "\n----- Création d'un autre ClapTrap -----" << std::endl;
-  ClapTrap c("Charlie");
+  std::cout << "\n----- Copy constructor b onto c -----" << std::endl;
+  ClapTrap c(b);
 
-  std::cout << "\n----- Affectation (operator=) -----" << std::endl;
-  c = a; // c devient comme a
+  std::cout << "\n----- Assignment (operator=) b onto c -----" << std::endl;
+  c = b;
 
-  std::cout << "\n----- Tester 'c' après l’affectation -----" << std::endl;
-  c.attack("Enemy4");
+  std::cout << "\n----- Deal c damage -----" << std::endl;
+  b.takeDamage(8);
 
-  std::cout << "\n----- Fin du programme -----" << std::endl;
+  std::cout << std::endl;
+
   return 0;
 }

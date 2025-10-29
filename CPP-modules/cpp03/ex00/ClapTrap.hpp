@@ -1,10 +1,9 @@
-#include <iostream>
 #include <string>
 
 class ClapTrap {
 private:
   std::string _name;
-  int _hitPoints;
+  unsigned int _hitPoints;
   unsigned int _energyPoints;
   unsigned int _attackDamage;
 
@@ -12,7 +11,7 @@ public:
   ClapTrap();
   ClapTrap(const std::string &name);
   ClapTrap(const ClapTrap &src);
-  ClapTrap operator=(const ClapTrap &src);
+  ClapTrap &operator=(const ClapTrap &src);
   ~ClapTrap();
 
   void attack(const std::string &target);
