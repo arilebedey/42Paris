@@ -1,11 +1,12 @@
-NAME = fixed
+NAME = claptrap
 
 SRC_DIR = .
 INC_DIR = .
 OBJ_DIR = obj
 
 SRCS = main.cpp \
-			 Fixed.cpp
+			 ClapTrap.cpp \
+			 ScavTrap.cpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 DEPS = $(OBJS:.o=.d)
