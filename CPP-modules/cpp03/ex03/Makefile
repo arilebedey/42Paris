@@ -6,8 +6,8 @@ OBJ_DIR = obj
 
 SRCS = main.cpp \
 			 ClapTrap.cpp \
-			 ScavTrap.cpp \
 			 FragTrap.cpp \
+			 ScavTrap.cpp \
 			 DiamondTrap.cpp
 
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))

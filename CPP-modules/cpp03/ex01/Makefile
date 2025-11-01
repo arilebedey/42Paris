@@ -1,4 +1,4 @@
-NAME = scavtrap
+NAME = claptrap
 
 SRC_DIR = .
 INC_DIR = .

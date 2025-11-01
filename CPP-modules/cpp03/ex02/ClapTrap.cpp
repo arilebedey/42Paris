@@ -6,7 +6,7 @@ ClapTrap::ClapTrap() {
   _hitPoints = 10;
   _energyPoints = 10;
   _attackDamage = 0;
-  std::cout << _name << " was created" << std::endl;
+  std::cout << _name << " ClapTrap was created" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string &name) {
@@ -14,7 +14,7 @@ ClapTrap::ClapTrap(const std::string &name) {
   _hitPoints = 10;
   _energyPoints = 10;
   _attackDamage = 0;
-  std::cout << _name << " was created" << std::endl;
+  std::cout << _name << " ClapTrap was created" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src) {
@@ -22,7 +22,7 @@ ClapTrap::ClapTrap(const ClapTrap &src) {
   _hitPoints = src._hitPoints;
   _energyPoints = src._energyPoints;
   _attackDamage = src._attackDamage;
-  std::cout << _name << " was copied (copy constructor)" << std::endl;
+  std::cout << _name << " ClapTrap was copied (copy constructor)" << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &src) {
@@ -32,11 +32,14 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &src) {
     _energyPoints = src._energyPoints;
     _attackDamage = src._attackDamage;
   }
-  std::cout << _name << " was copied (assignment operator)" << std::endl;
+  std::cout << _name << " ClapTrap was copied (assignment operator)"
+            << std::endl;
   return *this;
 }
 
-ClapTrap::~ClapTrap() { std::cout << _name << " was destroyed" << std::endl; }
+ClapTrap::~ClapTrap() {
+  std::cout << _name << " ClapTrap was destroyed" << std::endl;
+}
 
 void ClapTrap::attack(const std::string &target) {
   if (!_energyPoints)

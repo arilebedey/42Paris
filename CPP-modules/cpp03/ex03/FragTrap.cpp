@@ -2,36 +2,40 @@
 #include <iostream>
 
 FragTrap::FragTrap() : ClapTrap() {
-  this->_name = "noname";
   this->_hitPoints = 100;
   this->_energyPoints = 100;
   this->_attackDamage = 30;
-  std::cout << "FragTrap default constructor called for " << _name << std::endl;
+  std::cout << _name << " FragTrap was created" << std::endl;
 }
 
 FragTrap::FragTrap(const std::string &name) : ClapTrap(name) {
   this->_hitPoints = 100;
   this->_energyPoints = 100;
   this->_attackDamage = 30;
-  std::cout << "FragTrap constructor called for " << _name << std::endl;
+  std::cout << _name << " FragTrap was created" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src) {
-  std::cout << "FragTrap copy constructor called for " << _name << std::endl;
+  _name = src._name;
+  _hitPoints = src._hitPoints;
+  _energyPoints = src._energyPoints;
+  _attackDamage = src._attackDamage;
+  std::cout << _name << " FragTrap was copied (copy constructor)" << std::endl;
 }
 
 FragTrap &FragTrap::operator=(const FragTrap &other) {
   if (this != &other)
     ClapTrap::operator=(other);
-  std::cout << "FragTrap assignment operator called for " << _name << std::endl;
+  std::cout << _name << " FragTrap was copied (assignment operator)"
+            << std::endl;
   return *this;
 }
 
 FragTrap::~FragTrap() {
-  std::cout << "FragTrap destructor called for " << _name << std::endl;
+  std::cout << _name << " FragTrap was destroyed" << std::endl;
 }
 
-void FragTrap::highFivesGuys() {
-  std::cout << "FragTrap " << this->_name << " is requesting a high five!"
+void FragTrap::highFivesGuys(void) {
+  std::cout << "FragTrap " << this->_name << " requested a high-five"
             << std::endl;
 }

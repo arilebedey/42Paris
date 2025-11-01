@@ -88,6 +88,7 @@ int	main(int ac, char **av, char **env)
 			}
 			if (is_piped)
 			{
+				// NOTE: close pipes
 				close(p[0]);
 				if (dup2(p[1], 1) < 0)
 					fatal_err();
@@ -106,8 +107,10 @@ int	main(int ac, char **av, char **env)
 			if (is_piped)
 			{
 				close(p[1]);
+				// WARN: don't close p[0]
 				in_fd = p[0];
 			}
+			// NOTE: important!
 			else
 				in_fd = 0;
 			av[i] = arg_null;
