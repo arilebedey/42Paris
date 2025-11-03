@@ -28,11 +28,11 @@ int	main(int ac, char **av, char **env)
 {
 	int		i;
 	int		start;
-	int		is_piped;
-	int		p[2];
-	char	*arg_null;
-	int		pid;
 	int		in_fd;
+	int		is_piped;
+	pid_t	pid;
+	char	*arg_nulled;
+	int		p[2];
 
 	(void)ac;
 	i = 1;
@@ -41,31 +41,35 @@ int	main(int ac, char **av, char **env)
 	{
 		start = i;
 		is_piped = 0;
-		while (av[i] && strcmp(av[i], "|") != 0 && strcmp(av[i], ";") != 0)
+		while (av[i] && strcmp(av[i], ";") && strcmp(av[i], "|"))
 			i++;
 		if (start == i)
 		{
 			i++;
 			continue ;
 		}
-		if (strcmp(av[start], "cd") == 0)
+		if (!strcmp(av[start], "cd"))
 		{
 			if (i - start != 2)
-				ft_putstr("error: cd: bad arguments\n", 2);
-			else if (chdir(av[start + 1]) != 0)
+				ft_putstr("cd: wrong args", 2);
+			else if (chdir(av[start + 1]) == -1)
 			{
-				ft_putstr("error: cd: cannot change diretory to ", 2);
+				ft_putstr("cd: cannot cd to ", 2);
 				ft_putstr(av[start + 1], 2);
 				ft_putstr("\n", 2);
 			}
 			continue ;
 		}
-		if (av[i] && strcmp(av[i], "|") == 0)
+		if (av[i] && !strcmp(av[i], "|"))
 			is_piped = 1;
-		if (is_piped && pipe(p) != 0)
-			fatal_err();
-		arg_null = av[i];
+		arg_nulled = av[i];
 		av[i] = NULL;
+		if (is_piped && pipe(p) == -1)
+		{
+			if (in_fd)
+				close(in_fd);
+			fatal_err();
+		}
 		pid = fork();
 		if (pid == -1)
 		{
@@ -73,8 +77,8 @@ int	main(int ac, char **av, char **env)
 				close(in_fd);
 			if (is_piped)
 			{
-				close(p[1]);
 				close(p[0]);
+				close(p[1]);
 			}
 			fatal_err();
 		}
@@ -82,42 +86,59 @@ int	main(int ac, char **av, char **env)
 		{
 			if (in_fd)
 			{
-				if (dup2(in_fd, 0) < 0)
+				if (dup2(in_fd, 0) == -1)
+				{
+					close(in_fd);
+					if (is_piped)
+					{
+						close(p[0]);
+						close(p[1]);
+					}
 					fatal_err();
+				}
 				close(in_fd);
 			}
 			if (is_piped)
 			{
-				// NOTE: close pipes
-				close(p[0]);
-				if (dup2(p[1], 1) < 0)
+				if (dup2(p[1], 1) == -1)
+				{
+					close(p[1]);
+					close(p[0]);
+					if (in_fd)
+						close(in_fd);
 					fatal_err();
+				}
 				close(p[1]);
+				close(p[0]);
 			}
 			execve(av[start], &av[start], env);
-			ft_putstr("error: cannot exec ", 2);
+			ft_putstr("exec: couldn't exec ", 2);
 			ft_putstr(av[start], 2);
 			ft_putstr("\n", 2);
+			// NOTE: Don't forget to exit(1) if execve fails
 			exit(1);
 		}
 		else
 		{
 			if (in_fd)
+			{
 				close(in_fd);
+			}
 			if (is_piped)
 			{
 				close(p[1]);
-				// WARN: don't close p[0]
 				in_fd = p[0];
 			}
-			// NOTE: important!
+			// NOTE: if not piping, reset the in_fd to 0!
 			else
 				in_fd = 0;
-			av[i] = arg_null;
 			waitpid(pid, NULL, 0);
+			av[i] = arg_nulled;
 		}
 		if (av[i])
 			i++;
 	}
+	if (in_fd)
+		close(in_fd);
 	return (0);
 }
