@@ -6,6 +6,8 @@
 #include <iostream>
 
 int main() {
+  std::cout << "\n===== Animal Tests  =====\n" << std::endl;
+
   std::cout << "----- Creation -----" << std::endl;
   const Animal *generic = new Animal();
   const Animal *doggy = new Dog();
@@ -23,36 +25,30 @@ int main() {
 
   std::cout << "\n----- Copy and Assignment -----" << std::endl;
   Dog copyDog(*(Dog *)doggy);
-  copyDog = *(Dog *)doggy;
+  Cat copyCat = *(Cat *)kitty;
 
   std::cout << "\n----- Destruction (polymorphic delete) -----" << std::endl;
   delete generic;
   delete doggy;
   delete kitty;
 
-  std::cout << "\n===============================" << std::endl;
-  std::cout << "=== WrongAnimal Test Begins ===" << std::endl;
-  std::cout << "===============================\n" << std::endl;
+  std::cout << "\n===== WrongAnimal Tests  =====\n" << std::endl;
 
-  const WrongAnimal *wrongGeneric = new WrongAnimal();
+  std::cout << "----- Creation -----" << std::endl;
   const WrongAnimal *wrongCat = new WrongCat();
 
-  std::cout << "\n----- Display types (Wrong) -----" << std::endl;
-  std::cout << "wrongGeneric type: " << wrongGeneric->getType() << std::endl;
+  std::cout << "\n----- Display types -----" << std::endl;
   std::cout << "wrongCat type: " << wrongCat->getType() << std::endl;
 
   std::cout << "\n----- Sounds (Wrong) -----" << std::endl;
-  wrongGeneric->makeSound();
   wrongCat->makeSound();
 
-  std::cout << "\n----- Direct call WrongCat -----" << std::endl;
-  WrongCat directWrongCat;
-  directWrongCat.makeSound();
-
   std::cout << "\n----- Destruction (Wrong) -----" << std::endl;
-  delete wrongGeneric;
   delete wrongCat;
 
-  std::cout << "\n=== End of Tests ===" << std::endl;
+  std::cout << "\n===== End of WrongAnimal Tests  =====\n" << std::endl;
+
+  std::cout << "----- copyDog & copyCat destruction -----" << std::endl;
+
   return 0;
 }

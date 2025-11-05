@@ -1,9 +1,7 @@
-#ifndef WRONANIMAL_HPP
-#define WRONANIMAL_HPP
-
 #include "WrongAnimal.hpp"
+#include <iostream>
 
-WrongAnimal::WrongAnimal() : _type("Unknown") {
+WrongAnimal::WrongAnimal() : _type("Unspecified animal") {
   std::cout << "WrongAnimal default constructor called" << std::endl;
 }
 
@@ -34,5 +32,3 @@ void WrongAnimal::makeSound() const {
 }
 
 std::string WrongAnimal::getType() const { return _type; }
-
-#endif
