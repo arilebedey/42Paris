@@ -6,7 +6,7 @@
 
 int main() {
   try {
-    std::cout << "\n===== Animal Instantiation Test =====" << std::endl;
+    // std::cout << "\n===== Animal Instantiation Test =====" << std::endl;
     // Should not compile //
     // Animal a;
     // const Animal *ptrAnimal = new Animal();
@@ -16,14 +16,15 @@ int main() {
     const Animal *cat = new Cat();
 
     std::cout << "\n===== Sounds =====" << std::endl;
-    dog->makeSound();
-    cat->makeSound();
+    (*dog).makeSound();
+    (*cat).makeSound();
 
     std::cout << "\n===== Deep Copy Test =====" << std::endl;
-    Dog basicDog;
     {
+      Dog basicDog;
+      std::cout << std::endl;
       Dog tempDog = basicDog;
-      std::cout << "--- End of tempDog scope ---" << std::endl;
+      std::cout << std::endl;
     }
 
     std::cout << "\n===== Array Test =====" << std::endl;
