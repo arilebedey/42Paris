@@ -17,8 +17,10 @@ int main() {
     std::cout << "\n===== Deep Copy Test =====" << std::endl;
     Dog basicDog;
     {
+      std::cout << "--- Start tempDog scope ---" << std::endl;
       Dog tempDog = basicDog;
       std::cout << "--- End of tempDog scope ---" << std::endl;
+      // tempDog's Brain destroyed
     }
 
     std::cout << "\n===== Array Test =====" << std::endl;

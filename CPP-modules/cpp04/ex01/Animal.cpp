@@ -6,13 +6,12 @@ Animal::Animal() : type("Unspecified animal") {
 }
 
 Animal::Animal(const std::string &_type) : type(_type) {
-  std::cout << "Animal constructor with type parameter called" << std::endl;
-  std::cout << "Type: " << _type << std::endl;
+  std::cout << "Animal constructor called with type: " << _type << std::endl;
 }
 
 Animal::Animal(const Animal &other) : type(other.type) {
-  std::cout << "Animal copy constructor called" << std::endl;
-  std::cout << "Type: " << type << std::endl;
+  std::cout << "Animal copy constructor called with type: " << type
+            << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &other) {
