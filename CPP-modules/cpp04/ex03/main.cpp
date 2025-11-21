@@ -67,12 +67,13 @@ int main() {
   Character *tifa = new Character("Tifa");
 
   cloud->equip(shared);
-  std::cout << "Attempting to give the *same* pointer to another character:"
+  std::cout << "Attempting to give the same pointer to another character:"
             << std::endl;
   tifa->equip(shared);
 
   delete cloud;
   delete tifa;
+  delete shared;
 
   std::cout << "\n=== Program End ===" << std::endl;
   return 0;
