@@ -4,21 +4,16 @@
 #include "ICharacter.hpp"
 #include <string>
 
-struct MateriaSlot {
-  AMateria *ptr;
-  bool owned;
-};
-
 class Character : public ICharacter {
 private:
   std::string _name;
-  MateriaSlot _inventory[4];
-  int _idx;
+  AMateria *_inventory[4];
+  AMateria **_floor;
+  int _floorCount;
 
-  MateriaSlot *_registry;
-  int _registrySize;
-
-  void _expandRegistry();
+  void _clearInventory();
+  void _copyInventory(const Character &other);
+  void _addToFloor(AMateria *m);
 
 public:
   Character();
@@ -29,7 +24,6 @@ public:
 
   const std::string &getName() const;
   void equip(AMateria *m);
-  void equip(AMateria *m, bool takeOwnership);
   void unequip(int idx);
   void use(int idx, ICharacter &target);
 };
