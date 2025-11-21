@@ -75,7 +75,7 @@ void Character::equip(AMateria *m) {
   }
   for (int i = 0; i < 4; ++i) {
     if (_inventory[i] == 0) {
-      _inventory[i] = m->clone();
+      _inventory[i] = m;
       std::cout << _name << " equipped " << m->getType() << " in slot " << i
                 << std::endl;
       return;

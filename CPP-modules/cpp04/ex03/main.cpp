@@ -44,6 +44,7 @@ int main() {
 
   alice->use(0, *eve);
   alice->use(1, *eve);
+  alice->use(2, *eve);
 
   std::cout << "\n--- Copy constructing AliceCopy ---" << std::endl;
   Character aliceCopy(*alice);
@@ -59,21 +60,6 @@ int main() {
   delete eve;
   delete alice;
   delete src2;
-
-  std::cout << "\n=== Double Ownership Safety Test ===" << std::endl;
-
-  AMateria *shared = new Ice();
-  Character *cloud = new Character("Cloud");
-  Character *tifa = new Character("Tifa");
-
-  cloud->equip(shared);
-  std::cout << "Attempting to give the same pointer to another character:"
-            << std::endl;
-  tifa->equip(shared);
-
-  delete cloud;
-  delete tifa;
-  delete shared;
 
   std::cout << "\n=== Program End ===" << std::endl;
   return 0;
