@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(void) : _name("defaultname"), _grade(1) {}
+Bureaucrat::Bureaucrat(void) : _name("default"), _grade(1) {}
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name) {
   if (grade < 1)
@@ -13,13 +13,13 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) : _name(name) {
 Bureaucrat::Bureaucrat(const Bureaucrat &src)
     : _name(src._name), _grade(src._grade) {}
 
-Bureaucrat::~Bureaucrat(void) {}
-
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src) {
   if (this != &src)
     this->_grade = src.getGrade();
   return *this;
 }
+
+Bureaucrat::~Bureaucrat(void) {}
 
 const std::string &Bureaucrat::getName(void) const { return _name; }
 
