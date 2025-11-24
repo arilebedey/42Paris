@@ -1,4 +1,5 @@
 #include "Serializer.hpp"
+
 #include <iostream>
 
 static void print_planet(void)
@@ -40,7 +41,7 @@ int main() {
   data.planetName = "Kepler-452b";
   data.distance = 1800;
 
-  uintptr_t raw = Serializer::serialize(&data);
+  unsigned long raw = Serializer::serialize(&data);
   Data *ptr = Serializer::deserialize(raw);
 
   std::cout << "Original : " << &data << std::endl;
