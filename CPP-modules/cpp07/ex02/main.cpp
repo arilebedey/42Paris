@@ -4,11 +4,11 @@
 int main() {
   // int
   Array<int> intArray(5);
-  for (int i = 0; i < intArray.size(); i++)
+  for (size_t i = 0; i < intArray.size(); i++)
     intArray[i] = i * 10;
 
   std::cout << "intArray: ";
-  for (int i = 0; i < intArray.size(); i++)
+  for (size_t i = 0; i < intArray.size(); i++)
     std::cout << intArray[i] << " ";
   std::cout << std::endl;
 
@@ -19,11 +19,11 @@ int main() {
 
   // double + heap alloc
   Array<double> *dblArrPtr = new Array<double>(4);
-  for (int i = 0; i < dblArrPtr->size(); i++)
+  for (size_t i = 0; i < dblArrPtr->size(); i++)
     (*dblArrPtr)[i] = 0.5 * (i + 1);
 
   std::cout << "dblArray (heap): ";
-  for (int i = 0; i < dblArrPtr->size(); i++)
+  for (size_t i = 0; i < dblArrPtr->size(); i++)
     std::cout << (*dblArrPtr)[i] << " ";
   std::cout << std::endl;
 
