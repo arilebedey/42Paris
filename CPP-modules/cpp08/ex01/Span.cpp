@@ -49,3 +49,13 @@ Span &Span::operator=(const Span &other) {
   }
   return *this;
 }
+
+void Span::addRange(std::list<int>::iterator begin,
+                    std::list<int>::iterator end) {
+  unsigned int range_size =
+      static_cast<unsigned int>(std::distance(begin, end));
+  if (_numbers.size() + range_size > _max_size) {
+    throw std::runtime_error("Cannot add range, it would exceed span capacity");
+  }
+  _numbers.insert(_numbers.end(), begin, end);
+}

@@ -17,6 +17,7 @@ public:
   void addNumber(int n);
   unsigned int shortestSpan();
   unsigned int longestSpan();
+  void addRange(std::list<int>::iterator begin, std::list<int>::iterator end);
 };
 
 #endif
