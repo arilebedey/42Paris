@@ -2,7 +2,9 @@
 
 https://tuto.grademe.fr/inception/
 
-# Docker Commands
+# Useful Commands
+
+### Docker Commands
 
 `docker image ls`: list images
 `docker ps`: show running containers
@@ -10,10 +12,21 @@ https://tuto.grademe.fr/inception/
 
 `docker exec -it mariadb bash`: run interactive terminal inside mariadb container
 
-`docker exec -it mariadb mariadb -u root -p -h 127.0.0.1`
+### `mariadb` Commands
+
+`docker exec -it mariadb mariadb -u root -p wordpress -h 127.0.0.1`
 `docker exec -it mariadb mariadb -u wp_owner -p`
 
-### mariadb volume mapping
+### SQL Commands
+
+`SHOW TABLES;`
+`SELECT user, host FROM mysql.user;`
+
+# MariaDB
+
+## mariadb: docker-compose
+
+### mariadb: volume mapping
 
 ```yml
 volumes:
@@ -29,7 +42,7 @@ volumes:
 `type: none`: tells docker to not create a special FS like nfs or tmpfs
 `o: bind`: directly bind host path to container path
 
-### mariadb: MariaDB configuration file
+## mariadb: MariaDB configuration file
 
 ```50-server.cnf
 [mysqld]
@@ -79,3 +92,75 @@ RUN mkdir -p /var/run/mysqld \
 
 Single quotes are for string literals (usernames, hosts, passwords).  
 Backticks are for identifiers (database or table names) to handle special characters or reserved words.
+
+# Wordpress (wp)
+
+## wp: Dockerfile details
+
+`php-fpm` is the runtime that execute PHP code for web requests and returns HTML. It listens on a socket or TCP port (port 9000).
+
+`dumb-init` is a tiny process supervisor used as the PID 1 process inside containers.
+
+`WORKDIR /var/www/html` is often the default folder for the document root for the web content
+
+`www-data` is a dedicated system user and group created by default on most Unix‑like systems when the web server (e.g., NGINX or Apache) or PHP‑FPM is installed. It owns or runs web processes for isolation and safety. It typically owns your web files (/var/www/html) so those processes can read/write as needed.
+
+## WP: php-fmp conf file - www.conf
+
+https://www.atatus.com/blog/php-fpm-performance-optimization/#what-is-php-fpm
+
+```
+listen = 9000
+user = www-data
+group = www-data
+```
+
+Defines the port where php-fpm will listen
+
+```
+pm = ondemand
+pm.max_requests = 2000
+pm.max_children = 5
+pm.process_idle_timeout = 10s
+request_terminate_timeout = 5s
+```
+
+`clear_env = no`: don't clean env so WP can see
+
+Is php-fpm's process management configuration. `pm` can be attributed: `dynamic`, `ondemand` or `static`.
+
+`pm.max_children` = (Total PHP RAM) / (Memory per PHP process)
+
+## WP: setup.sh
+
+```
+cd /var/www/html
+cp wp-config-sample.php wp-config.php
+...
+sed -i "s/username_here/${WORDPRESS_DB_USER}/" wp-config.php
+...
+
+WP_KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
+...
+printf '%s\n' "${WP_KEYS}" >> wp-config.php
+```
+
+Writing hashes and env vars to `/var/www/html/wp-config.php`
+
+`curl -s https://api.wordpress.org/secret-key/1.1/salt/`: the WordPress secret key (salt) generator.
+
+Essentially, they make logins and sessions unpredictable and unique for every installation.
+
+They ensure that even if someone somehow gets your DB or cookies, they can’t easily fake or reuse login tokens
+
+`exec php-fpm7.4 -F`
+
+That makes PHP‑FPM run as PID 1 inside the container.
+
+# nginx
+
+Nginx examines the request using its configuration (e.g. /etc/nginx/conf.d/default.conf) and says:
+
+When nginx encounters a .php file, it forwards the request to that port or socket.
+
+#

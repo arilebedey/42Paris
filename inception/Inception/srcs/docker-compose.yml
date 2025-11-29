@@ -16,6 +16,24 @@ services:
       - inception
     expose:
       - "3306"
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    restart: always
+    env_file:
+      - .env
+    secrets:
+      - db_password
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception
+    expose:
+      - "9000"
 
 secrets:
   db_root_password:
@@ -30,6 +48,12 @@ volumes:
       type: none
       o: bind
       device: ${DATA_PATH}/mariadb
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${DATA_PATH}/wordpress
 
 networks:
   inception:
