@@ -34,6 +34,22 @@ services:
       - inception
     expose:
       - "9000"
+  nginx:
+    build:
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    depends_on:
+      - wordpress
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html:ro
+    networks:
+      - inception
+    ports:
+      - "443:443"
 
 secrets:
   db_root_password:

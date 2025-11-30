@@ -11,6 +11,8 @@ https://tuto.grademe.fr/inception/
 `docker ps -a`: show stopped + running containers
 
 `docker exec -it mariadb bash`: run interactive terminal inside mariadb container
+`docker stats dev_postgres`: realtime usage/stats
+`docker volume inspect foundation_dev-db-data`: show volume hash + fs mountpoint
 
 ### `mariadb` Commands
 
@@ -21,6 +23,9 @@ https://tuto.grademe.fr/inception/
 
 `SHOW TABLES;`
 `SELECT user, host FROM mysql.user;`
+`SELECT ID, user_login, user_pass FROM wp_users;`
+`docker exec -it mariadb mariadb -u root -p123 -h 127.0.0.1 wordpress -e "SHOW TABLES;"`
+`docker exec -it mariadb mariadb -u root -p123 -h 127.0.0.1 wordpress -e "SELECT ID, user_login, user_pass FROM wp_users;"`
 
 # MariaDB
 
@@ -163,4 +168,36 @@ Nginx examines the request using its configuration (e.g. /etc/nginx/conf.d/defau
 
 When nginx encounters a .php file, it forwards the request to that port or socket.
 
-#
+## TLS
+
+Makes sure that:
+
+- Others can’t read or alter the data traveling over the network.
+- The browser can verify the server’s identity (via a certificate).
+- Both sides agree on encryption algorithms before exchanging data.
+
+TLS uses asymmetric cryptography. Data encrypted with the private key can be verified with the public certificate. Just like `ssh`.
+
+### `openssl` generates the key pair
+
+```
+/etc/nginx/ssl/server.key
+/etc/nginx/ssl/server.crt
+```
+
+### Self-signed certificates
+
+Normally, a browser only trusts certificates signed by a Certificate Authority (CA) (like Let’s Encrypt).
+Here, in a learning environment and a VM, you can’t use public DNS or a trusted CA, so we use our own.
+
+`openssl req -x509`: creates a self-signed certificate.
+
+### `nginx.conf`
+
+Both TLSv1.2 and TLSv1.3 require strong ciphers, thus we write
+
+`ssl_ciphers HIGH:!aNULL:!MD5;`:
+
+- algorithms used are high security (>128-bit encryption)
+- exclude anonymouse insecure cypher (allow MITM attacks)
+- MD5, being cryptographically broken, must never be used for secure data integrity

@@ -6,6 +6,12 @@ read_secret_safely() {
 
 DB_PASS=$(read_secret_safely "${WORDPRESS_DB_PASSWORD_FILE}")
 
+echo "Waiting for MariaDB to accept connections..."
+until mysqladmin ping -hmariadb -u"${WORDPRESS_DB_USER}" -p"${DB_PASS}" --silent; do
+    sleep 2
+done
+echo "MariaDB is up!"
+
 cd /var/www/html
 
 if [ ! -f wp-config.php ]; then
@@ -19,7 +25,24 @@ if [ ! -f wp-config.php ]; then
     WP_KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
     sed -i "/AUTH_KEY/d;/SECURE_AUTH_KEY/d;/LOGGED_IN_KEY/d;/NONCE_KEY/d;/AUTH_SALT/d;/SECURE_AUTH_SALT/d;/LOGGED_IN_SALT/d;/NONCE_SALT/d" wp-config.php
     printf '%s\n' "${WP_KEYS}" >> wp-config.php
+
+    echo "Installing WordPress site..."
+    wp core install --allow-root \
+        --url="https://${DOMAIN_NAME}" \
+        --title="Inception Site" \
+        --admin_user="${MYSQL_USER}" \
+        --admin_password="${DB_PASS}" \
+        --admin_email="admin@${DOMAIN_NAME}"
+
+    echo "Creating secondary WordPress user..."
+    wp user create "${MYSQL_SECOND_USER}" "editor@${DOMAIN_NAME}" \
+        --role=editor \
+        --user_pass="${DB_PASS}" \
+        --allow-root
 fi
 
 chown -R www-data:www-data /var/www/html
+mkdir -p /run/php
+chown -R www-data:www-data /run/php
+
 exec php-fpm7.4 -F
