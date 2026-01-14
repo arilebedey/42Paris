@@ -1,5 +1,4 @@
 #include "bigint.hpp"
-#include <algorithm>
 
 bigint::bigint() { digits.push_back(0); };
 bigint::~bigint() {};
@@ -130,12 +129,13 @@ bool bigint::operator>=(const bigint &other) const {
 
 std::ostream &operator<<(std::ostream &os, const bigint &bi) {
   if (bi.digits.empty()) {
-    os << '0';
+    os << "0";
     return os;
   }
 
-  for (size_t i = bi.digits.size() - 1; i >= 0; --i) {
+  for (int i = bi.digits.size() - 1; i >= 0; --i) {
     os << bi.digits[i];
   }
+
   return os;
 }

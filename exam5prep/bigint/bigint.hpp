@@ -2,6 +2,8 @@
 #define BIGINT_HPP
 
 #include <vector>
+#include <algorithm>
+#include <iostream>
 
 class bigint {
 private:
