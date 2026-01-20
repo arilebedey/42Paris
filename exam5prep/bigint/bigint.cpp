@@ -101,7 +101,7 @@ bool bigint::operator<(const bigint &other) const {
   if (digits.size() != other.digits.size())
     return (digits.size() < other.digits.size());
 
-  for (size_t i = digits.size() - 1; i >= 0; --i) {
+  for (size_t i = digits.size() - 1; i-- > 0;) {
     if (digits[i] != other.digits[i])
       return (digits[i] < other.digits[i]);
   }
