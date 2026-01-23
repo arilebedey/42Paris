@@ -127,14 +127,19 @@ bool bigint::operator>=(const bigint &other) const {
   return (digits == other.digits || *this > other);
 };
 
-std::ostream &operator<<(std::ostream &os, const bigint &bi) {
-  if (bi.digits.empty()) {
+void bigint::print(std::ostream &os) const {
+  if (digits.empty()) {
     os << "0";
-    return os;
+    return;
   }
 
-  for (int i = bi.digits.size() - 1; i >= 0; --i) {
-    os << bi.digits[i];
+  for (size_t i = digits.size() - 1; i-- > 0;) {
+    os << digits[i];
   }
+  return;
+}
+
+std::ostream &operator<<(std::ostream &os, const bigint &bi) {
+  bi.print(os);
   return os;
 }

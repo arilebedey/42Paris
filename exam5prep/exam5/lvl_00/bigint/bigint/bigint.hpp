@@ -37,7 +37,8 @@ public:
   bool operator<=(const bigint &other) const;
   bool operator>=(const bigint &other) const;
 
-  friend std::ostream &operator<<(std::ostream &os, const bigint &bi);
+  void print(std::ostream &os) const;
 };
 
+std::ostream &operator<<(std::ostream &os, const bigint &bi);
 #endif
