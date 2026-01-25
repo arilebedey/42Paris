@@ -10,6 +10,11 @@ public:
   ~searchable_tree_bag();
   searchable_tree_bag(const searchable_tree_bag &other);
   searchable_tree_bag &operator=(const searchable_tree_bag &other);
+
+  bool has(int i) const;
+
+private:
+  bool search_node(node *n, int val) const;
 };
 
 #endif
