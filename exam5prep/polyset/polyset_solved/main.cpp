@@ -1,5 +1,6 @@
 // FILE GIVEN DURING EXAM, DO NOT CHANGE!!!
 
+#include "searchable_bag.hpp"
 #include "searchable_tree_bag.hpp"
 #include "searchable_array_bag.hpp"
 #include <cstdlib>
