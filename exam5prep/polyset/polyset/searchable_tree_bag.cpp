@@ -4,6 +4,8 @@ searchable_tree_bag::searchable_tree_bag() {};
 
 searchable_tree_bag::~searchable_tree_bag() {};
 
+// pass `other` to tree_bag() to leverage the already-implemented
+// copy logic in the base `tree_bag` class
 searchable_tree_bag::searchable_tree_bag(const searchable_tree_bag &other)
     : tree_bag(other) {};
 
