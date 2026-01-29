@@ -57,6 +57,12 @@ bigint bigint::operator+(const bigint &o) const {
   return res;
 }
 
+bigint &bigint::operator=(const bigint &o) {
+  if (this != &o)
+    d = o.d;
+  return *this;
+}
+
 bigint &bigint::operator++() {
   bigint o(1);
   (*this) += o;
@@ -88,7 +94,7 @@ bigint bigint::operator<<(const unsigned int s) const {
 bigint &bigint::operator>>=(const bigint &b) {
   unsigned long long n = 0;
   for (size_t i = 0; i < b.d.size(); i++)
-    n = n * 10 + b.d[i];
+    n = n * 10 + b.d[b.d.size() - i - 1];
 
   if (n == 0)
     return *this;
@@ -114,5 +120,16 @@ bool bigint::operator>(const bigint &o) const {
   return false;
 }
 
-// bigint &bigint::operator=(const bigint &other) {}
-;
+bool bigint::operator<(const bigint &o) const { return o > *this; }
+
+bool bigint::operator==(const bigint &o) const { return o.d == d; }
+
+bool bigint::operator!=(const bigint &o) const { return !(o.d == d); }
+
+bool bigint::operator<=(const bigint &o) const {
+  return (*this < o || *this == o);
+}
+
+bool bigint::operator>=(const bigint &o) const {
+  return (*this > o || *this == o);
+}

@@ -17,7 +17,7 @@ public:
 
   bigint &operator+=(const bigint &o);
   bigint operator+(const bigint &o) const;
-  // bigint operator=(const bigint &o) const;
+  bigint &operator=(const bigint &o);
 
   bigint &operator++();
   bigint operator++(int);
@@ -28,6 +28,13 @@ public:
   bigint &operator>>=(const bigint &b);
 
   bool operator>(const bigint &b) const;
+  bool operator<(const bigint &b) const;
+
+  bool operator==(const bigint &o) const;
+  bool operator!=(const bigint &o) const;
+
+  bool operator<=(const bigint &o) const;
+  bool operator>=(const bigint &o) const;
 
   void print(std::ostream &os) const;
 };

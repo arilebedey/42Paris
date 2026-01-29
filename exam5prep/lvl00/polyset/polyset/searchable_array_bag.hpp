@@ -11,10 +11,10 @@ public:
   searchable_array_bag(const searchable_array_bag &other);
   searchable_array_bag &operator=(const searchable_array_bag &other);
 
-  bool has(int i) const;
+  bool has(int) const;
 
 private:
-  bool search_array(int *data, int size, int val) const;
+  bool search_array(int val, int *data, int size) const;
 };
 
 #endif
