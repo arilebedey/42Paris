@@ -1,6 +1,8 @@
 #include "life.h"
+#include <unistd.h>
 
 void print_board(t_game *game) {
+  write(1, "\033[H\033[2J", 7);
   for (int i = 0; i < game->height; i++) {
     for (int j = 0; j < game->width; j++) {
       putchar(game->board[i][j]);
@@ -85,6 +87,7 @@ void fill_board(t_game *game) {
     }
 
     if (game->draw && (flag == 0)) {
+      /* printf("i: %i, j: %i\n", game->i, game->j); */
       game->board[game->i][game->j] = game->alive;
     }
   }
@@ -152,6 +155,8 @@ int main(int ac, char **av) {
     return 1;
   fill_board(&game);
   for (int i = 0; i < game.iter; i++) {
+    print_board(&game);
+    usleep(200000); // 200ms
     if (play_game(&game)) {
       free_board(&game);
       return 1;

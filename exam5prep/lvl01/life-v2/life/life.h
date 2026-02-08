@@ -1,5 +1,5 @@
-#ifndef LIFE
-#define LIFE
+#ifndef LIFE_H
+#define LIFE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,7 +8,7 @@
 typedef struct s_game {
   int width;
   int height;
-  int iterations;
+  int iter;
   char alive;
   char dead;
   int i;
@@ -17,10 +17,11 @@ typedef struct s_game {
   char **board;
 } t_game;
 
-int init_game(t_game *game, char *argv[]);
-void fill_board(t_game *game);
-int play(t_game *game);
 void print_board(t_game *game);
 void free_board(t_game *game);
+void free_tmp(t_game *game, char **tab);
+int init_game(t_game *game, char **av);
+void fill_board(t_game *game);
+int play_game(t_game *game);
 
 #endif

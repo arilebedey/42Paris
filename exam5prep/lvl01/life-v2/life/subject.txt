@@ -6,7 +6,9 @@ Allowed functions: atoi, read, putchar, malloc, calloc, realloc, free
 --------------------------------------------------------------------------------
 You must write a program that will simulate a game of life.
 The prototype of this program is the following:
+
 ./life width height iterations
+
 Width and height are the dimensions of the board and iterations is the number of
 iterations of the game of life.
 the initial configuration of the board will be drawn by a sequence of commands
