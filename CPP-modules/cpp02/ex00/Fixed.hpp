@@ -1,5 +1,5 @@
-#include <iostream>
-#include <string>
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
 class Fixed {
 public:
@@ -15,3 +15,5 @@ private:
   int _rawBits;
   static const int _fractionalBits = 8;
 };
+
+#endif
