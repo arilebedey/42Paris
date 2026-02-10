@@ -1,122 +1,163 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "life.h"
 
-typedef struct s_pen {
-  int x;
-  int y;
-  int is_draw;
-} t_pen;
-
-char **new_tab(int width, int height) {
-  char **tab = malloc(sizeof(char *) * height);
-  for (int i = 0; i < height; i++) {
-    tab[i] = calloc(width, sizeof(char)); // new
-    for (int j = 0; j < width; j++)
-      tab[i][j] = ' ';
-  }
-  return tab;
-}
-
-void print_tab(char **tab, int width, int height) {
-  for (int i = 0; i < height; i++) {
-    for (int j = 0; j < width; j++) {
-      putchar(tab[i][j]);
+void print_board(t_game *game) {
+  for (int i = 0; i < game->height; i++) {
+    for (int j = 0; j < game->width; j++) {
+      putchar(game->board[i][j]);
     }
     putchar('\n');
   }
 }
 
-void free_tab(char **tab, int height) {
-  for (int i = 0; i < height; i++)
-    free(tab[i]);
-  free(tab);
+void free_tmp(t_game *game, char **tab) {
+  if (tab) {
+    for (int i = 0; i < game->height; i++) {
+      if (tab[i]) {
+        free(tab[i]);
+      }
+    }
+    free(tab);
+  }
 }
 
-int count_voisins(char **tab, int x, int y, int width, int height) {
-  int count = 0;
-  for (int i = -1; i <= 1; i++) {
-    for (int j = -1; j <= 1; j++) {
-      if (i == 0 && j == 0)
-        continue;
+void free_board(t_game *game) {
+  if (game->board) {
+    for (int i = 0; i < game->height; i++) {
+      if (game->board[i]) {
+        free(game->board[i]);
+      }
+    }
+    free(game->board);
+  }
+}
 
-      int new_y = y + i;
-      int new_x = x + j;
-      if (new_x >= 0 && new_x < width && new_y >= 0 && new_y < height)
-        if (tab[new_y][new_x] == 'O')
+int init_game(t_game *game, char **av) {
+  game->alive = 'O';
+  game->dead = ' ';
+  game->width = atoi(av[1]);
+  game->height = atoi(av[2]);
+  game->iter = atoi(av[3]);
+  game->i = 0;
+  game->j = 0;
+  game->draw = 0;
+  game->board = malloc(sizeof(char *) * (game->height));
+  if (!game->board)
+    return 1;
+  for (int i = 0; i < game->height; i++) {
+    game->board[i] = malloc(sizeof(char) * (game->width));
+    if (!game->board[i]) {
+      free_board(game);
+      return 1;
+    }
+    for (int j = 0; j < game->width; j++)
+      game->board[i][j] = ' ';
+  }
+  return (0);
+}
+
+void fill_board(t_game *game) {
+  char buffer;
+  int flag;
+  while (read(0, &buffer, 1) == 1) {
+    flag = 0;
+    switch (buffer) {
+    case 'w':
+      if (game->i > 0)
+        game->i--;
+      break;
+    case 'a':
+      if (game->j > 0)
+        game->j--;
+      break;
+    case 's':
+      if (game->i < game->height - 1)
+        game->i++;
+      break;
+    case 'd':
+      if (game->j < game->width - 1)
+        game->j++;
+      break;
+    case 'x':
+      game->draw = !(game->draw);
+      break;
+    default:
+      flag = 1;
+    }
+
+    if (game->draw && (flag == 0)) {
+      game->board[game->i][game->j] = game->alive;
+    }
+  }
+}
+
+int count_neighbors(t_game *game, int i, int j) {
+  int count = 0;
+  for (int di = -1; di < 2; di++) {
+    for (int dj = -1; dj < 2; dj++) {
+      if ((di == 0) && (dj == 0))
+        continue;
+      int ni = di + i;
+      int nj = dj + j;
+      if ((ni >= 0) && (ni < game->height) && (nj >= 0) && (nj < game->width)) {
+        if (game->board[ni][nj] == game->alive)
           count++;
+      }
     }
   }
   return count;
 }
 
-void iter_map(char **tab, int width, int height) {
-  char **n_tab = new_tab(width, height);
-  for (int y = 0; y < height; y++) {
-    for (int x = 0; x < width; x++) {
-      int count = count_voisins(tab, x, y, width, height);
-      if (tab[y][x] == 'O') {
-        if (count == 2 || count == 3) {
-          n_tab[y][x] = 'O';
-        }
+int play_game(t_game *game) {
+  char **tmp;
+  tmp = malloc(sizeof(char *) * (game->height));
+  if (!tmp)
+    return 1;
+  for (int i = 0; i < game->height; i++) {
+    tmp[i] = malloc(sizeof(char) * (game->width));
+    if (!tmp[i]) {
+      free_tmp(game, tmp);
+      return 1;
+    }
+  }
+
+  for (int i = 0; i < game->height; i++) {
+    for (int j = 0; j < game->width; j++) {
+      int count = count_neighbors(game, i, j);
+      if (game->board[i][j] == game->alive) {
+        if ((count == 2) || (count == 3))
+          tmp[i][j] = game->alive;
+        else
+          tmp[i][j] = game->dead;
       } else {
         if (count == 3)
-          n_tab[y][x] = 'O';
+          tmp[i][j] = game->alive;
+        else
+          tmp[i][j] = game->dead;
       }
     }
   }
-  for (int i = 0; i < height; i++) {
-    for (int j = 0; j < width; j++) {
-      tab[i][j] = n_tab[i][j];
-    }
-  }
-  free_tab(n_tab, height);
+
+  free_board(game);
+  game->board = tmp;
+  return 0;
 }
 
 int main(int ac, char **av) {
   if (ac != 4)
     return 1;
 
-  int width = atoi(av[1]);
-  int height = atoi(av[2]);
-  int iter = atoi(av[3]);
-  if (width <= 0 || height <= 0 || iter < 0) // new
+  t_game game;
+
+  if (init_game(&game, av))
     return 1;
-  char **tab = new_tab(width, height);
-  t_pen pen = {0, 0, 0};
-  char command;
-
-  while (read(0, &command, 1) > 0) {
-    if (pen.is_draw)
-      tab[pen.y][pen.x] = 'O';
-
-    switch (command) {
-    case 'w':
-      if (pen.y > 0)
-        pen.y--;
-      break;
-    case 's':
-      if (pen.y < height - 1)
-        pen.y++;
-      break;
-    case 'a':
-      if (pen.x > 0)
-        pen.x--;
-      break;
-    case 'd':
-      if (pen.x < width - 1)
-        pen.x++;
-      break;
-    case 'x':
-      pen.is_draw = !pen.is_draw;
-      break;
+  fill_board(&game);
+  for (int i = 0; i < game.iter; i++) {
+    if (play_game(&game)) {
+      free_board(&game);
+      return 1;
     }
   }
-  if (pen.is_draw)
-    tab[pen.y][pen.x] = 'O'; // new
-  for (int it = 0; it < iter; it++)
-    iter_map(tab, width, height);
-  print_tab(tab, width, height);
-  free_tab(tab, height);
+  print_board(&game);
+  free_board(&game);
   return 0;
 }
