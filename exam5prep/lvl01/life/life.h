@@ -13,7 +13,7 @@ typedef struct s_game {
   char dead;
   int i;
   int j;
-  int draw;
+  int pen;
   char **board;
 } t_game;
 

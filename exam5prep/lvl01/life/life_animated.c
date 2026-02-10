@@ -41,7 +41,7 @@ int init_game(t_game *game, char **av) {
   game->iter = atoi(av[3]);
   game->i = 0;
   game->j = 0;
-  game->draw = 0;
+  game->pen = 0;
   game->board = malloc(sizeof(char *) * (game->height));
   if (!game->board)
     return 1;
@@ -80,13 +80,13 @@ void fill_board(t_game *game) {
         game->j++;
       break;
     case 'x':
-      game->draw = !(game->draw);
+      game->pen = !(game->pen);
       break;
     default:
       flag = 1;
     }
 
-    if (game->draw && (flag == 0)) {
+    if (game->pen && (flag == 0)) {
       /* printf("i: %i, j: %i\n", game->i, game->j); */
       game->board[game->i][game->j] = game->alive;
     }
