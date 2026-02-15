@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2025/10/21 10:06:21 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/02/15 20:32:53 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,6 @@ static char	*update_stash(char *stash)
 	return (new_stash);
 }
 
-static char	*handle_read_error(char *stash, char *buffer)
-{
-	free_all(buffer, stash);
-	return (NULL);
-}
-
 static char	*read_file(int fd, char *stash)
 {
 	char	*buffer;
@@ -88,7 +82,7 @@ static char	*read_file(int fd, char *stash)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (handle_read_error(stash, buffer));
+			return (free(buffer), free(stash), NULL);
 		buffer[bytes_read] = '\0';
 		stash = ft_strjoin_free(stash, buffer);
 		if (!stash)
@@ -106,17 +100,15 @@ char	*get_next_line(int fd)
 	static char	*stash = NULL;
 	char		*line;
 
-	if (fd == -1)
-	{
-		clean_stash(&stash);
-		return (NULL);
-	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read(fd, NULL, 0) < 0)
 	{
-		clean_stash(&stash);
-		return (NULL);
+		if (stash)
+		{
+			free(stash);
+			stash = NULL;
+		}
 	}
 	stash = read_file(fd, stash);
 	if (!stash)

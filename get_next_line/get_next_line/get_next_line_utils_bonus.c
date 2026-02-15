@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:45:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/05/02 14:35:57 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/02/15 20:36:19 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -20,18 +30,10 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == (char) c)
-			break ;
+			return ((char *) s + i);
 		i++;
 	}
-	if (s[i] == (char) c)
-		return ((char *) s + i);
 	return (NULL);
-}
-
-void	free_all(char *buffer, char *stash)
-{
-	free(buffer);
-	free(stash);
 }
 
 char	*ft_strjoin_free(char const *s1, char const *s2)
@@ -60,16 +62,6 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	new[i + j] = '\0';
 	free((char *) s1);
 	return (new);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
 }
 
 void	*ft_calloc(size_t count, size_t size)

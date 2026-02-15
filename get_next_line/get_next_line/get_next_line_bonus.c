@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2025/06/11 12:10:12 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/02/15 20:35:56 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*extract_line(char *stash)
 {
@@ -67,12 +67,6 @@ static char	*update_stash(char *stash)
 	return (new_stash);
 }
 
-static char	*handle_read_error(char *stash, char *buffer)
-{
-	free_all(buffer, stash);
-	return (NULL);
-}
-
 static char	*read_file(int fd, char *stash)
 {
 	char	*buffer;
@@ -88,7 +82,7 @@ static char	*read_file(int fd, char *stash)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-			return (handle_read_error(stash, buffer));
+			return (free(stash), free(buffer), NULL);
 		buffer[bytes_read] = '\0';
 		stash = ft_strjoin_free(stash, buffer);
 		if (!stash)
@@ -103,10 +97,10 @@ static char	*read_file(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stashes[1024] = {NULL};
+	static char	*stashes[FD_SETSIZE] = {NULL};
 	char		*line;
 
-	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= FD_SETSIZE || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (read(fd, NULL, 0) < 0)
 	{

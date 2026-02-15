@@ -6,19 +6,20 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:45:41 by alebedev          #+#    #+#             */
-/*   Updated: 2025/10/21 10:06:33 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/02/15 20:21:14 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	clean_stash(char **stash)
+size_t	ft_strlen(const char *s)
 {
-	if (*stash)
-	{
-		free(*stash);
-		*stash = NULL;
-	}
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -29,18 +30,10 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == (char)c)
-			break ;
+			return ((char *)s + i);
 		i++;
 	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
 	return (NULL);
-}
-
-void	free_all(char *buffer, char *stash)
-{
-	free(buffer);
-	free(stash);
 }
 
 char	*ft_strjoin_free(char const *s1, char const *s2)
@@ -71,22 +64,12 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	return (new);
 }
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
 void	*ft_calloc(size_t count, size_t size)
 {
 	size_t	i;
 	void	*mem_ptr;
 
-	if (size != 0 && count > ((size_t)-1 / size))
+	if (size != 0 && count > ((size_t) -1 / size))
 		return (NULL);
 	mem_ptr = malloc(size * count);
 	if (!mem_ptr)
