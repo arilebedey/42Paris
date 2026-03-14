@@ -14,5 +14,5 @@ int main(int argc, char *argv[]) {
   btc.loadPrices("data.csv");
   btc.processInput(argv[1]);
 
-  return _returnValue;
+  return btc.returnValue;
 }

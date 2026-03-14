@@ -3,7 +3,7 @@
 
 class BitcoinExchange {
 private:
-  std::map<std::string, double> _prices;
+  std::map<std::string, float> _prices;
 
 public:
   int returnValue;
@@ -13,10 +13,9 @@ public:
   BitcoinExchange(const BitcoinExchange &other);
   BitcoinExchange &operator=(const BitcoinExchange &other);
 
-  bool isValidDate(const std::string &date);
-  bool isValidNum(const std::string &num, double &out);
+  bool isValidDate(const std::string &date) const;
+  bool isValidValue(const std::string &value, float &out) const;
 
-  void processInput(std::string filename);
-  void loadPrices(std::string csvFile);
-  double getPrice();
+  void loadPrices(const std::string &csvFile);
+  void processInput(const std::string &filename);
 };
