@@ -1,3 +1,6 @@
+#ifndef BITCOIN_EXCHANGE_HPP
+#define BITCOIN_EXCHANGE_HPP
+
 #include <map>
 #include <string>
 
@@ -19,3 +22,5 @@ public:
   void loadPrices(const std::string &csvFile);
   void processInput(const std::string &filename);
 };
+
+#endif

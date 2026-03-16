@@ -12,6 +12,8 @@ int main(int argc, char *argv[]) {
 
   BitcoinExchange btc;
   btc.loadPrices("data.csv");
+  if (btc.returnValue)
+    return 1;
   btc.processInput(argv[1]);
 
   return btc.returnValue;

@@ -66,8 +66,13 @@ void BitcoinExchange::loadPrices(const std::string &csvFile) {
     std::string date, priceStr;
     if (!std::getline(iss, date, ',') || !std::getline(iss, priceStr))
       continue;
-    float price = std::stof(priceStr);
-    _prices[date] = price;
+
+    try {
+      float price = std::stof(priceStr);
+      _prices[date] = price;
+    } catch (const std::exception &e) {
+      std::cerr << "Warning: skipping invalid price on " << date << std::endl;
+    }
   }
   file.close();
 }
