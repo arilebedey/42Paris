@@ -32,7 +32,7 @@ fclean: clean
 
 re: fclean all
 
-test:
+test: all
 	./test/test.sh && ./test/overflow.sh
 
 -include $(DEPS)
