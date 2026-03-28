@@ -68,7 +68,11 @@ void BitcoinExchange::loadPrices(const std::string &csvFile) {
       continue;
 
     try {
-      float price = std::stof(priceStr);
+      std::istringstream priceStream(priceStr);
+      float price;
+      priceStream >> price;
+      if (priceStream.fail())
+        throw std::exception();
       _prices[date] = price;
     } catch (const std::exception &e) {
       std::cerr << "Warning: skipping invalid price on " << date << std::endl;
@@ -78,7 +82,7 @@ void BitcoinExchange::loadPrices(const std::string &csvFile) {
 }
 
 void BitcoinExchange::processInput(const std::string &filename) {
-  std::ifstream file(filename);
+  std::ifstream file(filename.c_str());
   if (!file.is_open()) {
     std::cerr << "Error: could not open file" << std::endl;
     returnValue = 1;
@@ -86,12 +90,12 @@ void BitcoinExchange::processInput(const std::string &filename) {
   }
 
   std::string line;
-  int pass = 1;
+  int currentLine = 1;
   while (std::getline(file, line)) {
-    if ((line == "date | value") && pass == 1) {
+    if ((line == "date | value") && currentLine == 1) {
       continue;
     }
-    pass++;
+    currentLine++;
 
     int spaceCount = std::count(line.begin(), line.end(), ' ');
     if (spaceCount != 2) {
@@ -101,8 +105,7 @@ void BitcoinExchange::processInput(const std::string &filename) {
 
     std::istringstream iss(line);
     std::string date, pipe, valueStr;
-    iss >> date >> pipe >>
-        valueStr; // >> extracts whitespace-delimited tokens from the stream
+    iss >> date >> pipe >> valueStr;
 
     if (!isValidDate(date)) {
       std::cerr << "Error: invalid date => " << line << std::endl;

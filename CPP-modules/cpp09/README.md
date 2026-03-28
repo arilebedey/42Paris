@@ -1,6 +1,26 @@
+## ex00
+
+### Why map()
+
+- Sorted by key: Dates are stored in chronological order automatically
+
+- Efficient lookup: lower_bound() uses binary search to find the closest earlier date in O(log n)
+
+## ex01
+
+### Why stack()
+
+- You need LIFO (Last-In-First-Out) behavior to process operands in the correct order
+
+- Operations pop the two most recent values and push the result back
+
 ## ex02
 
 ### Vector vs. Deque
+
+Vector is O(n) for insertion
+Deque uses a block-based structure to solve vector's insertion problem
+Vector faster random access because contiguous
 
 | Aspect              | vector                  | deque                            | Impact                            |
 | ------------------- | ----------------------- | -------------------------------- | --------------------------------- |
@@ -13,6 +33,9 @@
 #### Verdict
 
 Deque is better at resizing and and front insertion
+But for FJ vector is faster because Cache locality is better (contiguous memory)
+
+In practice, vector tends to win on modern CPUs for most workloads unless insertions dominate the operations
 
 ### The why
 
@@ -95,6 +118,10 @@ bk is guaranteed to belong somewhere before a\_{k+1}
 ### upper_bound
 
 std::upper_bound returns an iterator to the first element in a sorted range that is strictly greater than the given value.
+
+upper_bound has no way to verify the data is sorted — it just blindly does the index arithmetic and returns a position.
+
+If the data wasn't sorted, it would simply return a wrong position silently, leading to incorrect sorting results with no error or warning.
 
 ### .assign()
 
