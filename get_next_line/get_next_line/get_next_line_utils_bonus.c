@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:45:41 by alebedev          #+#    #+#             */
-/*   Updated: 2026/04/04 09:27:10 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/04/04 10:24:11 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_strjoin_free(char const *s1, char const *s2, size_t s1_len)
 	s2_len = ft_strlen(s2);
 	new = malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (!new)
-		return (NULL);
+		return (free((char *)s1), NULL);
 	i = 0;
 	while (i < s1_len)
 	{

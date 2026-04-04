@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2026/04/04 09:59:07 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/04/04 10:28:49 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static char	*extract_line(char *stash)
 
 static char	*update_stash(char *stash)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	char	*new_stash;
 
 	i = 0;
@@ -105,14 +105,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (read(fd, NULL, 0) < 0)
-	{
-		if (stash)
-		{
-			free(stash);
-			stash = NULL;
-		}
-	}
 	stash = read_file(fd, stash);
 	if (!stash)
 		return (NULL);
