@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2026/02/15 20:35:56 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/04/04 09:09:41 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static char	*extract_line(char *stash)
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	if (stash[i] == '\n')
-		line = ft_calloc(i + 2, sizeof(char));
+		line = malloc((i + 2) * sizeof(char));
 	else
-		line = ft_calloc(i + 1, sizeof(char));
+		line = malloc((i + 1) * sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -35,7 +35,8 @@ static char	*extract_line(char *stash)
 		i++;
 	}
 	if (stash[i] == '\n')
-		line[i] = '\n';
+		line[i++] = '\n';
+	line[i] = '\0';
 	return (line);
 }
 
@@ -53,7 +54,7 @@ static char	*update_stash(char *stash)
 		free(stash);
 		return (NULL);
 	}
-	new_stash = ft_calloc(ft_strlen(stash) - i + 1, sizeof(char));
+	new_stash = malloc((ft_strlen(stash) - i + 1) * sizeof(char));
 	if (!new_stash)
 	{
 		free(stash);
@@ -63,8 +64,23 @@ static char	*update_stash(char *stash)
 	j = 0;
 	while (stash[i])
 		new_stash[j++] = stash[i++];
+	new_stash[j] = '\0';
 	free(stash);
 	return (new_stash);
+}
+
+static char	*init_stash(char **stash, char *buffer)
+{
+	if (*stash)
+		return (*stash);
+	*stash = malloc(sizeof(char));
+	if (!*stash)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	(*stash)[0] = '\0';
+	return (*stash);
 }
 
 static char	*read_file(int fd, char *stash)
@@ -72,11 +88,9 @@ static char	*read_file(int fd, char *stash)
 	char	*buffer;
 	ssize_t	bytes_read;
 
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buffer)
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer || !init_stash(&stash, buffer))
 		return (NULL);
-	if (!stash)
-		stash = ft_calloc(1, sizeof(char));
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(stash, '\n'))
 	{
@@ -86,10 +100,7 @@ static char	*read_file(int fd, char *stash)
 		buffer[bytes_read] = '\0';
 		stash = ft_strjoin_free(stash, buffer);
 		if (!stash)
-		{
-			free(buffer);
-			return (NULL);
-		}
+			return (free(buffer), NULL);
 	}
 	free(buffer);
 	return (stash);

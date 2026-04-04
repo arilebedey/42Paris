@@ -6,11 +6,11 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:45:41 by alebedev          #+#    #+#             */
-/*   Updated: 2026/02/15 20:36:19 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/04/04 08:56:44 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -29,8 +29,8 @@ char	*ft_strchr(const char *s, int c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == (char) c)
-			return ((char *) s + i);
+		if (s[i] == (char)c)
+			return ((char *)s + i);
 		i++;
 	}
 	return (NULL);
@@ -60,25 +60,6 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 		j++;
 	}
 	new[i + j] = '\0';
-	free((char *) s1);
+	free((char *)s1);
 	return (new);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	size_t	i;
-	void	*mem_ptr;
-
-	if (size != 0 && count > ((size_t) -1 / size))
-		return (NULL);
-	mem_ptr = malloc(size * count);
-	if (!mem_ptr)
-		return (NULL);
-	i = 0;
-	while (i < (size * count))
-	{
-		*(char *)(mem_ptr + i) = 0;
-		i++;
-	}
-	return (mem_ptr);
 }
