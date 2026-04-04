@@ -6,7 +6,7 @@
 /*   By: alebedev <alebedev@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:42:15 by alebedev          #+#    #+#             */
-/*   Updated: 2026/04/04 09:09:20 by alebedev         ###   ########.fr       */
+/*   Updated: 2026/04/04 09:59:07 by alebedev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,18 @@ static char	*update_stash(char *stash)
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	if (!stash[i])
-	{
-		free(stash);
-		return (NULL);
-	}
-	new_stash = malloc((ft_strlen(stash) - i + 1) * sizeof(char));
-	if (!new_stash)
+	if (!stash[i] || !stash[i + 1])
 	{
 		free(stash);
 		return (NULL);
 	}
 	i++;
+	new_stash = malloc(ft_strlen(stash + i) + 1);
+	if (!new_stash)
+	{
+		free(stash);
+		return (NULL);
+	}
 	j = 0;
 	while (stash[i])
 		new_stash[j++] = stash[i++];
@@ -69,41 +69,33 @@ static char	*update_stash(char *stash)
 	return (new_stash);
 }
 
-static char	*init_stash(char **stash, char *buffer)
-{
-	if (*stash)
-		return (*stash);
-	*stash = malloc(sizeof(char));
-	if (!*stash)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	(*stash)[0] = '\0';
-	return (*stash);
-}
-
 static char	*read_file(int fd, char *stash)
 {
 	char	*buffer;
 	ssize_t	bytes_read;
+	size_t	stash_len;
 
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer || !init_stash(&stash, buffer))
 		return (NULL);
+	stash_len = ft_strlen(stash);
+	if (ft_strchr(stash, '\n'))
+		return (free(buffer), stash);
 	bytes_read = 1;
-	while (bytes_read > 0 && !ft_strchr(stash, '\n'))
+	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (free(stash), free(buffer), NULL);
 		buffer[bytes_read] = '\0';
-		stash = ft_strjoin_free(stash, buffer);
+		stash = ft_strjoin_free(stash, buffer, stash_len);
 		if (!stash)
 			return (free(buffer), NULL);
+		stash_len += bytes_read;
+		if (ft_strchr(stash + stash_len - bytes_read, '\n'))
+			break ;
 	}
-	free(buffer);
-	return (stash);
+	return (free(buffer), stash);
 }
 
 char	*get_next_line(int fd)

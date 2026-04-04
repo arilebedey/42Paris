@@ -20,9 +20,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin_free(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
+char	*ft_strchr(const char *s, int c);
+char	*init_stash(char **stash, char *buffer);
+char	*ft_strjoin_free(char const *s1, char const *s2, size_t s1_len);
+char	*get_next_line(int fd);
 
 #endif
