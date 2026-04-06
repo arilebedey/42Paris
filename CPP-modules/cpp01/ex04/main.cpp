@@ -1,48 +1,37 @@
 #include <fstream>
 #include <iostream>
 
-int replace(char **argv, std::string str) {
-  std::ofstream outfile;
-  int pos;
+std::string replaceAll(const std::string &str, const std::string &s1,
+                       const std::string &s2) {
+  std::string result;
+  size_t pos = 0;
+  size_t prev = 0;
 
-  if (std::string(argv[2]).empty()) {
-    std::cout << "Error: old_word cannot be empty." << std::endl;
-    return (1);
+  while ((pos = str.find(s1, prev)) != std::string::npos) {
+    result += str.substr(prev, pos - prev);
+    result += s2;
+    prev = pos + s1.size();
   }
-
-  if (std::string(argv[3]).empty()) {
-    std::cout << "usage: replace <file> old_word new_word" << std::endl;
-    std::cout << "Author: alebedev" << std::endl;
-    return (1);
-  }
-
-  outfile.open((std::string(argv[1]) + ".replace").c_str());
-  if (outfile.fail())
-    return (1);
-  for (int i = 0; i < (int)str.size(); i++) {
-    pos = str.find(argv[2], i);
-    if (pos != -1 && pos == i) {
-      outfile << argv[3];
-      i += std::string(argv[2]).size() - 1;
-    } else
-      outfile << str[i];
-  }
-  outfile.close();
-  return (0);
+  result += str.substr(prev);
+  return result;
 }
 
 int main(int argc, char **argv) {
   std::ifstream infile;
+  std::ofstream outfile;
   std::string str, line;
 
   if (argc != 4) {
-    std::cout << "usage: replace <file> old_word new_word" << std::endl;
-    std::cout << "Author: alebedev" << std::endl;
+    std::cout << "usage: ./replace <file> old_word new_word" << std::endl;
+    return (1);
+  }
+  if (std::string(argv[2]).empty()) {
+    std::cout << "Error: old_word cannot be empty." << std::endl;
     return (1);
   }
   infile.open(argv[1]);
   if (infile.fail()) {
-    std::cout << "Error: " << argv[1] << ":" << " no such file or directory"
+    std::cout << "Error: " << argv[1] << ": no such file or directory"
               << std::endl;
     return (1);
   }
@@ -52,5 +41,12 @@ int main(int argc, char **argv) {
       str += "\n";
   }
   infile.close();
-  return (replace(argv, str));
+  outfile.open((std::string(argv[1]) + ".replace").c_str());
+  if (outfile.fail()) {
+    std::cout << "Error: " << argv[1] << ": cannot create outfile" << std::endl;
+    return (1);
+  }
+  outfile << replaceAll(str, argv[2], argv[3]);
+  outfile.close();
+  return (0);
 }

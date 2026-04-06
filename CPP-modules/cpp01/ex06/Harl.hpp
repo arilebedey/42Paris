@@ -1,20 +1,19 @@
 #ifndef Harl_HPP
+#define Harl_HPP
 
-# define Harl_HPP
+#include <string>
 
-# include <iostream>
+class Harl {
+private:
+  void debug(void);
+  void info(void);
+  void warning(void);
+  void error(void);
 
-class	Harl
-{
-	private:
-		void	debug(void);
-		void	info(void);
-		void	warning(void);
-		void	error(void);
-	public:
-		Harl(void);
-		~Harl(void);
-		void	filter(std::string level);
+public:
+  Harl(void);
+  ~Harl(void);
+  void filter(std::string level);
 };
 
 #endif

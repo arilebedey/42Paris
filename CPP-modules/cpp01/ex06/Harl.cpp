@@ -1,30 +1,33 @@
 #include "Harl.hpp"
-#include <ostream>
+#include <iostream>
 
-Harl::Harl(void) { std::cout << "A Harl materialized!" << std::endl; }
+Harl::Harl(void) {}
 
-Harl::~Harl(void) { std::cout << "Harl ran away!" << std::endl; }
+Harl::~Harl(void) {}
 
 void Harl::debug(void) {
-  std::cout << "I love to get extra bacon for my ";
-  std::cout << "7XL-double-cheese-triple-pickle-special-ketchup burger. ";
-  std::cout << "I really do!" << std::endl;
+  std::cout
+      << "[DEBUG]" << std::endl
+      << "The user_id you are currently looking for could be in the `user` "
+         "table."
+      << std::endl;
 }
 
 void Harl::info(void) {
-  std::cout << "I cannot believe adding extra bacon costs more money. ";
-  std::cout << "You didin’t put enough!  If you did, I wouldn’t be asking ";
-  std::cout << "for more!" << std::endl;
+  std::cout << "[INFO]" << std::endl
+            << "We have 5 services running and they're even operational!"
+            << std::endl;
 }
 
 void Harl::warning(void) {
-  std::cout << "I think I deserve to have some extra bacon for free. ";
-  std::cout << "I’ve been coming here for years, whereas you just started ";
-  std::cout << "working here last month." << std::endl;
+  std::cout << "[WARNING]" << std::endl
+            << "A lot of cache is starting to build up on the VPS!"
+            << std::endl;
 }
 
 void Harl::error(void) {
-  std::cout << "This is unacceptable! I want to speak to the manager now.";
+  std::cout << "[ERROR]" << std::endl
+            << "Why are there so many errors during CI?";
   std::cout << std::endl;
 }
 
@@ -43,23 +46,14 @@ void Harl::filter(std::string level) {
   switch (lvl) {
   case 0:
     this->debug();
-    break;
   case 1:
     this->info();
-    this->debug();
-    break;
   case 2:
     this->warning();
-    this->info();
-    this->debug();
-    break;
   case 3:
-    this->warning();
-    this->info();
-    this->debug();
     this->error();
     break;
   default:
-    std::cout << "*Birds flying high, you know how I feel...*" << std::endl;
+    std::cout << "[Tirelessly analyzing your systems...]" << std::endl;
   }
 }

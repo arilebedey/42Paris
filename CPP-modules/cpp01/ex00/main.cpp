@@ -3,12 +3,12 @@
 
 int main(void) {
   std::cout << "Creating zombie on stack:\n";
-  Zombie stackZombie("Stack-Zomb");
+  Zombie stackZombie("StackZombie");
   stackZombie.announce();
 
   std::cout << "\n";
   std::cout << "Creating zombie on heap:\n";
-  Zombie *heapZombie = newZombie("Heap-Zomb");
+  Zombie *heapZombie = newZombie("HeapZombie");
   if (heapZombie) {
     heapZombie->announce();
     std::cout << "\n";
@@ -19,7 +19,7 @@ int main(void) {
 
   std::cout << "\n";
   std::cout << "Creating temporary zombie via randomChump:\n";
-  randomChump("Temp-Zomb");
+  randomChump("TempZombie");
 
   std::cout << "\n";
   return (0);
