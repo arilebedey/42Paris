@@ -1,19 +1,20 @@
 #include "Harl.hpp"
 
-int main()
-{
-	Harl harl;
+#include <iostream>
 
-	std::cout << std::endl;
-	harl.complain("DEBUG");
-	std::cout << std::endl;
-	harl.complain("INFO");
-	std::cout << std::endl;
-	harl.complain("WARNING");
-	std::cout << std::endl;
-	harl.complain("ERROR");
-	std::cout << std::endl;
-	harl.complain("RANDOM");
+int main() {
+  Harl harl;
 
-	return 0;
+  std::cout << std::endl;
+  harl.complain("DEBUG");
+  std::cout << std::endl;
+  harl.complain("INFO");
+  std::cout << std::endl;
+  harl.complain("WARNING");
+  std::cout << std::endl;
+  harl.complain("ERROR");
+  std::cout << std::endl;
+  harl.complain("non_existing_level");
+
+  return 0;
 }
